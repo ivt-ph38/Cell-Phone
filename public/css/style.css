@@ -1299,42 +1299,8 @@ textarea.input {
   margin-right: 15px;
 }
 
-/*-- Store Grid --*/
-
-.store-grid {
+.store-sort {
   float: right;
-}
-
-.store-grid li {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  background-color: #FFF;
-  border: 1px solid #E4E7ED;
-  text-align: center;
-  -webkit-transition: 0.2s all;
-  transition: 0.2s all;
-}
-
-.store-grid li+li {
-  margin-left: 5px;
-}
-
-.store-grid li:hover {
-  background-color: #E4E7ED;
-  color: #D10024;
-}
-
-.store-grid li.active {
-  background-color: #D10024;
-  border-color: #D10024;
-  color: #FFF;
-  cursor: default;
-}
-
-.store-grid li a {
-  display: block;
 }
 
 /*-- Store Pagination --*/
