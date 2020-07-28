@@ -19,6 +19,9 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id');
             $table->string('content');
+            $table->foreign('guest_id')->references('id')->on('guests');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

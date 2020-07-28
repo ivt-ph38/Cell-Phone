@@ -21,6 +21,9 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('total_price');
             $table->string('delivery_address');
             $table->string('note');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('status_id')->references('id')->on('statuses');
+            $table->foreign('deliverer_id')->references('id')->on('deliverers');
             $table->timestamps();
         });
     }
