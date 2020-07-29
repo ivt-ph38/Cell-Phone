@@ -19,10 +19,10 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id');
             $table->string('content');
-            $table->foreign('guest_id')->references('id')->on('guests');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+            $table->foreign('guest_id')->references('id')->on('guests')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
