@@ -37,7 +37,7 @@ class CreateProductsTable extends Migration
             $table->string('promotion_price');
             $table->date('start_promotion');
             $table->date('end_promotion');
-             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
