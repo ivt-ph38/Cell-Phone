@@ -158,8 +158,16 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
+						<li><a href="#">iPhone</a>
+							<ul>
+								<li><a href="">iPhone 11 Pro MAX</a></li>
+								<li><a href="">iPhone 11</a></li>
+								<li><a href="">iPhone XS</a></li>
+								<li><a href="">iPhone XS MAX</a></li>
+								
+							</ul>	
+						</li>
+						<li><a href="#">Samsung</a></li>
 						<li><a href="#">Laptops</a></li>
 						<li><a href="#">Smartphones</a></li>
 						<li><a href="#">Cameras</a></li>

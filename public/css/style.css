@@ -85,6 +85,13 @@ ul, ol {
   padding: 0;
   list-style: none
 }
+ul li{
+  position: relative;
+}
+ul ul{
+  display: none;
+  position: absolute;
+}
 
 /*----------------------------*\
 	Buttons
@@ -655,7 +662,9 @@ textarea.input {
 .main-nav>li>a:hover:after, .main-nav>li>a:focus:after, .main-nav>li.active>a:after {
   width: 100%;
 }
-
+.main-nav li:hover >ul{
+  display: block;
+}
 .header-ctn li.nav-toggle {
   display: none;
 }
