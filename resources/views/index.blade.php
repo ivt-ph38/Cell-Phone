@@ -18,7 +18,7 @@
 
 						<!-- Wrapper for slides -->
 						<div class="row">
-							<div class="col-md-8 col-md-offset-2">
+							<div class="col-md-10 col-md-offset-2">
 								<div class="carousel-inner">
 									<div class="item active ">
 										<img src="./img/banner1.png" class="img-rounded"  alt="banner 1" style="width:100%;">

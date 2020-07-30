@@ -19,17 +19,18 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('title');
             $table->string('description');
-            $table->unsignedBigInteger('price');
-            $table->unsignedBigInteger('quantity');
+            $table->string('price');
+            $table->string('quantity');
             $table->string('size');
             $table->string('weight');
             $table->string('color');
             $table->string('image');
             $table->string('display');
-            $table->string('Os');
+            $table->string('os');
             $table->string('storage');
             $table->string('ram');
-            $table->string('CPU');
+            $table->string('cpu');
+            $table->string('gpu');
             $table->string('primary_camera');
             $table->string('rear_camera');
             $table->string('battery');
@@ -37,8 +38,12 @@ class CreateProductsTable extends Migration
             $table->string('promotion_price');
             $table->date('start_promotion');
             $table->date('end_promotion');
+
+
             $table->foreign('category_id')->references('id')->on('categories');
+
             $table->timestamps();
+          
         });
     }
 
