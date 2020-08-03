@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Category;
-use App\Product;
+namespace App\Http\Controllers\Admin;
+use App\Role;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ProductController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $listProducts = Product::all();
-        return view('admin.product.list', compact('listProducts'));
+        $listRole = Role::orderBy('id','ASC')->paginate(2);
+        return view('admin.role.list', compact('listRole'));
     }
 
     /**
@@ -25,8 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categoryID = Category::all();
-        return view('admin.product.create', compact('categoryID'));
+        //
     }
 
     /**
@@ -37,18 +36,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->except('_token');
-        Product::create($data);
-        return redirect()->route('product.list');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
         //
     }
@@ -56,41 +53,34 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit($id)
     {
-        $product = Product::find($id);
-        $categoryID = Category::all();
-        return view('admin.product.edit', compact('product', 'categoryID'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        $data = $request->except('_token', '_method');
-        $product->update($data);
-        return redirect()->route('product.list');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->delete();
-        return redirect()->route('product.list');
+        //
     }
 }
