@@ -11,9 +11,38 @@
 |
 */
 
+
 Route::get('/view/admin', function () {
     return view('admin.master.master');
 });
 Route::get('/', function () {
     return view('user.index');
 });
+
+// Route::get('/', function () {
+//     return view('index');
+// });
+// Route::get('/a', function () {
+//     return view('store');
+// });
+
+
+
+
+
+// ----------User-----------// 
+Route::resource('user', 'UserController');
+
+
+Route::group(['namespace'=>'Admin'],function(){
+	// ----------Home-----------// 
+	Route::get('/', 'CategoryController@showCategory');
+	// ----------Category-----------// 
+	Route::resource('category', 'CategoryController');
+	// ----------Product-----------// 
+	Route::resource('product', 'ProductController');
+	// ----------Role-----------// 
+	Route::resource('role', 'RoleController');
+
+});
+

@@ -148,7 +148,37 @@
 		</header>
 		<!-- /HEADER -->
 
+<<<<<<< HEAD:resources/views/user/layout/master.blade.php
 
+=======
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308382424851899_iPhone-Apple.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308383002140401_Samsung.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308383477514764_OPPO.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308383938050284_Vsmart.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308384436908561_Xiaomi.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308401852916473_Realme.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308404834150721_Nokia.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308404026693828_Vivo.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308405384262423_Huawei.jpg" alt=""></a></li>
+
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+>>>>>>> Feature/Create-seeder-thanh:resources/views/layout/master.blade.php
 		
 			@section('content')
 			@show

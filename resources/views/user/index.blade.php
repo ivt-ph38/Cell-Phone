@@ -427,7 +427,7 @@
 						<!-- aside Widget -->
 						
 						<div class="aside">
-							<h3 class="aside-title">Price</h3>
+							<h3 class="aside-title">Mức giá</h3>
 							<div class="price-filter">
 								<div id="price-slider"></div>
 								<div class="input-number price-min">
@@ -448,17 +448,21 @@
 
 						<!-- aside Widget -->
 						<div class="aside">
-							<h3 class="aside-title">Brand</h3>
+							<h3 class="aside-title">Hãng sản xuất</h3>
+							@foreach($listCategory as $rel)
 							<div class="checkbox-filter">
 								<div class="input-checkbox">
-									<input type="checkbox" id="brand-1">
-									<label for="brand-1">
+
+									<input type="checkbox" id="brand-{{$rel->id}}">
+									
+									<label for="brand-{{$rel->id}}">
 										<span></span>
-										SAMSUNG
-										<small>(578)</small>
+											{{$rel->name}}
+										<small>({{$rel->products->count()}})</small>
 									</label>
 								</div>
-								<div class="input-checkbox">
+								
+								<!-- <div class="input-checkbox">
 									<input type="checkbox" id="brand-2">
 									<label for="brand-2">
 										<span></span>
@@ -497,8 +501,10 @@
 										SONY
 										<small>(755)</small>
 									</label>
-								</div>
+									
+								</div> -->
 							</div>
+							@endforeach
 						</div>
 						<!-- /aside Widget -->						
 					</div>

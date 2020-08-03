@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\Category;
-use App\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $listProducts = Product::all();
-        return view('admin.product.list', compact('listProducts'));
+        $listCategory = Category::orderBy('id','ASC')->paginate(5);
+        return view('admin.category.list', compact('listCategory'));
+    }
+    public function showCategory()
+    {
+        $listCategory = Category::all();
+        return view('index', compact('listCategory'));
+        
     }
 
     /**
@@ -25,8 +32,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categoryID = Category::all();
-        return view('admin.product.create', compact('categoryID'));
+        return view('admin.category.create');
     }
 
     /**
@@ -35,20 +41,20 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $data = $request->except('_token');
-        Product::create($data);
-        return redirect()->route('product.list');
+        Category::create($data);
+        return redirect()->route('category.list');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
         //
     }
@@ -56,41 +62,38 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit($id)
     {
-        $product = Product::find($id);
-        $categoryID = Category::all();
-        return view('admin.product.edit', compact('product', 'categoryID'));
+        $category = Category::find($id);
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $product = Product::find($id);
+        $category = Category::find($id);
         $data = $request->except('_token', '_method');
-        $product->update($data);
-        return redirect()->route('product.list');
+        $category->update($data);
+        return redirect()->route('category.list');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->delete();
-        return redirect()->route('product.list');
+        //
     }
 }
