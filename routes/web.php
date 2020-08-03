@@ -17,3 +17,6 @@ Route::get('/', function () {
 Route::get('/a', function () {
     return view('store');
 });
+Route::get('/test', function () {
+    return view('table-xeditable');
+});
