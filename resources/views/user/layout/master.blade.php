@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Sell Phone</title>
+	<title>Sell Phone</title>
 
-		<!-- Google font -->
-		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="user/css/bootstrap.min.css"/>
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{{asset("user/css/bootstrap.min.css")}}"/>
 
-		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="user/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="user/css/slick-theme.css"/>
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="{{asset("user/css/slick.css")}}"/>
+	<link type="text/css" rel="stylesheet" href="{{asset("user/css/slick-theme.css")}}"/>
 
-		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="user/css/nouislider.min.css"/>
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="{{asset("user/css/nouislider.min.css")}}"/>
 
-		<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="user/css/font-awesome.min.css">
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="{{asset("user/css/font-awesome.min.css")}}">
 
-		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="user/css/style.css"/>
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{{asset("user/css/style.css")}}"/>
+	{{-- angular --}}
+	<link rel="stylesheet" href="{{asset("user/css/angular-material.min.css")}}">
 
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-    </head>
-	<body>
+	</head>
+	<body ng-app="myApp"  ng-controller="MyController">
+		
 		<!-- HEADER -->
-		<header>
+
+		<header  >
 			
 			<!-- MAIN HEADER -->
-			<div id="header">
+			<div id="header" >
 				<!-- container -->
 				<div class="container">
 					<!-- row -->
-					<div class="row">
+					<div  class="row" >
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
@@ -79,7 +83,7 @@
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ hàng</span>
-										<div class="qty">2</div>
+										<div class="qty">@{{thamso}}</div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
@@ -94,6 +98,16 @@
 												<button class="delete"><i class="fa fa-close"></i></button>
 											</div>
 
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="{{asset("user/img/product02.png")}}" alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
 											<div class="product-widget">
 												<div class="product-img">
 													<img src="{{asset("user/img/product02.png")}}" alt="">
@@ -155,7 +169,7 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="{{route('home')}}">Trang chủ</a></li>
+						<li class="active"><a href="{{route('user.home')}}">Trang chủ</a></li>
 						<li><a href="{{route('user.store')}}">Iphone</a></li>
 						<li><a href="#">Categories</a></li>
 						<li><a href="#">Laptops</a></li>
@@ -170,10 +184,10 @@
 			<!-- /container -->
 		</nav>
 		<!-- /NAVIGATION -->
-
 		
-			@section('content')
-			@show
+		
+		@section('content')
+		@show
 
 		
 		<!-- FOOTER -->
@@ -258,11 +272,11 @@
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
 						</div>
 					</div>
-						<!-- /row -->
+					<!-- /row -->
 				</div>
 				<!-- /container -->
 			</div>
@@ -271,12 +285,19 @@
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
-		<script src="user/js/jquery.min.js"></script>
-		<script src="user/js/bootstrap.min.js"></script>
-		<script src="user/js/slick.min.js"></script>
-		<script src="user/js/nouislider.min.js"></script>
-		<script src="user/js/jquery.zoom.min.js"></script>
-		<script src="user/js/main.js"></script>
+		<script src="{{asset("user/js/jquery.min.js")}}"></script>
+		<script src="{{asset("user/js/bootstrap.min.js")}}"></script>
+		<script src="{{asset("user/js/slick.min.js")}}"></script>
+		<script src="{{asset("user/js/nouislider.min.js")}}"></script>
+		<script src="{{asset("user/js/jquery.zoom.min.js")}}"></script>
+		<script src="{{asset("user/js/main.js")}}"></script>
+		<script type="text/javascript" src="{{asset("user/js/angular-1.5.min.js")}}"></script> 
+		<script type="text/javascript" src="{{asset("user/js/angular-animate.min.js")}}"></script>
+		<script type="text/javascript" src="{{asset("user/js/angular-aria.min.js")}}"></script>
+		<script type="text/javascript" src="{{asset("user/js/angular-messages.min.js")}}"></script>
+		<script type="text/javascript" src="{{asset("user/js/angular-material.min.js")}}"></script>
+		<script type="text/javascript" src="{{asset("user/js/main_angular.js")}}"></script> 
+		<script type="text/javascript" src="{{asset("user/js/main_js.js")}}"></script> 
 
 	</body>
-</html>
+	</html>
