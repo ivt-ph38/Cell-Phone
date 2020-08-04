@@ -11,18 +11,17 @@
 |
 */
 
-Route::get('/view/admin', function () {
-    return view('admin.master.master');
+
+
+
+// trang chu 
+Route::get('/', function () { return view('user.index');})->name("user.home");
+// Cac trang user
+Route::group(['prefix'=>'user','as'=>'user.'],function () {
+	// Trang category
+	Route::get('/store', function () { return view('user.store');})->name("store");
+	// Trang chi tiet san pham
+	Route::get('/product', function () {return view('user.product');})->name("product");
+	// Trang thanh toan
+	Route::get('/checkout', function () {return view('user.checkout');})->name("checkout");
 });
-Route::get('/', function () {
-    return view('user.index');
-})->name("home");
-Route::get('/store', function () {
-    return view('user.store');
-})->name("user.store");
-Route::get('/product', function () {
-    return view('user.product');
-})->name("user.product");
-Route::get('/checkout', function () {
-    return view('user.checkout');
-})->name("user.checkout");
