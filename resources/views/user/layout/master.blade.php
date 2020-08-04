@@ -49,7 +49,7 @@
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="#" class="logo">
-									<img src="./img/logo.png" alt="">
+									<img src="{{asset("user/img/logo.png")}}" alt="">
 								</a>
 							</div>
 						</div>
@@ -85,7 +85,7 @@
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+													<img src="{{asset("user/img/product01.png")}}" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -96,7 +96,7 @@
 
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./img/product02.png" alt="">
+													<img src="{{asset("user/img/product02.png")}}" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -111,7 +111,7 @@
 										</div>
 										<div class="cart-btns">
 											<a href="#">Xem Giỏ Hàng</a>
-											<a href="#">Thanh Toán  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="{{route('user.checkout')}}">Thanh Toán  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>
@@ -147,7 +147,29 @@
 			<!-- /MAIN HEADER -->
 		</header>
 		<!-- /HEADER -->
-
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="{{route('home')}}">Trang chủ</a></li>
+						<li><a href="{{route('user.store')}}">Iphone</a></li>
+						<li><a href="#">Categories</a></li>
+						<li><a href="#">Laptops</a></li>
+						<li><a href="#">Smartphones</a></li>
+						<li><a href="#">Cameras</a></li>
+						<li><a href="#">Accessories</a></li>
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
 
 		
 			@section('content')
@@ -164,25 +186,23 @@
 					<div class="row">
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">About Us</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<h3 class="footer-title">Tư vấn mua hàng </h3>
+								
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+									<li><a href="#"><i class="fa fa-map-marker"></i>92 Quang Trung, Hải Châu</a></li>
 									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
 									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
 								</ul>
+
 							</div>
 						</div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
+								<h3 class="footer-title">Góp ý, khiếu nại dịch vụ (8h00-22h00)</h3>
 								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
+									<li><a href="#">1800 6616</a></li>
+									
 								</ul>
 							</div>
 						</div>
@@ -191,26 +211,26 @@
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Information</h3>
+								<h3 class="footer-title">Dịch Vụ</h3>
 								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
+									<li><a href="#">Hệ thống bảo hành</a></li>
+									<li><a href="#">Kiểm tra hàng Apple chính hãng</a></li>
+									<li><a href="#">Giới thiệu máy đổi trả</a></li>
+									<li><a href="#">Chính sách đổi trả</a></li>
+									<li><a href="#">Kiểm tra hóa đơn điện tử</a></li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Service</h3>
+								<h3 class="footer-title">Liên Hệ</h3>
 								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
+									<li><a href="#">Gọi mua hàng 1800.1060 (7:30 - 22:00)</a></li>
+									<li><a href="#">Gọi khiếu nại   1800.1062 (8:00 - 21:30)</a></li>
+									<li><a href="#">Gọi bảo hành   1800.1064 (8:00 - 21:00)</a></li>
+									<li><a href="#">Kỹ thuật           1800.1763 (7:30 - 22:00)</a></li>
+									
 								</ul>
 							</div>
 						</div>

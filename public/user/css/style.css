@@ -1290,6 +1290,7 @@ textarea.input {
 
 .store-sort {
   display: inline-block;
+   float: right;
 }
 
 .store-sort label {

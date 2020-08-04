@@ -16,4 +16,13 @@ Route::get('/view/admin', function () {
 });
 Route::get('/', function () {
     return view('user.index');
-});
+})->name("home");
+Route::get('/store', function () {
+    return view('user.store');
+})->name("user.store");
+Route::get('/product', function () {
+    return view('user.product');
+})->name("user.product");
+Route::get('/checkout', function () {
+    return view('user.checkout');
+})->name("user.checkout");
