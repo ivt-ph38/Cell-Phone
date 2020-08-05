@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Product;
 use Illuminate\Http\Request;
@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+       $product = Product::all()->toArray();
+       dd($product);
     }
 
     /**

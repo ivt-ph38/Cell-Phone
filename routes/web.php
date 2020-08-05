@@ -15,7 +15,7 @@
 
 
 // trang chu 
-Route::get('/', function () { return view('user.index');})->name("user.home");
+Route::get('/', "User\ProductController@index")->name("user.home");
 // Cac trang user
 Route::group(['prefix'=>'user','as'=>'user.'],function () {
 	// Trang category
