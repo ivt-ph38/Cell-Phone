@@ -1,6 +1,6 @@
 ﻿ var app = angular.module('myApp',['ngMaterial']);
  app.controller('MyController',  function($scope){
-  $scope.thamso = 3;
+  $scope.thamso = 4;
   $scope.a1 = "them a1 vao scope";
   $scope.a3 = function(){
   	$scope.thamso++;

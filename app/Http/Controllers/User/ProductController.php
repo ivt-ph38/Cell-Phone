@@ -14,8 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-       $product = Product::all()->toArray();
-       dd($product);
+       
     }
 
     /**
@@ -45,9 +44,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $itemProduct = Product::find($id)->toArray();
+        return view('user.product',compact('itemProduct'));
     }
 
     /**

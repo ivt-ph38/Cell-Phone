@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Category;
+use App\Product;
+use App\Order_detail;
+use DB;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,8 +17,24 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-    }
+        //lay bien category tu boot
+        //lay san pham mới nhất
+        $productNew = Product::orderBy('created_at', 'desc')->take(5)->get()->toArray();
+        //Tạo mảng gồm tên category tên product, image và giá của các sản phẩm mới nhất
+        foreach ($productNew as $key => $value) {
+           $listProductNew[]=[
+            'id' => $value['id'],
+            'category_name'=>Category::find($value['category_id'])->toArray()['name'],
+            'product_name'=>$value['name'],
+            'price'=>$value['price'],
+            'image'=>$value['image']
+        ];
+      }
+    // dd($productNew);
+       
+    return view('user.index',compact(['listProductNew']));
+        //Tra ve view trang chủ với biến categoryAndProduct
+}
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +54,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -44,9 +63,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $listProduct = Category::find($id)->products->toArray();
+        $categoryName = Category::find($id)->toArray()['name'];
+        return view('user.store',compact(['categoryName','listProduct']));
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Order;
 use Illuminate\Http\Request;
@@ -35,7 +35,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+       
     }
 
     /**
@@ -44,9 +45,18 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Request $request)
     {
-        //
+
+        $data = $request->except('_method','_token');
+        //lay du liêu vè bỏ 2 trường     
+        $data_cart[$data['product_id']] = $data;
+        $data_cart[] = session()->get('data_cart');
+
+        //tạo mảng dữ liệu giỏ hàng với key là product_id
+        // dd($data_cart);
+        session()->put('data_cart',$data_cart);
+        dd(session()->get('data_cart'));
     }
 
     /**

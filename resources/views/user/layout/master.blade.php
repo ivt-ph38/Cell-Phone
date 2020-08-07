@@ -38,7 +38,7 @@
 
 	</head>
 	<body ng-app="myApp"  ng-controller="MyController">
-		
+
 		<!-- HEADER -->
 
 		<header  >
@@ -52,7 +52,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
+								<a href="{{route('user.home')}}" class="logo">
 									<img src="{{asset("user/img/logo.png")}}" alt="">
 								</a>
 							</div>
@@ -64,12 +64,17 @@
 							<div class="header-search">
 								<form>
 									<select class="input-select">
-										<option value="0">Hãng</option>
-										<option value="1">Iphone</option>
-										<option value="1">SamSung</option>
+										<option value="0">Tất cả</option>		
+										@foreach ($category as $key=>$value)
+										<option value="{{$key+1}}">{{$value['name']}}</option>		   
+										@endforeach
+										
 									</select>
-									<input class="input" placeholder="Tìm điện thoại">
-									<button class="search-btn">Search</button>
+									<input type="text" name="product_search" id="product_search" class="input" placeholder="Tìm điện thoại ở đây!!">				
+									<button type="submit" class="search-btn">Chi tiết</button>
+									<div id="productList">
+									</div>
+									{{ csrf_field() }}
 								</form>
 							</div>
 						</div>
@@ -80,54 +85,12 @@
 							<div class="header-ctn">
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a href="{{route('user.cart')}}">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ hàng</span>
 										<div class="qty">@{{thamso}}</div>
 									</a>
-									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="{{asset("user/img/product01.png")}}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="{{asset("user/img/product02.png")}}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="{{asset("user/img/product02.png")}}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">Xem Giỏ Hàng</a>
-											<a href="{{route('user.checkout')}}">Thanh Toán  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
-									</div>
+									
 								</div>
 								<!-- /Cart -->
 								<!-- Account -->
@@ -170,12 +133,10 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="{{route('user.home')}}">Trang chủ</a></li>
-						<li><a href="{{route('user.store')}}">Iphone</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+						@foreach ($category as $key=>$value)
+
+						<li><a href="{{route('user.category',$value['id'])}}">{{$value['name']}}</a></li>			
+						@endforeach
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -261,14 +222,7 @@
 					<!-- row -->
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-							</ul>
+							
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -298,6 +252,33 @@
 		<script type="text/javascript" src="{{asset("user/js/angular-material.min.js")}}"></script>
 		<script type="text/javascript" src="{{asset("user/js/main_angular.js")}}"></script> 
 		<script type="text/javascript" src="{{asset("user/js/main_js.js")}}"></script> 
+		<script>
+			$(document).ready(function(){
 
+				$('#product_search').keyup(function(){ 
+					var query = $(this).val();
+					if(query != '')
+					{
+						var _token = $('input[name="_token"]').val();
+						$.ajax({
+							url:"{{ route('autocomplete.fetch') }}",
+							method:"POST",
+							data:{query:query, _token:_token},
+							success:function(data){
+								$('#productList').fadeIn();  
+								$('#productList').html(data);
+							}
+						});
+					}
+				});
+
+				$(document).on('click', '.result', function(){  
+					$('#product_search').val($(this).text());  
+					$('#productList').fadeOut();  
+				});  
+
+			});
+		</script>
 	</body>
 	</html>
+	

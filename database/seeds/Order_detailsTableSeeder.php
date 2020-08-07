@@ -11,17 +11,8 @@ class Order_detailsTableSeeder extends Seeder
      */
     public function run()
     {
-        $data =[ 
-        	[
-        		'order_id' => 1,
-        		'product_id' => 1,
-        		'price' => 29490000,
-        		'sale_quantity'=> 1
-
-        	],
-
-        	
-        ];
-        Order_detail::insert($data);
+        
+        
+        factory(App\Order_detail::class,10)->create();
     }
 }
