@@ -2,7 +2,6 @@
 @extends('user.layout.master')
 @section ('content')
 
-
 <!-- SECTION--Slide -->
 <div class="section">
 	<!-- container -->
@@ -82,7 +81,7 @@
 						<div class="product-body">
 							<p class="product-category">{{$value['category_name']}}</p>
 							<h3 class="product-name"><a href="#">{{$value['product_name']}}</a></h3>
-							<h4 class="product-price">{{$value['price']}}<del class="product-old-price">$990.00</del></h4>
+							<h4 class="product-price">{{number_format($value['price'])}}<del class="product-old-price">$990.00</del></h4>
 
 
 							<div class="product-rating">
@@ -94,7 +93,8 @@
 
 						</div>
 						<div class="add-to-cart">
-							<button  class="add-to-cart-btn" ><i class="fa fa-eye" ></i> <a style="font-weight: bold;color:#fff" href="{{route('user.product',$value['id'])}}">Chi Tiết Sản Phẩm</a></button>
+							<a href="{{route('user.product',$value['id'])}}"><button  class="add-to-cart-btn" ><i class="fa fa-eye" ></i>Chi Tiết Sản Phẩm </button></a>
+							
 						</div>
 					</div>
 					
@@ -152,7 +152,7 @@
 									<div class="product-body">
 										<p class="product-category">{{$value['category_name']}}</p>
 										<h3 class="product-name"><a href="#">{{$value['product_name']}}</a></h3>
-										<h4 class="product-price">{{$value['price']}} <del class="product-old-price">$990.00</del></h4>
+										<h4 class="product-price">{{number_format($value['price'])}} <del class="product-old-price">$990.00</del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -163,7 +163,8 @@
 										
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-eye"></i> <a style="font-weight: bold;color:#fff" href="{{route('user.product',$value['id'])}}">Chi Tiết Sản Phẩm</a> </button>
+										 <a href="{{route('user.product',$value['id'])}}"><button class="add-to-cart-btn"><i class="fa fa-eye"></i> Chi Tiết Sản Phẩm</button></a>
+										
 									</div>
 								</div>
 								<!-- /product -->
@@ -183,5 +184,6 @@
 	<!-- /container -->
 </div>
 <!-- /SECTION -->
+
 
 @endsection	

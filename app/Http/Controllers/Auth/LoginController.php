@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\User\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use App\Http\Requests\LoginRequest;
+use Auth;
 class LoginController extends Controller
 {
     /*
@@ -35,5 +36,26 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function login(LoginRequest $request, $role)
+    { 
+
+       $data = $request->only('email', 'password');
+
+       if(\Auth::attempt($data)){
+        $request->session()->regenerate();
+        if ($role == 'home') {
+            return redirect()->route('user.Account');
+        }
+        elseif ($role== 'cart') {
+            return redirect()->route('user.checkLoginToCart');
+        }
+        
+       }
+       else {
+        return redirect()->back()->with(['errors' =>'Sai mật khẩu hoặc email']);
+       }
+       
+       
     }
 }

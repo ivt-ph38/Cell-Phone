@@ -63,23 +63,15 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star-o"></i>
 						</div>
-						<a class="review-link" href="#">10 Review(s) | Add your review</a>
+						<a class="review-link" href="#">10 Đánh giá | Thêm đánh giá của bạn</a>
 					</div>
 					<div>
-						<h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
-						<span class="product-available">In Stock</span>
+						<h3 class="product-price">{{number_format($itemProduct['price'])}} <del class="product-old-price"></del></h3>
+						<span class="product-available">Còn hàng</span>
 					</div>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					<form action="{{route('user.cart')}}" method="POST" role="form">
-						@method('PUT')
-						@csrf
-						<div class="product-options">
-						<label>
-							Size
-							<select class="input-select">
-								<option value="0">X</option>
-							</select>
-						</label>
+					
+						<div class="product-options">						
 						<label>
 							Color
 							<select class="input-select">
@@ -89,18 +81,11 @@
 					</div>
 
 					<div class="add-to-cart">
-						<div class="qty-label">
-							Qty
-							<div class="input-number">
-								<input type="hidden" name="product_id" value="{{$itemProduct['id']}}">
-								<input type="number" value="1" name="quantity">
-								<span class="qty-up">+</span>
-								<span class="qty-down">-</span>
-							</div>
-						</div>
-						<button type="submit" class="add-to-cart-btn" ng-click = "a3()"><i class="fa fa-shopping-cart" ></i> Thêm vào giỏ hàng</button>
+						
+						<a href="{{route('user.addToCart',$itemProduct['id'])}}"><button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart" ></i> Thêm vào giỏ hàng </button></a>
+						
 					</div>
-					</form>
+				    
 					
 
 				</div>

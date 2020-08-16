@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Order;
+use App\Order_detail;
+use App\User;
+use Session;
 use Illuminate\Http\Request;
-
+use Auth;
 class OrderController extends Controller
 {
     /**
@@ -16,12 +19,25 @@ class OrderController extends Controller
     {
         //
     }
+    
+    public function checkLogin(){
+        if (Auth::check()) {
+            $cart = Session::get('cart');
+            $user = Auth::user();
+            return view('user.checkout',compact('cart', 'user'));
+        }
+        else {
+            $role = 'cart';
+            return view('user.login',compact('role'));
+        }
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         //
@@ -34,9 +50,29 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
 
-       
+       $dataOrder = [
+            'user_id' => Auth::user()->id,
+            'status_id' =>'1',
+            'deliverer_id' => '1',
+            'total_price' => Session::get('cart')->totalPrice,
+            'note' =>'test1'
+        ];
+        $order = Order::create($dataOrder);
+        $order_id = $order->id;
+        foreach (Session::get('cart')->items as $key => $value) {
+           $dataOrderDetail = [
+            'order_id' => $order_id,
+            'product_id' => $value['item']->id,
+            'sale_quantity'=>$value['qty'],
+            'price'=>$value['price']
+        ];
+         $order = Order_detail::create($dataOrderDetail);
+          
+        }
+        session()->forget('cart');
+        return redirect()->route('user.Account');   
     }
 
     /**
@@ -47,16 +83,8 @@ class OrderController extends Controller
      */
     public function show(Request $request)
     {
-
-        $data = $request->except('_method','_token');
-        //lay du liêu vè bỏ 2 trường     
-        $data_cart[$data['product_id']] = $data;
-        $data_cart[] = session()->get('data_cart');
-
-        //tạo mảng dữ liệu giỏ hàng với key là product_id
-        // dd($data_cart);
-        session()->put('data_cart',$data_cart);
-        dd(session()->get('data_cart'));
+        
+        
     }
 
     /**
@@ -77,9 +105,20 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request,$id,$status)
     {
-        //
+       $order = Order::find($id);
+       if ($status== 1) {
+          $data=['status_id'=> 4];
+       }
+       elseif ($status==4){
+         $data=['status_id'=> 1];
+       }
+       
+       
+       $order->update($data);
+
+       return redirect()->route('user.Account');
     }
 
     /**

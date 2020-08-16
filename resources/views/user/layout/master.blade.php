@@ -23,7 +23,14 @@
 
 	<!-- Font Awesome Icon -->
 	<link rel="stylesheet" href="{{asset("user/css/font-awesome.min.css")}}">
+	
 
+	
+	{{-- css login --}}
+	<link type="text/css" rel="stylesheet" href="{{asset("user/css/util.css")}}"/>
+	<link type="text/css" rel="stylesheet" href="{{asset("user/css/main_login.css")}}"/>
+	<link type="text/css" rel="stylesheet" href="{{asset("user/css/material-design-iconic-font.min.css")}}"/>
+	<link rel="stylesheet" type="text/css" href="{{asset("user/fonts/iconic/css/material-design-iconic-font.min.css")}}">
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{asset("user/css/style.css")}}"/>
 	{{-- angular --}}
@@ -38,7 +45,7 @@
 
 	</head>
 	<body ng-app="myApp"  ng-controller="MyController">
-
+		
 		<!-- HEADER -->
 
 		<header  >
@@ -62,7 +69,9 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
+								<form action="{{route('user.search')}}" method="POST">
+									@method('POST')
+									@csrf
 									<select class="input-select">
 										<option value="0">Tất cả</option>		
 										@foreach ($category as $key=>$value)
@@ -88,14 +97,14 @@
 									<a href="{{route('user.cart')}}">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ hàng</span>
-										<div class="qty">@{{thamso}}</div>
+										<div class="qty">{{Session::has('cart') ? Session::get('cart')->totalQty : 0 }}</div>
 									</a>
 									
 								</div>
 								<!-- /Cart -->
 								<!-- Account -->
 								<div>
-									<a href="#">
+									<a href="{{ route('user.Account') }}">
 										<i class="fa fa-user-o"></i>
 										<span>Tài Khoản</span>
 										
@@ -135,7 +144,7 @@
 						<li class="active"><a href="{{route('user.home')}}">Trang chủ</a></li>
 						@foreach ($category as $key=>$value)
 
-						<li><a href="{{route('user.category',$value['id'])}}">{{$value['name']}}</a></li>			
+						<li><a href="{{route('user.category',['id'=>$value['id'],'arrange'=>'desc'])}}">{{$value['name']}}</a></li>			
 						@endforeach
 					</ul>
 					<!-- /NAV -->
@@ -276,9 +285,21 @@
 					$('#product_search').val($(this).text());  
 					$('#productList').fadeOut();  
 				});  
-
-			});
-		</script>
-	</body>
-	</html>
-	
+               $('.store-filter>ul').removeClass("pagination"); //doi class cua pagination
+               $('.store-filter>ul').addClass("store-pagination");
+               $('.store-filter>ul>li').removeClass("page-item");
+               ///code user view
+               $('.deliverable-infos').hide();
+               $('.dropdown-deliverable').on('click', function(e) {
+               	console.log("dropdown toggled!");
+               	e.preventDefault();
+               	e.stopPropagation();			      
+			        var dataFor = $(this).data('for');
+			        var idFor = $(dataFor);
+			        idFor.slideToggle();
+			    });
+			    ///end code userview 
+           });
+       </script>
+   </body>
+   </html>

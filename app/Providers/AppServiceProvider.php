@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Providers;
-
 use Illuminate\Support\ServiceProvider;
 use App\Category;
 use App\Product;
@@ -26,29 +25,36 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
-        $category = Category::all()->toArray();
-        View::share('category', $category);
+
+        //Share biến category cho tất cả các wiew
+        View::share('category', Category::all()->toArray());
+        ////////////////////////
+
          //Lây product_id san phảm bán nhiều nhất
-    $hotProduct = DB::table('order_details')
-                ->select('product_id', DB::raw('SUM(sale_quantity) as total_quantity'))
-                ->groupBy('product_id')
-                ->orderBy('total_quantity', 'DESC')
+        $hotProduct = DB::table('order_details')
+        ->select('product_id', DB::raw('SUM(sale_quantity) as total_quantity'))
+        ->groupBy('product_id')
+        ->orderBy('total_quantity', 'DESC')
                 ->take(5) //lấy 5 sản phẩm                
                 ->get()->toArray();
 
         //////Lây list san phẩm bán nhìu nhất ($hotProduct là mang cac oj)
-       foreach ($hotProduct as $key => $value) {
+                foreach ($hotProduct as $key => $value) {
         $product = Product::find($value->product_id)->toArray(); //$product là mảng sp 
-           $listHotProduct[]=[
+        $listHotProduct[]=[
             'id'=> $product['id'],
             'category_name'=>Category::find($product['category_id'])->toArray()['name'],
             'product_name'=>$product['name'],
             'price'=>$product['price'],
             'image'=>$product['image']
         ];
-    }   
-        
+        }   
     View::share('listHotProduct', $listHotProduct);
+    //////////////////////////
+    
+   
+
+    
+
 }
 }
