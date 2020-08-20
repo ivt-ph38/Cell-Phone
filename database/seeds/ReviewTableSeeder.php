@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class StarTableSeeder extends Seeder
+class ReviewTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class StarTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Star::class,10)->create();
+        factory(App\Review::class,100)->create();
     }
 }

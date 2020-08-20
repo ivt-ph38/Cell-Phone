@@ -20,16 +20,10 @@ class OrderController extends Controller
         //
     }
     
-    public function checkLogin(){
-        if (Auth::check()) {
+    public function userCheckout(){
             $cart = Session::get('cart');
             $user = Auth::user();
             return view('user.checkout',compact('cart', 'user'));
-        }
-        else {
-            $role = 'cart';
-            return view('user.login',compact('role'));
-        }
     }
 
     /**
@@ -60,7 +54,7 @@ class OrderController extends Controller
             'note' =>'test1'
         ];
         $order = Order::create($dataOrder);
-        $order_id = $order->id;
+        $order_id=$order->id;
         foreach (Session::get('cart')->items as $key => $value) {
            $dataOrderDetail = [
             'order_id' => $order_id,

@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Guest extends Model
+class Review extends Model
 {
      protected $fillable = [
-        'name', 'phone',  'email' , 'address'
+        'guest_id', 'product_id',  'user_id' , 'value', 'content'
     ];
 }

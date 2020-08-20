@@ -67,11 +67,17 @@
 					</div>
 					<div>
 						<h3 class="product-price">{{number_format($itemProduct['price'])}} <del class="product-old-price"></del></h3>
-						<span class="product-available">Còn hàng</span>
+						@if ($qtyAvailable>0)
+						<span class="product-available" style="color: blue">Còn hàng</span>
+						@else 
+						<span class="product-available">Hết hàng</span>
+						
+						@endif
+						
 					</div>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 					
-						<div class="product-options">						
+					<div class="product-options">						
 						<label>
 							Color
 							<select class="input-select">
@@ -81,11 +87,16 @@
 					</div>
 
 					<div class="add-to-cart">
-						
+						@if ($qtyAvailable>0)
 						<a href="{{route('user.addToCart',$itemProduct['id'])}}"><button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart" ></i> Thêm vào giỏ hàng </button></a>
+						@else 
+						<div class="text-center" style="margin-top: 30px"><a href="{{route('user.home')}}" class="btn" style="background-color:#D10024;color:#fff"><i class="fa fa-shopping-cart"></i> Tiếp Tục Mua Hàng</a></div>
+						
+						@endif
+						
 						
 					</div>
-				    
+
 					
 
 				</div>
@@ -97,9 +108,9 @@
 				<div id="product-tab">
 					<!-- product tab nav -->
 					<ul class="tab-nav">
-						<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-						<li><a data-toggle="tab" href="#tab2">Details</a></li>
-						<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+						<li class="active"><a data-toggle="tab" href="#tab1">Thông số kĩ thuật </a></li>
+						
+						<li><a data-toggle="tab" href="#tab2">Đánh giá (3)</a></li>
 					</ul>
 					<!-- /product tab nav -->
 
@@ -115,18 +126,10 @@
 						</div>
 						<!-- /tab1  -->
 
-						<!-- tab2  -->
-						<div id="tab2" class="tab-pane fade in">
-							<div class="row">
-								<div class="col-md-12">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-								</div>
-							</div>
-						</div>
-						<!-- /tab2  -->
+						
 
 						<!-- tab3  -->
-						<div id="tab3" class="tab-pane fade in">
+						<div id="tab2" class="tab-pane fade in">
 							<div class="row">
 								<!-- Rating -->
 								<div class="col-md-3">
@@ -216,54 +219,26 @@
 								<div class="col-md-6">
 									<div id="reviews">
 										<ul class="reviews">
+											@foreach ($convertReviewOfProduct as $review)
+											
 											<li>
 												<div class="review-heading">
-													<h5 class="name">John</h5>
-													<p class="date">27 DEC 2018, 8:0 PM</p>
+													<h5 class="name">{{$review['name']}}</h5>
+													<p class="date">{{$review['created_at']}}</p>
 													<div class="review-rating">
+														@for ($i = 1; $i <= $review['valueStar']; $i++)
 														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o empty"></i>
+														@endfor
+														
+														
 													</div>
 												</div>
 												<div class="review-body">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+													<p>{{$review['content']}}</p>
 												</div>
 											</li>
-											<li>
-												<div class="review-heading">
-													<h5 class="name">John</h5>
-													<p class="date">27 DEC 2018, 8:0 PM</p>
-													<div class="review-rating">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o empty"></i>
-													</div>
-												</div>
-												<div class="review-body">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-												</div>
-											</li>
-											<li>
-												<div class="review-heading">
-													<h5 class="name">John</h5>
-													<p class="date">27 DEC 2018, 8:0 PM</p>
-													<div class="review-rating">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o empty"></i>
-													</div>
-												</div>
-												<div class="review-body">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-												</div>
-											</li>
+											@endforeach
+											
 										</ul>
 										<ul class="reviews-pagination">
 											<li class="active">1</li>
@@ -279,22 +254,34 @@
 								<!-- Review Form -->
 								<div class="col-md-3">
 									<div id="review-form">
-										<form class="review-form">
-											<input class="input" type="text" placeholder="Your Name">
-											<input class="input" type="email" placeholder="Your Email">
-											<textarea class="input" placeholder="Your Review"></textarea>
+										<form class="review-form" action="{{ route('user.addReview') }}" method="POST">
+											@csrf
+											
+											@guest
+											<input class="input" name="name" type="text" placeholder="Your Name">
+											<input class="input" name="email" type="email" placeholder="Your Email">
+											@endguest
+											
+											<textarea class="input" name="content" placeholder="Your Review"></textarea>
+											<input type="hidden" name="product_id" value="{{$itemProduct['id']}}">
 											<div class="input-rating">
 												<span>Your Rating: </span>
 												<div class="stars">
-													<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-													<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-													<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-													<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-													<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+													<input id="star5" name="value" value="5" type="radio"><label for="star5"></label>
+													<input id="star4" name="value" value="4" type="radio"><label for="star4"></label>
+													<input id="star3" name="value" value="3" type="radio"><label for="star3"></label>
+													<input id="star2" name="value" value="2" type="radio"><label for="star2"></label>
+													<input id="star1" name="value" value="1" type="radio"><label for="star1"></label>
 												</div>
+												@if($errors->has('value'))
+												<p style="color:red">{{$errors->first('value')}}</p>
+												@endif
 											</div>
-											<button class="primary-btn">Submit</button>
+											<button  class="primary-btn">Submit</button>
+
 										</form>
+										
+										
 									</div>
 								</div>
 								<!-- /Review Form -->
@@ -450,4 +437,5 @@
 	<!-- /container -->
 </div>
 <!-- /Section -->
+
 @endsection

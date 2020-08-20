@@ -48,12 +48,12 @@ class LoginController extends Controller
             return redirect()->route('user.Account');
         }
         elseif ($role== 'cart') {
-            return redirect()->route('user.checkLoginToCart');
+            return redirect()->route('user.Checkout');
         }
         
        }
        else {
-        return redirect()->back()->with(['errors' =>'Sai mật khẩu hoặc email']);
+        return redirect()->back()->withErrors(['msg'=>'Mật khẩu hoặc email k đúng']);
        }
        
        

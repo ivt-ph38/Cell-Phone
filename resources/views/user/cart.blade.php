@@ -35,9 +35,21 @@
 							<td data-th="Quantity">
 								<div class="input-number" style="width: 70px">
 									<input type="number" value="{{$value['qty']}}" name="quantity">
-									<input type="hidden" name="product_id" value="{{$value['item']->id}}">
-									<a href="{{route('user.cartUpdate',['id'=>$value['item']->id,'action'=>'asc'])}}"><span class="qty-up"  >+</span></a>
+									
+									
+									@if ($value['stocking']=='true')
+									<a href="{{route('user.cartUpdate',['id'=>$value['item']->id,'action'=>'asc'])}}" ><span class="qty-up"  >+</span></a>
+									@else
+									<a  data-toggle="modal" data-target="#Qtyup"><span class="qty-disup " >+</span></a>
+									@endif
+
+									@if ($value['minimum']=='true')
+									<a  data-toggle="modal" data-target="#Qtydown"><span class="qty-disdown " >-</span></a>
+									@else
 									<a href="{{route('user.cartUpdate',['id'=>$value['item']->id,'action'=>'desc'])}}"><span class="qty-down" >-</span></a>
+									@endif
+
+									
 								</div>
 							</td>
 							
@@ -45,11 +57,9 @@
 							<td class="actions" data-th="">
 								<a href="{{route('user.deleteProduct',$value['item']->id)}}"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></a>
 							</td>
-							
 						</tr>
 						@endforeach
-						
-						
+	
 					</tbody>
 					
 				</table>
@@ -57,38 +67,83 @@
 
 			<div class="col-sm-4 col-sm-offset-1">	
 				<div class="text-center" style="margin-top: 70px">Tổng Đơn Hàng: <strong> {{number_format($totalPrice)}} VNĐ</div>
-					<div class="text-center" style="margin-top: 30px"><a href="{{route('user.home')}}" class="btn" style="background-color:#333;color:#fff"><i class="fa fa-angle-left"></i> Tiếp Tục Mua Hàng</a></div>							
-							
-					<div class="text-center" style="margin-top:10px"><a href="{{route('user.checkLoginToCart')}}" class="btn btn-block" style="background-color:#D10024;color:#fff" data-target="#myModal">Thanh Toán <i class="fa fa-angle-right"></i></a></div>			
-					<div class="text-center" style="margin-top:10px"><button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">Thanh Toán</button></div>		
-																	
+
+					<div class="text-center" style="margin-top: 30px"><a href="{{route('user.home')}}" class="btn" style="background-color:#333;color:#fff"><i class="fa fa-shopping-cart"></i> &nbsp; Tiếp Tục Mua Hàng</a></div>							
+					@auth
+					<div class="text-center" style="margin-top:10px"><a href="{{route('user.Checkout')}}" class="btn btn-block" style="background-color:#D10024;color:#fff" data-target="#myModal"> <i class="fa fa-usd"></i> &nbsp; Thanh Toán</a></div>
+					@endauth	
+					
+					@guest
+					<div class="text-center" style="margin-top:10px"><button type="button" class="btn btn-block" style="background-color:#D10024;color:#fff" data-toggle="modal" data-target="#myModal"> <i class="fa fa-usd"></i>&nbsp; Thanh Toán</button></div>	
+					@endguest
+
+
+				</div>
 			</div>
-		</div>
 
-		<div class="container" >
-			
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog">
+			<div class="container" >
 
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Xin chào quý khách!!!</h4>
+				<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header" style="background-color: #81F7F3">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Xin chào quý khách hiện bạn chưa đăng nhập!!!</h4>
+							</div>
+							<div class="modal-body">
+								<p>Để quản lí đơn hàng bạn cần  </p> <a href="{{ route('user.ViewLogin',['role'=>'cart']) }}"><button class="btn" style="background-color:#B40431;color: white; margin-left: 250px;">Đăng nhập tại đây</button></a>
+								<p>hoặc </p> <a href="{{ route('guest.Checkout') }}"><button class="btn" style="background-color:#8A0808;color: white;margin-left: 250px;">Tiếp tục thanh toán</button></a> 
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+							</div>
 						</div>
-						<div class="modal-body">
-							<p>Some text in the modal.</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-						</div>
+
 					</div>
+				</div>
+				<div class="modal fade" id="Qtyup" role="dialog">
+					<div class="modal-dialog">
 
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header" style="background-color: #D10024; ">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 class="text-center" style="color: #fff">Thông báo!!</h3>
+							</div>
+							<div class="modal-body">
+								<h4 class="modal-title text-center"><i class="fa fa-times" aria-hidden="true"></i> Hết Hàng!!</h4>
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="modal fade" id="Qtydown" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header" style="background-color: #D10024; ">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 class="text-center" style="color: #fff">Thông báo!!</h3>
+							</div>
+							<div class="modal-body">
+								<h4 class="modal-title text-center"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Tối thiểu mua 1 sản phẩm.</h4>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
 
 		</div>
 
-	</div>
-
-	@endsection
+		@endsection

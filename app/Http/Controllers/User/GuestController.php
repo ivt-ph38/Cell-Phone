@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Guest;
+use App\Order;
+use App\Order_detail;
 use Illuminate\Http\Request;
-
+use Session;
+use App\Http\Requests\GuestRequest;
 class GuestController extends Controller
 {
     /**
@@ -22,6 +25,10 @@ class GuestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function guestCheckout(){
+            $cart = Session::get('cart'); 
+            return view('guest.checkout',compact('cart'));
+    }
     public function create()
     {
         //
@@ -33,9 +40,32 @@ class GuestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GuestRequest $request)
     {
-        //
+        $dataGuest = $request->except('method','_token','note');
+        $guest = Guest::create($dataGuest);
+
+        $dataOrder = [
+            'guest_id' => $guest->id,
+            'status_id' =>'1',
+            'deliverer_id' => '1',
+            'total_price' => Session::get('cart')->totalPrice,
+            'note' =>$request->note
+        ];
+        $order = Order::create($dataOrder);
+        $order_id =$order->id;
+        foreach (Session::get('cart')->items as $key => $value) {
+           $dataOrderDetail = [
+            'order_id' => $order_id,
+            'product_id' => $value['item']->id,
+            'sale_quantity'=>$value['qty'],
+            'price'=>$value['price']
+        ];
+         $order = Order_detail::create($dataOrderDetail);
+          
+        }
+        session()->forget('cart');
+        return view('guest.success');
     }
 
     /**

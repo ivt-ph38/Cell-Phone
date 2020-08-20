@@ -294,12 +294,22 @@
                	console.log("dropdown toggled!");
                	e.preventDefault();
                	e.stopPropagation();			      
-			        var dataFor = $(this).data('for');
-			        var idFor = $(dataFor);
-			        idFor.slideToggle();
-			    });
+               	var dataFor = $(this).data('for');
+               	var idFor = $(dataFor);
+               	idFor.slideToggle();
+               });
 			    ///end code userview 
-           });
-       </script>
-   </body>
-   </html>
+			    $("#star3").click(function(){
+		
+		
+
+			var $aa=  $(this).val();
+			console.log($aa);
+				
+			
+		
+	});
+			});
+		</script>
+	</body>
+	</html>

@@ -25,6 +25,7 @@ class UserController extends Controller
 					$account[$key]['details'][$key1]['product_name'] = Product::find($account[$key]['details'][$key1]['product_id'])->toArray()['name'];
 				}
 			}
+			krsort($account);
 			return view('user.User',compact('account','user'));
 		}
 		else {
@@ -38,8 +39,18 @@ class UserController extends Controller
 
 		$data = $request->except('_token','_method');
 		$data['password'] = bcrypt( $data['password']);     
-		User::create($data);
-		return view('user.login',compact('role'));
+		$user = User::create($data);
+        $dataLogin=$request->only('email', 'password');
+		\Auth::attempt($dataLogin);
+        $request->session()->regenerate();
+        if ($role == 'home') {
+            return redirect()->route('user.Account');
+        }
+        elseif ($role== 'cart') {
+            return redirect()->route('user.Checkout');
+        }
+        
+		
 
 	}
 }

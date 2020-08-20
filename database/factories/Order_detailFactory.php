@@ -13,7 +13,7 @@ $factory->define(Order_detail::class, function (Faker $faker) {
     return [
         'order_id' => $faker->randomElement($listOrderID),
         'product_id' => $faker->randomElement($listProductID),
-        'sale_quantity'=> rand(1,10),
+        'sale_quantity'=> rand(1,5),
         'price'=> rand(100,1000000)
 
     ];
