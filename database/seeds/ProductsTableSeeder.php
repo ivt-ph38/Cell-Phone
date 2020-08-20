@@ -42,7 +42,7 @@ class ProductsTableSeeder extends Seeder
         [
 
             'category_id' => 2,
-            'name'=>'iPhone 11 Pro Max',
+            'name'=>'iPhone X Pro Max',
             'title' => 'iPhone 11 Pro Max 64GB',
             'description' => 'Iphone 11 pro max 64 GB.',
             'price' =>29490000,
@@ -68,7 +68,7 @@ class ProductsTableSeeder extends Seeder
         [
 
             'category_id' => 3,
-            'name'=>'iPhone 11 Pro Max',
+            'name'=>'iPhone 8 ',
             'title' => 'iPhone 11 Pro Max 64GB',
             'description' => 'Iphone 11 pro max 64 GB.',
             'price' =>29490000,

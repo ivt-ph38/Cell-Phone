@@ -27,6 +27,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('guest_id')->references('id')->on('guests')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->foreign('deliverer_id')->references('id')->on('deliverers')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 

@@ -1,108 +1,89 @@
-<!DOCTYPE html>
-<html lang="">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Title Page</title>
+@extends('admin.master.master')
+		@section ('content')
+    @include('errors.message')
+  @include('errors.error')
+    <div class="row">
+      <div class="col-sm-12">
+        <form action="{{route('search_product')}}"  method="GET" style="margin-bottom:30px " class="form-inline" role="form">
+          @csrf
+          <div class="form-group" style="margin-right:10px ">
+             <input type="search" name="name" id="input" class="form-control"  placeholder="Tên sản phẩm...">
+          </div>
+          <div class="form-group" style="margin-right:10px ">
+            <select name="brand" id="input" class="form-control" >
+              <option >-- Hãng --</option>
+               
+                @foreach ($categoryID as $value)
+                <option value="{{$value->id}}">{{$value->name}}</option>
+                @endforeach
+            </select>
+          </div>
+          <button type="submit" class="btn btn-default" style="margin-right:30px "><i class="fas fa-search"></i></button>
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<h1 class="text-center">List Product</h1>
-
-<button type="button" class="btn btn-info"><a style="color:white;" href="{{route('product.create')}}">Add Product</a></button><br><br>
-	<table class="table table-hover">
-		<thead>
-			<tr style="background-color:skyblue">
-				<th>ID</th>
-				<th>Name</th>
-				<th>Category_id</th>
-				<th>Name Category</th>
-				<th>Titel</th>
-				<th>Description</th>
-				<th>Price</th>
-				<th>Quantity</th>
-				<th>Size</th>
-				<th>Weight</th>
-				<th>Color</th>
-				<th>Image</th>
-				<th>Display</th>
-				<th>Os</th>
-				<th>Storage</th>
-				<th>Ram</th>
-				<th>CPU</th>
-				<th>GPU</th>
-				<th>Primary_camera</th>
-				<th>Rear_camera</th>
-				<th>Battery</th>
-				<th>Warranty</th>
-				<th>Promotion_price</th>
-				<th>Start_promotion</th>
-				<th>End_promotion</th>
-
-				<th>Edit</th>
-				<th>Delete</th>
-
-			</tr>
-		</thead>
-		<tbody>
-			@foreach($listProducts as $rel)
-			<tr>
-				<td>{{$rel->id}}</td>
-				<td>{{$rel->name}}</td>
-				<td>{{$rel->category_id}}</td>
-				<td>{{$rel->category->name}}</td>
-				<td>{{$rel->title}}</td>
-				<td>{{$rel->description}}</td>
-				<td>{{$rel->price}}</td>
-				<td>{{$rel->quantity}}</td>
-				<td>{{$rel->size}}</td>
-				<td>{{$rel->weight}}</td>
-				<td>{{$rel->color}}</td>
-				<td>{{$rel->image}}</td>
-				<td>{{$rel->display}}</td>
-				<td>{{$rel->os}}</td>
-				<td>{{$rel->storage}}</td>
-				<td>{{$rel->ram}}</td>
-				<td>{{$rel->cpu}}</td>
-				<td>{{$rel->gpu}}</td>
-				<td>{{$rel->primary_camera}}</td>
-				<td>{{$rel->rear_camera}}</td>
-				<td>{{$rel->battery}}</td>
-				<td>{{$rel->warranty}}</td>
-				<td>{{$rel->promotion_price}}</td>
-				<td>{{$rel->start_promotion}}</td>
-				<td>{{$rel->end_promotion}}</td>
-
-
-				<td><a href="{{route('product.edit',$rel->id)}}" class="btn btn-danger" role="button">Edit</a></td>
-				<td>
-					<form action="{{route('product.destroy', $rel->id)}}" method="POST">
-        				@method('DELETE')
-        				@csrf
-        				<button type="submit" class="btn btn-danger">Delete</button>
-    				</form>
-				</td>
+           <button type="button" class="btn btn-info" ><a style="color:white;" href="{{route('product.create')}}">Tạo Mới</a></button>
+        </form>
+       
+      </div>
+    </div>
+    
+	<div class="card card-info main">
+    	<div class="card-header">
+      		<h3 class="card-title">Danh Sách Sản Phẩm</h3>
+        	<div class="card-tools">
+          	<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
+        	</div>
+        </div>
+        
+            <div class="card-body p-0" style="width: 98%; margin: 10px auto; border: 1px solid gray;" >
+             	<table class="table table-hover">
+                <thead style="background: #DEE1E6;">
+                  	<tr>
+                    <th>STT</th>
+                    <th>Hình ảnh</th>
+      					    <th>Tên sản phẩm</th>
+                    <th>Hãng</th>
+      					    <th>Số lượng</th>
+      					    <th>Giá bán</th>	
+        						<th>Ngày tạo</th>
+        						
+        						<th >Hành động</th>
 				
-			</tr>
-			@endforeach
-		</tbody>
-	</table>
+                  	</tr>
+                </thead>
+                <tbody>
+				@foreach($products as $key => $rel)
+                 	<tr>
+                   	<td>{{$key+1}}</td>
+                   	<td><img src="{{asset($rel->image)}}" width="70px" height="50px">
+						        </td>
+        						<td>{{$rel->name}}</td>
+                    <td>{{$rel->category->name}}</td>
+        						<td>{{$rel->quantity}}</td>
+        						<td>{{$rel->price}}</td>
+        						<td>{{$rel->created_at}}</td>
+        					
+                    	<td >
+                      		<div class="btn-group btn-group-sm">
+                      			
+                      			<a style="margin-right: 5px" href="{{route('product.show',$rel->id)}}" class="btn btn-info" title="chi tiết"><i class="fas fa-eye"></i></a>
+                        		<a style="margin-right: 5px" href="{{route('product.edit',$rel->id)}}" class="btn btn-secondary" title="sửa" onclick = 'return confirm("Bạn có chắc chắn muốn sửa sản phẩm: {{ $rel->id }} không?")'><i class="far fa-edit"></i></a>
+                            <a style="margin-right: 5px" href="{{route('product.destroy', $rel->id)}}" class="btn btn-danger" onclick="event.preventDefault();
+                                                       window.confirm('Bạn có chắc là bạn muốn xoá sản phẩm: ' + '{{ $rel->id }}' + ' không?') ? document.getElementById('delete-product-{{ $rel->id }}').submit() : false;"><i class="fas fa-trash"></i></a>
+                        <form  action="{{route('product.destroy', $rel->id)}}" method="POST" id="delete-product-{{ $rel->id }}" style="display: none;">
+                      @method('DELETE')
+                      @csrf
+                  </form>
+                          </div>
+                    	</td>
+                  	</tr>
+                  @endforeach
+              </tbody>
+             
+              </table>
+              <div class="clearfix">{{$products->links()}}</div>
 
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
- 		<script src="Hello World"></script>
-	</body>
-</html>
+            </div>
+            
+            <!-- /.card-body -->
+</div>
+@endsection

@@ -17,7 +17,7 @@
   <!-- JQVMap -->
   <link rel="stylesheet" href={{asset("admin/plugins/jqvmap/jqvmap.min.css")}}>
   <!-- Theme style -->
-  <link rel="stylesheet" href={{asset("admin/dist/css/adminlte.min.css")}}>
+  <link rel="stylesheet" href={{asset("/admin/dist/css/adminlte.min.css")}}>
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href={{asset("admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css")}}>
   <!-- Daterange picker -->
@@ -26,6 +26,8 @@
   <link rel="stylesheet" href={{asset("admin/plugins/summernote/summernote-bs4.css")}}>
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href={{asset("admin/css/style-admin.css")}}>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -59,6 +61,18 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      <!-- logout -->
+      <li>
+        <a class="dropdown-item" href="{{ route('logout') }}"
+         onclick="event.preventDefault();
+         document.getElementById('logout-form').submit();">
+         {{ __('Logout') }}
+      </a>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+      </form>
+      </li>
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -183,31 +197,44 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+               Danh mục
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="index.html" class="nav-link active">
+              <li class="nav-item active">
+                <a href="{{ url('/admin/category') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Category</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="index2.html" class="nav-link">
+                <a href="{{ url('/admin/product') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>Product</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="index3.html" class="nav-link">
+                <a href="{{ url('/admin/user') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
+                  <p>User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/admin/role') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Role</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/admin/order') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Order</p>
                 </a>
               </li>
             </ul>
-          </li>                           
+          </li>
+                           
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -222,12 +249,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
+            
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+             
+              
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -239,7 +266,8 @@
     <section class="content">
       <div class="container-fluid">
        
-        //noi dung o day
+        @section('content')
+        @show
         
         
       </div><!-- /.container-fluid -->
@@ -264,6 +292,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+
 <script src={{asset("admin/plugins/jquery/jquery.min.js")}}></script>
 <!-- jQuery UI 1.11.4 -->
 <script src={{asset("admin/plugins/jquery-ui/jquery-ui.min.js")}}></script>
@@ -297,5 +326,7 @@
 <script src={{asset("admin/dist/js/pages/dashboard.js")}}></script>
 <!-- AdminLTE for demo purposes -->
 <script src={{asset("admin/dist/js/demo.js")}}></script>
+<!-- my script -->
+<script src={{asset("admin/js/myscript.js")}}></script>
 </body>
 </html>

@@ -49,7 +49,8 @@
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="#" class="logo">
-									<img src="./img/logo.png" alt="">
+									<img src="./user/img/logo.png"  alt="">
+
 								</a>
 							</div>
 						</div>
@@ -148,9 +149,7 @@
 		</header>
 		<!-- /HEADER -->
 
-<<<<<<< HEAD:resources/views/user/layout/master.blade.php
 
-=======
 		<!-- NAVIGATION -->
 		<nav id="navigation">
 			<!-- container -->
@@ -178,7 +177,7 @@
 			<!-- /container -->
 		</nav>
 		<!-- /NAVIGATION -->
->>>>>>> Feature/Create-seeder-thanh:resources/views/layout/master.blade.php
+
 		
 			@section('content')
 			@show

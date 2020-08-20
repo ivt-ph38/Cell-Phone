@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Role;
+use App\User;
+use App\RoleUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +16,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $listRole = Role::orderBy('id','ASC')->paginate(2);
+        $listRole = Role::with('users')->orderBy('id','ASC')->paginate(2);
+        // $role = Role::find(1);
+        // $role->users()->attach(1);
+        
+
         return view('admin.role.list', compact('listRole'));
     }
 
@@ -23,9 +29,10 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
-        //
+        return view('admin.role.create');
     }
 
     /**
@@ -36,7 +43,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->except('_token');
+        Role::create($data);
+        return redirect()->route('role.index');
     }
 
     /**
@@ -58,7 +67,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        return view('admin.role.edit', compact('role'));
     }
 
     /**
@@ -70,7 +80,10 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::find($id);
+        $data = $request->except('_token', '_method');
+        $role->update($data);
+        return redirect()->route('role.index');
     }
 
     /**

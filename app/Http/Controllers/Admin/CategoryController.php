@@ -15,13 +15,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $categoryID = Category::all();
         $listCategory = Category::orderBy('id','ASC')->paginate(5);
-        return view('admin.category.list', compact('listCategory'));
+       
+        return view('admin.category.list', compact('listCategory','categoryID'));
     }
     public function showCategory()
     {
         $listCategory = Category::all();
-        return view('index', compact('listCategory'));
+        return view('user.index', compact('listCategory'));
         
     }
 
@@ -43,9 +45,11 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
+        
         $data = $request->except('_token');
         Category::create($data);
-        return redirect()->route('category.list');
+        return redirect()->route('category.index')->with(['message'=>'Đã tạo thành công !!']);
+    
     }
 
     /**
@@ -83,7 +87,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $data = $request->except('_token', '_method');
         $category->update($data);
-        return redirect()->route('category.list');
+        return redirect()->route('category.index')->with(['message'=>'Đã sửa thành công!!']);
     }
 
     /**
@@ -94,6 +98,31 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::with('products')->find($id);
+        
+        $countProduct = count($category->products);
+        if($countProduct == 0){
+            $category->delete();
+            return redirect()->route('category.index')->with(['message'=>'Đã xóa thành công!!']);
+        }
+        else{
+            return redirect()->route('category.index')->with(['error'=>'Không thể xóa vì hãng này vẫn còn sản phẩm!!']);
+        }
+ 
+       
+    }
+    public function search(Request $request){
+        $categoryID = Category::all();
+        if($request->name){
+            $category = Category::where('name','like','%'.$request->name.'%')
+                        ->get();
+        return view('admin.category.search', compact('category','categoryID'));
+        }
+        if($request->brand){
+            //dd($request->brand);
+            $category = Category::where('id',$request->brand)->get();
+                        
+        return view('admin.category.search', compact('category','categoryID'));
+        }
     }
 }

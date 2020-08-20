@@ -12,9 +12,11 @@ class StatusTableSeeder extends Seeder
     public function run()
     {
         $data = [
-        		['status' => 'Đang đóng gói'],
-        		['status' => 'Đang vân chuyên'],
-        		['status' => 'Mod']
+        		['status' => 'Mới'],
+        		['status' => 'Đang xử lý'],
+        		['status' => 'Đã giao hàng'],
+                ['status' => 'Đã thanh toán'],
+                ['status' => 'Đã hủy']
         ];
         Status::insert($data);
     }
