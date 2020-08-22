@@ -144,7 +144,7 @@
 						<li class="active"><a href="{{route('user.home')}}">Trang chủ</a></li>
 						@foreach ($category as $key=>$value)
 
-						<li><a href="{{route('user.category',['id'=>$value['id'],'arrange'=>'desc'])}}">{{$value['name']}}</a></li>			
+						<li><a href="{{route('user.productCategory',['id'=>$value['id'],'level'=>'0','arrange'=>'desc'])}}">{{$value['name']}}</a></li>			
 						@endforeach
 					</ul>
 					<!-- /NAV -->

@@ -28,10 +28,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function filterPrice(){
-       $product =  DB::table('products')->where('category_id',$id)->whereBetween('price', array(3000000, 9000000))->get();
-       dd($product);
-   }
+    
 
    public function getAddToCart(Request $request, $id) {
     $product = Product::find($id);

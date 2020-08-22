@@ -24,7 +24,23 @@ class ReviewRequest extends FormRequest
     public function rules()
     {
         return [
-        'value'=>'required'
+        'value'=>'required',
+        'name'=>'required|string',
+        'email'=>'required|email|unique:guests,email',
+        'content'=>'required|string'
+        ];
+    }
+     public function messages () {
+        return [
+            'value.required'=> 'Bạn chưa đánh giá sao',
+            'name.required'=> 'Bắt buộc nhập tên của bạn',
+            'email.required'=> 'Bắt buộc nhập email',
+            'email.email'=> 'email không hợp lệ',
+            'email.unique'=> 'email đã tồn tại',
+            'content.required' => 'Yêu cầu nhập đánh giá của ban'
+            
+           
+          
         ];
     }
 }

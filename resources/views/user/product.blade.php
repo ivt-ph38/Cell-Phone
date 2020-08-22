@@ -55,16 +55,7 @@
 			<div class="col-md-5">
 				<div class="product-details">
 					<h2 class="product-name">{{$itemProduct['name']}}</h2>
-					<div>
-						<div class="product-rating">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star-o"></i>
-						</div>
-						<a class="review-link" href="#">10 Đánh giá | Thêm đánh giá của bạn</a>
-					</div>
+					
 					<div>
 						<h3 class="product-price">{{number_format($itemProduct['price'])}} <del class="product-old-price"></del></h3>
 						@if ($qtyAvailable>0)
@@ -75,15 +66,10 @@
 						@endif
 						
 					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<p>{{$itemProduct['description']}}</p>
 					
 					<div class="product-options">						
-						<label>
-							Color
-							<select class="input-select">
-								<option value="0">Red</option>
-							</select>
-						</label>
+						
 					</div>
 
 					<div class="add-to-cart">
@@ -110,7 +96,7 @@
 					<ul class="tab-nav">
 						<li class="active"><a data-toggle="tab" href="#tab1">Thông số kĩ thuật </a></li>
 						
-						<li><a data-toggle="tab" href="#tab2">Đánh giá (3)</a></li>
+						<li><a data-toggle="tab" href="#tab2">Đánh giá</a></li>
 					</ul>
 					<!-- /product tab nav -->
 
@@ -119,8 +105,72 @@
 						<!-- tab1  -->
 						<div id="tab1" class="tab-pane fade in active">
 							<div class="row">
-								<div class="col-md-12">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								<div class="col-md-8 col-md-offset-2">
+									<table class="table table-bordered success">
+										<thead>
+											<tr >
+												<th class="danger">Tên điện thoại</th>
+												<td>{{$itemProduct['name']}}</td>
+											</tr>
+											<tr>
+												<th class="danger">Màu</th>
+												<td>{{$itemProduct['color']}}</td>
+											</tr>
+											<tr>
+												<th class="danger" >Mô tả</th>
+												<td>{{$itemProduct['description']}}</td>
+											</tr>
+											<tr>
+												<th class="danger" >Kích thước</th>
+												<td>{{$itemProduct['size']}}</td>
+											</tr>
+											<tr>
+												<th class="danger" >Khối lượng</th>
+												<td>{{$itemProduct['size']}}</td>
+											</tr>
+											<tr>
+												<th class="danger" >Hệ điều hành</th>
+												<td>{{$itemProduct['os']}}</td>
+											</tr>
+											<tr>
+												<th class="danger" >Dung lượng</th>
+												<td>{{$itemProduct['storage']}}</td>
+											</tr>
+											<tr>
+												<th class="danger" >Camera sau</th>
+												<td>+91 {{$itemProduct['rear_camera']}}</td>
+											</tr>
+
+											<tr>
+												<th class="danger" >Camera trước</th>
+												<td>{{$itemProduct['primary_camera']}}</td>
+											</tr>
+											<tr>
+												<th class="danger" >CPU</th>
+												<td>{{$itemProduct['cpu']}}</td>
+											</tr>
+											<tr >
+												<th class="danger"  >Ram</th>
+												<td>{{$itemProduct['storage']}}</td>
+											</tr>
+											<tr>
+												<th class="danger">GPU</th>
+												<td>{{$itemProduct['gpu']}}</td>
+											</tr>
+											<tr>
+												<th class="danger">Dung lượng pin</th>
+												<td>{{$itemProduct['battery']}}</td>
+											</tr>
+											<tr>
+												<th class="danger">Bảo hành</th>
+												<td>{{$itemProduct['warranty']}}</td>
+											</tr>
+
+
+
+										</thead>
+
+									</table>
 								</div>
 							</div>
 						</div>
@@ -258,14 +308,25 @@
 											@csrf
 											
 											@guest
-											<input class="input" name="name" type="text" placeholder="Your Name">
-											<input class="input" name="email" type="email" placeholder="Your Email">
+											<span>Tên <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
+											<input class="input" name="name" type="text" placeholder="Tên của bạn" value="{{old('name')}}">
+											@if($errors->has('name'))
+												<p style="color:red">{{$errors->first('name')}}</p>
+												@endif
+											<span>Email <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
+											<input class="input" name="email" type="email" placeholder="Email của bạn" value="{{old('email')}}">
+											@if($errors->has('email'))
+												<p style="color:red">{{$errors->first('email')}}</p>
+												@endif
 											@endguest
 											
-											<textarea class="input" name="content" placeholder="Your Review"></textarea>
+											<textarea class="input" name="content" placeholder="Viết đánh giá về sản phẩm" value="{{old('content')}}"></textarea>
+											@if($errors->has('content'))
+												<p style="color:red">{{$errors->first('content')}}</p>
+												@endif
 											<input type="hidden" name="product_id" value="{{$itemProduct['id']}}">
 											<div class="input-rating">
-												<span>Your Rating: </span>
+												<span>Đánh giá <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
 												<div class="stars">
 													<input id="star5" name="value" value="5" type="radio"><label for="star5"></label>
 													<input id="star4" name="value" value="4" type="radio"><label for="star4"></label>
@@ -277,7 +338,7 @@
 												<p style="color:red">{{$errors->first('value')}}</p>
 												@endif
 											</div>
-											<button  class="primary-btn">Submit</button>
+											<button  class="primary-btn">Đánh Giá</button>
 
 										</form>
 										

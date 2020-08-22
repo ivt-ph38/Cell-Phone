@@ -20,7 +20,8 @@ Route::get('/', "User\CategoryController@index")->name("user.home");
 // Cac trang user
 Route::group(['prefix'=>'user','as'=>'user.'],function () {
 	// Trang cac san pham trong category 
-	Route::get('/category/product/{id}/{arrange}', "User\CategoryController@show")->name("category");
+	Route::get('/category/product/{id}/{level}/{arrange}', "User\CategoryController@show")->name("productCategory");
+	// Route::get('/product/filter/{id}/{level}', "User\CategoryController@filterPrice")->name("filter");
 	// Trang chi tiet san pham
 	Route::get('/product/{id}', "User\ProductController@show")->name("product");
 	//review

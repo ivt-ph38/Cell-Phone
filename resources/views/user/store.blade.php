@@ -31,11 +31,32 @@
 				<div class="aside">
 					<h3 class="aside-title text-center">Lọc Theo giá</h3>
 					<div class="text-center">
-						<a href="">Dưới 2 triệu</a>  <hr>  
-						<a href="">Từ 2 - 4 triệu</a> <hr>
-						<a href="">Từ 4 - 7 triệu</a> <hr>
-						<a href=""> Từ 7 - 13 triệu</a> <hr>
-						<a href=""> Trên 13 triệu</a> <hr>
+						@if ($level==1)
+						<a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'1']) }}">Dưới 2 triệu</a>  <hr>
+						@else
+						<a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'1']) }}">Dưới 2 triệu</a>  <hr> 
+						@endif
+						 @if ($level==2)
+						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'2']) }}">Từ 2 - 4 triệu</a> <hr>
+						 @else	{{-- expr --}}
+						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'2']) }}">Từ 2 - 4 triệu</a> <hr>
+						 @endif
+						 @if ($level==3)
+						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'3']) }}">Từ 4 - 7 triệu</a> <hr>
+						 @else	{{-- expr --}}
+						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'3']) }}">Từ 4 - 7 triệu</a> <hr>
+						 @endif
+						 @if ($level==4)
+						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'4']) }}"> Từ 7 - 13 triệu</a> <hr>
+						 @else	{{-- expr --}}
+						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'4']) }}"> Từ 7 - 13 triệu</a> <hr>
+						 @endif
+						 @if ($level==5)
+						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'5']) }}"> Trên 13 triệu</a> <hr>
+						 @else	{{-- expr --}}
+						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'5']) }}"> Trên 13 triệu</a> <hr>
+						 @endif
+						 
 					</div>
 				</div>
 				<!-- /aside Widget -->
@@ -46,7 +67,7 @@
 					@foreach ($listHotProduct as $value)
 					<div class="product-widget">
 						<div class="product-img">
-							<img src="{{$value['image']}}" alt="">
+							<img src="{{asset($value['image'])}}" alt="">
 						</div>
 						<div class="product-body">
 							<p class="product-category">{{$value['category_name']}}</p>
@@ -70,17 +91,17 @@
 							<div class="row">
 								@if ($arrange=='asc')
 								<div class="col-md-6">
-									<a style="color:red;font-weight: bold;" href="{{route('user.category',['id'=>$categoryName['id'],'arrange'=>'asc'])}}">Sắp xếp giá tăng dần</a>
+									<a style="color:red;font-weight: bold;" href="{{route('user.productCategory',['id'=>$id,'level'=>$level,'arrange'=>'asc'])}}">Sắp xếp giá tăng dần</a>
 								</div>
 								<div class="col-md-6">
-									<a style="color:#848484" href="{{route('user.category',['id'=>$categoryName['id'],'arrange'=>'desc'])}}">Sắp xếp giá giảm dần</a>
+									<a style="color:#848484" href="{{route('user.productCategory',['id'=>$id,'level'=>$level,'arrange'=>'desc'])}}">Sắp xếp giá giảm dần</a>
 								</div>
 								@elseif($arrange=='desc')
 								<div class="col-md-6">
-									<a style="color:#848484"  href="{{route('user.category',['id'=>$categoryName['id'],'arrange'=>'asc'])}}">Sắp xếp giá tăng dần</a>
+									<a style="color:#848484"  href="{{route('user.productCategory',['id'=>$id,'level'=>$level,'arrange'=>'asc'])}}">Sắp xếp giá tăng dần</a>
 								</div>
 								<div class="col-md-6">
-									<a style="color:red; font-weight: bold;"  href="{{route('user.category',['id'=>$categoryName['id'],'arrange'=>'desc'])}}">Sắp xếp giá giảm dần</a>
+									<a style="color:red; font-weight: bold;"  href="{{route('user.productCategory',['id'=>$id,'level'=>$level,'arrange'=>'desc'])}}">Sắp xếp giá giảm dần</a>
 								</div>
 								@endif
 
@@ -101,7 +122,7 @@
 					<div class="col-md-4 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="{{$value->image}}" alt="">
+								<img src="{{asset($value->image)}}" alt="">
 								<div class="product-label">
 									<span class="sale">-30%</span>
 									<span class="new">NEW</span>
