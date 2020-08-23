@@ -21,30 +21,30 @@ Route::middleware(['auth'])->group(function () {
 		Route::prefix('admin')->group(function () {
 
 			Route::group([
-			'middleware' => 'check_role:hãng sản phẩm'
+			'middleware' => 'check_role:Quản lí hãng sản phẩm'
 				],function () {
 					// ----------Category-----------// 
 					Route::resource('category', 'CategoryController');
 					Route::get('searchCategory', 'CategoryController@search')->name('search_category');
 			});
 			Route::group([
-			'middleware' => 'check_role:sản phẩm'
+			'middleware' => 'check_role:Quản lí sản phẩm'
 				],function () {
 					// ----------Product-----------// 
 					Route::resource('product', 'ProductController');
 					Route::get('searchProduct', 'ProductController@search')->name('search_product');
 			});
 			Route::group([
-			'middleware' => 'check_role:đơn hàng'
+			'middleware' => 'check_role:Quản lí đơn hàng'
 				],function () {
 					// ----------Order-----------// 
 					Route::resource('order', 'OrderController');
 					Route::get('searchOrder', 'OrderController@search')->name('search_order');
 					// ----------Send order to mail-----------// 
-					Route::get('mail/{id}', 'OrderController@sendMail')->name('sendmail');
+					// Route::get('mail/{id}', 'OrderController@sendMail')->name('sendmail');
 			});
 			Route::group([
-			'middleware' => 'check_role:khách hàng'
+			'middleware' => 'check_role:Quản lí khách hàng'
 				],function () {
 					//---- module Users ----//
 					Route::resource('user', 'UserController');
@@ -52,13 +52,13 @@ Route::middleware(['auth'])->group(function () {
 			});
 			
     		Route::group([
-			'middleware' => 'check_role:role'
+			'middleware' => 'check_role:Quản lí phân quyền'
 				],function () {
 					//---- module Role  ----//
 					Route::resource('role', 'RoleController');
 			});
 			Route::group([
-			'middleware' => 'check_role:phân quyền người dùng'
+			'middleware' => 'check_role:Quản lí người phân quyền'
 				],function () {
 					//---- module User Authorization  ----//
 					Route::resource('userAuth', 'UserAuthorizationController');
