@@ -6,6 +6,7 @@ use App\User;
 use App\RoleUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RoleRequest;
 
 class RoleController extends Controller
 {
@@ -16,11 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $listRole = Role::with('users')->orderBy('id','ASC')->paginate(2);
-        // $role = Role::find(1);
-        // $role->users()->attach(1);
-        
-
+        $listRole = Role::with('users')->orderBy('id','ASC')->paginate(5);
         return view('admin.role.list', compact('listRole'));
     }
 
@@ -41,7 +38,7 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
         $data = $request->except('_token');
         Role::create($data);
@@ -78,7 +75,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
         $role = Role::find($id);
         $data = $request->except('_token', '_method');
@@ -94,6 +91,15 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::with('users')->find($id);
+        
+        $countUser = count($role->users);
+        if($countUser == 0){
+            $role->delete();
+            return redirect()->route('role.index')->with(['message'=>'Đã xóa thành công!!']);
+        }
+        else{
+            return redirect()->route('role.index')->with(['error'=>'Xóa không thành công!!']);
+        }
     }
 }

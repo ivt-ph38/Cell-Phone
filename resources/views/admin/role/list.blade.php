@@ -1,7 +1,9 @@
 @extends('admin.master.master')
 		@section ('content')
-		<h2>LIST ROLE</h2>
-	<div class="card card-info" style="width: 400px; float: left; margin-right: 30px">
+    @include('errors.message')
+  @include('errors.error')
+		
+	<div class="card card-info" style="width: 600px; float: left; margin-right: 30px">
     <div class="card-header">
       <h3 class="card-title">Role</h3>
         <div class="card-tools">
@@ -12,23 +14,28 @@
               <table class="table">
                 <thead style="background: #DEE1E6;">
                   <tr>
-                      <th>ID</th>
-					  <th>Name</th>
-					  <th>Total User</th>
-					  <th>Action</th>
+                    <th>STT</th>
+        					  <th>Tên phân quyền</th>
+        					  <th>Số người phân quyền</th>
+        					  <th>Hành động</th>
                   </tr>
                 </thead>
                 <tbody>
-				@foreach($listRole as $rel)
+				@foreach($listRole as$key => $rel)
                 <tr>
-                    <td>{{$rel->id}}</td>
-					<td>{{$rel->name}}</td>
-					<td>{{count($rel->users)}}</td>
+                  <td>{{++$key}}</td>
+        					<td>{{$rel->name}}</td>
+        					<td>{{count($rel->users)}}</td>
 					
                     <td >
                       <div class="btn-group btn-group-sm">
                         <a style="margin-right: 5px" href="{{route('role.edit',$rel->id)}}" class="btn btn-info"><i class="far fa-edit"></i></a>
-                        <a style="margin-right: 5px" href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        <a style="margin-right: 5px" href="{{route('role.destroy', $rel->id)}}" title="Xóa" class="btn btn-danger" onclick="event.preventDefault();
+                                                       window.confirm('Bạn có chắc là bạn muốn xoá hãng: ' + '{{ $rel->name }}' + ' không?') ? document.getElementById('delete-role-{{ $rel->name }}').submit() : false;" ><i class="fas fa-trash"></i></a>
+                        <form  action="{{route('role.destroy', $rel->id)}}" method="POST" id="delete-role-{{ $rel->name }}" style="display: none;">
+                      @method('DELETE')
+                      @csrf
+                  </form>
                       </div>
                     </td>
                   </tr>

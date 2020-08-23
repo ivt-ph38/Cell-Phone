@@ -37,10 +37,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function form_login()
-    {
-        return view('admin.login.login');
-    }
+    
     public function login(LoginRequest $request)
     {
         $data = $request->only('email','password');

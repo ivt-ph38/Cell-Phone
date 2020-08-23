@@ -61,18 +61,34 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- logout -->
-      <li>
-        <a class="dropdown-item" href="{{ route('logout') }}"
-         onclick="event.preventDefault();
-         document.getElementById('logout-form').submit();">
-         {{ __('Logout') }}
-      </a>
+     <!-- login and dk -->
+      @guest
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+          </li>
+            @if (Route::has('register'))
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+          </li>
+            @endif
+            @else
+          <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ Auth::user()->fullname }} <span class="caret"></span>
+            </a>
 
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-      @csrf
-      </form>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+            </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
+        </div>
       </li>
+       @endguest
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -230,6 +246,12 @@
                 <a href="{{ url('/admin/order') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Order</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/admin/userAuth') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>User Authorization</p>
                 </a>
               </li>
             </ul>

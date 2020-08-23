@@ -46,18 +46,18 @@ class User extends Authenticatable
         return $this->hasOne('App\Order');
     }
     //----- kiểm tra $roles là string hay là array ---//
-    public function authorizeRoles($roles){
-        if (is_array($roles)) {
-            return $this->hasAnyRole($roles);
-        }
-            return $this->hasRole($roles);
-    }
-    public function hasAnyRole($roles){
+    // public function authorizeRoles($roles){
+    //     if (is_array($roles)) {
+    //         return $this->hasAnyRole($roles);
+    //     }
+    //         return $this->hasRole($roles);
+    // }
+    // public function hasAnyRole($roles){
         
-        return null !== $this->roles()->whereIn('name', $roles)->first();
-    }
-    public function hasRole($role){
-        return null !== $this->roles()->where('name', $role)->first();
-    }
+    //     return null !== $this->roles()->whereIn('name', $roles)->first();
+    // }
+    // public function hasRole($role){
+    //     return null !== $this->roles()->where('name', $role)->first();
+    // }
 
 }
