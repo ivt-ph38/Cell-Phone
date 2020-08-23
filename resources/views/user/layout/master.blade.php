@@ -59,8 +59,14 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
+<<<<<<< HEAD
 								<a href="{{route('user.home')}}" class="logo">
 									<img src="{{asset("user/img/logo.png")}}" alt="">
+=======
+								<a href="#" class="logo">
+									<img src="./user/img/logo.png"  alt="">
+
+>>>>>>> admin
 								</a>
 							</div>
 						</div>
@@ -144,8 +150,31 @@
 						<li class="active"><a href="{{route('user.home')}}">Trang chủ</a></li>
 						@foreach ($category as $key=>$value)
 
+<<<<<<< HEAD
 						<li><a href="{{route('user.productCategory',['id'=>$value['id'],'level'=>'0','arrange'=>'desc'])}}">{{$value['name']}}</a></li>			
 						@endforeach
+=======
+
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308382424851899_iPhone-Apple.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308383002140401_Samsung.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308383477514764_OPPO.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308383938050284_Vsmart.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308384436908561_Xiaomi.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308401852916473_Realme.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308404834150721_Nokia.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308404026693828_Vivo.jpg" alt=""></a></li>
+						<li><a href=""><img src="https://images.fpt.shop/unsafe/fit-in/120x25/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/7/20/637308405384262423_Huawei.jpg" alt=""></a></li>
+
+>>>>>>> admin
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -154,6 +183,10 @@
 			<!-- /container -->
 		</nav>
 		<!-- /NAVIGATION -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> admin
 		
 		
 		@section('content')

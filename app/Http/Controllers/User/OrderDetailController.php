@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Admin;
 use App\Order_detail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OrderDetailController extends Controller
 {
@@ -14,7 +14,7 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -41,21 +41,22 @@ class OrderDetailController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order_detail  $order_detail
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Order_detail $order_detail)
+    public function show($id)
     {
-        //
+        // $order_detail = Order_detail::find($id);
+        // return view('admin.order.orderDeatil', compact('order_detail')) ;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order_detail  $order_detail
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order_detail $order_detail)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +65,10 @@ class OrderDetailController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order_detail  $order_detail
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order_detail $order_detail)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +76,10 @@ class OrderDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order_detail  $order_detail
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order_detail $order_detail)
+    public function destroy($id)
     {
         //
     }

@@ -141,6 +141,7 @@
 							<div class="products-slick" data-nav="#slick-nav-2">
 								@foreach ($listHotProduct as $value)
 									<!-- product -->
+
 								<div class="product">
 									<div class="product-img">
 										<img src="{{asset($value['image'])}}" alt="">

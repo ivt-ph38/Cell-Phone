@@ -205,7 +205,11 @@ class ProductsTableSeeder extends Seeder
         [
 
             'category_id' => 2,
+<<<<<<< HEAD
             'name'=>'Sam Sung Galaxy note10',
+=======
+            'name'=>'iPhone X Pro Max',
+>>>>>>> admin
             'title' => 'iPhone 11 Pro Max 64GB',
             'description' => 'Iphone 11 pro max 64 GB.',
             'price' =>29490000,
@@ -232,7 +236,11 @@ class ProductsTableSeeder extends Seeder
         [
 
             'category_id' => 3,
+<<<<<<< HEAD
             'name'=>'OPPO Reno4',
+=======
+            'name'=>'iPhone 8 ',
+>>>>>>> admin
             'title' => 'iPhone 11 Pro Max 64GB',
             'description' => 'Iphone 11 pro max 64 GB.',
             'price' =>29490000,

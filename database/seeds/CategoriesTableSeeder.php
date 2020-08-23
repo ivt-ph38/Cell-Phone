@@ -12,7 +12,7 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
     	 $data = [
-        		['name' => 'Iphone'],
+        		['name' => 'Iphone',],
         		['name' => 'Samsung'],
         		['name' => 'OPPO'],
         		['name' => 'Vsmart'],

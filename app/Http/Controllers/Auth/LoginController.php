@@ -6,6 +6,8 @@ use App\Http\Controllers\User\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\LoginRequest;
 use Auth;
+
+
 class LoginController extends Controller
 {
     /*
@@ -37,6 +39,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
     public function login(LoginRequest $request, $role)
     { 
 
@@ -57,5 +60,6 @@ class LoginController extends Controller
        }
        
        
+
     }
 }

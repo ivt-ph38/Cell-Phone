@@ -5,16 +5,19 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use  SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    protected $table = 'users';
     protected $fillable = [
         'username','email', 'password','fullname','address','phone'
     ];
@@ -37,8 +40,32 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function orders()
     {
        return $this->hasMany('App\Order');
     }
+
+    public function roles (){
+        return $this->belongsToMany('App\Role');
+    }
+    public function order (){
+        return $this->hasOne('App\Order');
+    }
+    //----- kiểm tra $roles là string hay là array ---//
+    // public function authorizeRoles($roles){
+    //     if (is_array($roles)) {
+    //         return $this->hasAnyRole($roles);
+    //     }
+    //         return $this->hasRole($roles);
+    // }
+    // public function hasAnyRole($roles){
+        
+    //     return null !== $this->roles()->whereIn('name', $roles)->first();
+    // }
+    // public function hasRole($role){
+    //     return null !== $this->roles()->where('name', $role)->first();
+    // }
+
+
 }

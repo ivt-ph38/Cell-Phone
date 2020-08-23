@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+
         //Share biến category cho tất cả các wiew
         View::share('category', Category::all()->toArray());
         ////////////////////////
@@ -48,13 +49,9 @@ class AppServiceProvider extends ServiceProvider
             'price'=>$product['price'],
             'image'=>$product['image']
         ];
-        }   
+    }   
     View::share('listHotProduct', $listHotProduct);
     //////////////////////////
-    
-   
-
-    
-
+}   
 }
-}
+

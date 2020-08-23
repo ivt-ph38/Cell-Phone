@@ -20,6 +20,7 @@ class CreateGuestsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

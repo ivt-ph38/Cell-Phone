@@ -36,13 +36,11 @@ class CreateProductsTable extends Migration
             $table->string('battery');
             $table->string('warranty');
             $table->string('promotion_price');
-            $table->date('start_promotion');
-            $table->date('end_promotion');
-
-
+            $table->date('start_promotion')->nullable();
+            $table->date('end_promotion')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
-
             $table->timestamps();
+            $table->softDeletes();
           
         });
     }

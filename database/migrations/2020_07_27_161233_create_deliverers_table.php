@@ -18,6 +18,7 @@ class CreateDeliverersTable extends Migration
             $table->string('name');
             $table->integer('phone');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
