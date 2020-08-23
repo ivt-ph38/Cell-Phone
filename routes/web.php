@@ -60,11 +60,11 @@ Route::group(['prefix'=>'user','as'=>'user.'],function () {
     Route::post('/register/{role}', "User\UserController@register")->name("register");
 	// Trang thanh toan
 	Route::get('/checkout', function () {return view('user.checkout');})->name("checkout");
-
+});
 /////////////route admin
 
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+ Auth::routes();
+
 
 Route::middleware(['auth'])->group(function () {
 	Route::group(['namespace'=>'Admin'],function(){

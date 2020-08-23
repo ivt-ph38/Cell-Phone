@@ -12,10 +12,10 @@ class Order extends Model
 
     public function order_details()
     {
-     return $this->hasMany('App\Order_detail');
- }    
- public function user()
- {
+       return $this->hasMany('App\Order_detail');
+   }    
+   public function user()
+   {
     return $this->belongsTo('App\User');
 }
 public function status()

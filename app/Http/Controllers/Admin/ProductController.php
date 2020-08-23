@@ -5,7 +5,7 @@ use App\Category;
 use App\Product;
 use App\Order;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\User\Controller;
 
 class ProductController extends Controller
 {
