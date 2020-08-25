@@ -61,6 +61,8 @@ Route::group(['prefix'=>'user','as'=>'user.'],function () {
 	// Trang thanh toan
 	Route::get('/checkout', function () {return view('user.checkout');})->name("checkout");
 });
+
+Route::get('/feedback/{orderId}',"User\OrderController@addFeedback")->name("feedback");
 /////////////route admin
 
 
@@ -84,7 +86,7 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth'],funct
 			'middleware' => 'check_role:Quản lí hãng sản phẩm'
 				],function () {
 
-Route::get('/feedback/{orderId}',"User\OrderController@addFeedback")->name("feedback");
+
 
 
 
