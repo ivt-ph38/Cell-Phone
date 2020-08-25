@@ -50,7 +50,7 @@ class ProductController extends Controller
         }
         $data['image'] = '/admin/images/products/'.$newName;
         Product::create($data);
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with(['message'=>'Đã tạo thành công !!']);
     }
 
     /**
@@ -98,7 +98,7 @@ class ProductController extends Controller
         }
         $data['image'] = '/admin/images/products/'.$newName;
         $product->update($data);
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with(['message'=>'Đã sửa thành công!!']);
     }
 
     /**
@@ -109,6 +109,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+
      $a = DB::table('order_details')->select('*')->where('product_id',$id)->get()->toArray();
        if($a==null) { //khong co trong don hang
 
@@ -135,6 +136,7 @@ class ProductController extends Controller
                    Product::find($id)->delete();
                     return redirect()->route('product.index')->with(['message'=>'Đã xóa sản phẩm thành công. !!']); 
                 }
+
     }
      
 }

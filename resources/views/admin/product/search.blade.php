@@ -56,7 +56,7 @@
         						<td>{{$rel->name}}</td>
                     <td>{{$rel->category->name}}</td>
         						<td>{{$rel->quantity}}</td>
-        						<td>{{$rel->price}}</td>
+        						<td>{{number_format($rel->price)}}</td>
         						<td>{{$rel->created_at}}</td>
         						
                     	<td >
