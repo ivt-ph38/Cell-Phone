@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Product;
 use App\Order;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -108,42 +109,49 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        
-        $productID = Product::with('order_details')->find($id);
+     $a = DB::table('order_details')->select('*')->where('product_id',$id)->get()->toArray();
+       if($a==null) { //khong co trong don hang
 
-        $order_detail =$productID->order_details;
-
-        foreach ($order_detail as $value) {
-            // lấy giá trị order_id//
-            $order_id = $value->order_id;
-            $order = Order::find($order_id)->toArray();
-            //lấy status_id//
-            $status_id = $order['status_id'];
-            dd($status_id);
-            if($status_id == 4){
-                $productID->delete();
-                return redirect()->route('product.index')->with(['message'=>'Đã xóa sản phẩm thành công. !!']);
-            }
-            else{
-                return redirect()->route('product.index')->with(['error'=>'Không thể xóa vì đơn hàng của sản phẩm này chưa thanh toán.!!']);
-            }    
-        }
-        
+        Product::find($id)->delete();
+        return redirect()->route('product.index')->with(['message'=>'Đã xóa sản phẩm thành công. !!']);
     }
-    public function search(Request $request){
-        $categoryID = Category::all();
-        if($request->name){
-            $products = Product::where('name','like','%'.$request->name.'%')
-                        ->orWhere('price',$request->name)
-                        ->get();
+    else{
+                $check=0; 
+                foreach ($a as $key => $value) {
+                    if((Order::find($value->order_id)->status_id)==4) {
+                        $check =0;
+                    }
+                    else {
+                       $check =1;
+                       break;
+                    }
+
+                }
+                if($check==1) {
+                    return redirect()->route('product.index')->with(['error'=>'Không thể xóa vì đơn hàng của sản phẩm này chưa hủy.!!']);
+                    
+                }
+                else {
+                   Product::find($id)->delete();
+                    return redirect()->route('product.index')->with(['message'=>'Đã xóa sản phẩm thành công. !!']); 
+                }
+    }
+     
+}
+public function search(Request $request){
+    $categoryID = Category::all();
+    if($request->name){
+        $products = Product::where('name','like','%'.$request->name.'%')
+        ->orWhere('price',$request->name)
+        ->get();
         return view('admin.product.search', compact('products','categoryID'));
-        }
-        if($request->brand){
+    }
+    if($request->brand){
             //dd($request->brand);
-            $products = Product::where('category_id',$request->brand)->get();
-                        
+        $products = Product::where('category_id',$request->brand)->get();
+
         return view('admin.product.search', compact('products','categoryID'));
-        }
     }
-    
+}
+
 }
