@@ -5,7 +5,7 @@ use App\User;
 use App\Role;
 use DB;
 use Illuminate\Http\Request;
-use App\Http\Controllers\User\Controller;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 
 class UserController extends Controller
@@ -50,13 +50,14 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {   
+      
         //---- insert to users table ---//
         $data = $request->except('_token');
         $data['password'] = bcrypt($request->password);
         $user = User::create($data);
-       
-        
-        return redirect()->route('user.index');
+
+        return redirect()->route('user.index')->with(['message'=>'Đã tạo thành công !!']);
+
     }
 
     /**
@@ -96,7 +97,7 @@ class UserController extends Controller
         $data = $request->except('_token', '_method');
         $data['password'] = bcrypt($request->password);
         $user->update($data);
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with(['message'=>'Đã sửa thành công!!']);
     }
 
     /**
@@ -109,7 +110,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with(['message'=>'Đã xóa thành công!!']);
     }
     public function search(Request $request){
         if($request->name){

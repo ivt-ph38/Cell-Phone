@@ -5,7 +5,7 @@ use App\User;
 use App\Role;
 use DB;
 use Illuminate\Http\Request;
-use App\Http\Controllers\User\Controller;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 
 class UserAuthorizationController extends Controller
@@ -15,11 +15,7 @@ class UserAuthorizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __contruct()
-    {
-        $this->middleware('check_role');
-       
-    }
+    
     public function index()
     {
         $user_id = DB::table('role_user')->pluck('user_id')->toArray();

@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $table = 'users';
     protected $fillable = [
-        'username','email', 'password','fullname','address','phone'
+        'email', 'password','fullname','address','phone'
     ];
 
     /**
@@ -48,6 +48,9 @@ class User extends Authenticatable
 
     public function roles (){
         return $this->belongsToMany('App\Role');
+    }
+    public function role_users (){
+        return $this->hasMany('App\RoleUser');
     }
     public function order (){
         return $this->hasOne('App\Order');

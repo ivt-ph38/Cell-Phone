@@ -5,7 +5,7 @@ use App\Category;
 use App\Product;
 use App\Order;
 use Illuminate\Http\Request;
-use App\Http\Controllers\User\Controller;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->orderBy('id','ASC')->paginate(2);;
+        $products = Product::with('category')->orderBy('id','ASC')->paginate(10);;
         $categoryID = Category::all();
         return view('admin.product.list', compact('products','categoryID'));
     }
@@ -109,17 +109,19 @@ class ProductController extends Controller
     public function destroy($id)
     {
         
-        $product = Product::with('order_details')->find($id);
-        $order_detail =$product->order_details;
+        $productID = Product::with('order_details')->find($id);
+
+        $order_detail =$productID->order_details;
+
         foreach ($order_detail as $value) {
             // lấy giá trị order_id//
             $order_id = $value->order_id;
             $order = Order::find($order_id)->toArray();
             //lấy status_id//
             $status_id = $order['status_id'];
-            //dd($status_id);
+            dd($status_id);
             if($status_id == 4){
-                $product->delete();
+                $productID->delete();
                 return redirect()->route('product.index')->with(['message'=>'Đã xóa sản phẩm thành công. !!']);
             }
             else{

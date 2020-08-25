@@ -20,7 +20,7 @@
   
 		<div class="card card-info main">
     <div class="card-header">
-      <h3 class="card-title">Danh sách phan quyen</h3>
+      <h3 class="card-title">Danh Sách</h3>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
         </div>
@@ -29,7 +29,7 @@
               <table class="table">
                 <thead style="background: #DEE1E6;">
                   <tr>
-                    <th>ID</th>
+                    <th>STT</th>
           					<th>Tên</th>
           					<th>Email</th>
                     <th>Hành động</th>

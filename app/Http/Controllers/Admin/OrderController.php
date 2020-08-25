@@ -12,7 +12,7 @@ use Mail;
 use App\Mail\Admin\OrderMail;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\User\Controller;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
@@ -109,9 +109,9 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $order = Order::find($id);
-        $order->delete();
-        return redirect()->route('order.index');
+        // $order = Order::find($id);
+        // $order->delete();
+        // return redirect()->route('order.index');
     }
     public function sendMail($id){
         $orderID = Order::find($id);
@@ -167,14 +167,14 @@ class OrderController extends Controller
         if($request->status_order){
             
             $order_id = Order::where('status_id',$request->status_order)->get();
-                   dd($order_id);      
+                   //dd($order_id);      
         return view('admin.order.search', compact('order_id','status'));
         }
         //----- tìm theo ngày ------// 
         if($request->date){
             
             $order_id = Order::whereDate('created_at',$request->date)->get();
-            dd($order_id);
+            //dd($order_id);
                         
         //return view('admin.order.search', compact('order_id','status'));
         }
