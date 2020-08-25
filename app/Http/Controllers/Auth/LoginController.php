@@ -47,7 +47,7 @@ class LoginController extends Controller
        if(\Auth::attempt($data)){
         $request->session()->regenerate();
         if ($role == 'home') {
-
+ return redirect()->route('user.Account');
         }
         elseif ($role== 'cart') {
             return redirect()->route('user.Checkout');

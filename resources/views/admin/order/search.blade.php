@@ -57,7 +57,7 @@
                    <td>{{$rel->user->address}}</td>
                    <td>{{$rel->deliverer->name}}</td>
                    <td>{{$rel->created_at}}</td>
-                   <td>{{$rel->total_price}}</td>
+                   <td>{{number_format($rel->total_price)}}</td>
 					         <td style="color:#0c0">{{$rel->status->status}}</td>
                     <td >
                       <div class="btn-group btn-group-sm">

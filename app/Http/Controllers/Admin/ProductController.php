@@ -50,7 +50,7 @@ class ProductController extends Controller
         }
         $data['image'] = '/admin/images/products/'.$newName;
         Product::create($data);
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with(['message'=>'Đã tạo thành công !!']);
     }
 
     /**
@@ -98,7 +98,7 @@ class ProductController extends Controller
         }
         $data['image'] = '/admin/images/products/'.$newName;
         $product->update($data);
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with(['message'=>'Đã sửa thành công!!']);
     }
 
     /**
