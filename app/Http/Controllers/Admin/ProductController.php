@@ -109,9 +109,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         
-        $productID = Product::with('order_details')->find($id);
+        $product = Product::with('order_details')->find($id);
 
-        $order_detail =$productID->order_details;
+        $order_detail =$product->order_details;
 
         foreach ($order_detail as $value) {
             // lấy giá trị order_id//
@@ -121,7 +121,7 @@ class ProductController extends Controller
             $status_id = $order['status_id'];
             dd($status_id);
             if($status_id == 4){
-                $productID->delete();
+                $product->delete();
                 return redirect()->route('product.index')->with(['message'=>'Đã xóa sản phẩm thành công. !!']);
             }
             else{
