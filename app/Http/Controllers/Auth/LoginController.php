@@ -42,24 +42,21 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request, $role)
     { 
-
        $data = $request->only('email', 'password');
 
        if(\Auth::attempt($data)){
         $request->session()->regenerate();
         if ($role == 'home') {
-            return redirect()->route('user.Account');
+
         }
         elseif ($role== 'cart') {
             return redirect()->route('user.Checkout');
         }
-        
-       }
+    }
        else {
         return redirect()->back()->withErrors(['msg'=>'Mật khẩu hoặc email k đúng']);
        }
-       
-       
 
     }
+
 }

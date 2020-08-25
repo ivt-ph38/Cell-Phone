@@ -24,9 +24,9 @@ class UserRequest extends FormRequest
    public function rules()
     {
         return [
-            'username' => 'required|min:3|max:20',
+           
             'fullname' => 'required|min:3|max:50',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'address' => 'required',
             'phone' => 'required|min:10',
             'password' => 'required|min:4|max:20'
@@ -36,9 +36,7 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => 'Vui lòng nhập :attribute! ',
-            'username.min' => ':attribute ít nhất 3 kí tự.',
-            'username.max' => ':attribute nhiều nhất 20 kí tự.',
+            
             'fullname.required' => 'Vui lòng nhập :attribute! ',
             'fullname.min' => ':attribute ít nhất 3 kí tự.',
             'fullname.max' => ':attribute nhiều nhất 50 kí tự.',
@@ -55,7 +53,7 @@ class UserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'username' =>' Tên đăng nhập',
+            
             'fullname' =>' Họ và Tên',
             'email' =>' Email',
             'phone' =>' Số điện thoại',

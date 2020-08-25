@@ -48,7 +48,7 @@
                     <th>Địa chỉ nhận hàng</th>
                     <th>Người giao hàng</th>
                     <th>Ngày đặt hàng</th>
-                    <th>date</th>
+                   
                     <th>Số tiền</th>
                     <th>Tình trạng đặt hàng</th>
                     <th>Action</th>
@@ -61,8 +61,8 @@
 					         <td>{{$rel->user->fullname}}</td>
                    <td>{{$rel->user->address}}</td>
                    <td>{{$rel->deliverer->name}}</td>
-                   <td>{{$rel->created_at}}</td>
-                   <td>{{date("H:m:s d-m-Y", strtotime("$rel->created_at"))}}</td>
+                   
+                   <td>{{date("d-m-Y", strtotime("$rel->created_at"))}}</td>
                    <td>{{$rel->total_price}}</td>
 					         <td style="color:#0c0">{{$rel->status->status}}</td>
                     <td >

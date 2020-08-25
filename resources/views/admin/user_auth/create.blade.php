@@ -15,10 +15,10 @@
 				@csrf
 				<div class="block_1" style="width: 400px; float:left;  margin-right: 30px">
 					<div class="form-group">
-						<label for="">Tên đăng nhập:</label>
-						<input type="text" name="username" value="{{old('username')?old('username'):''}}" class="form-control" id="" placeholder="Input field">
-						@if( $errors->has('username'))
-	            			<p style ="color: red;">{{$errors->first('username')}}</p>
+						<label for="">Họ và Tên:</label>
+						<input type="text" name="fullname" value="{{old('fullname')?old('fullname'):''}}" class="form-control" id="" placeholder="Input field">
+						@if( $errors->has('fullname'))
+	            			<p style ="color: red;">{{$errors->first('fullname')}}</p>
 	        			@endif
 						
 					</div>
@@ -30,14 +30,7 @@
 	        			@endif
 						
 					</div>
-					<div class="form-group">
-						<label for="">Họ và Tên:</label>
-						<input type="text" name="fullname" value="{{old('fullname')?old('fullname'):''}}" class="form-control" id="" placeholder="Input field">
-						@if( $errors->has('fullname'))
-	            			<p style ="color: red;">{{$errors->first('fullname')}}</p>
-	        			@endif
-						
-					</div>
+				
 					<div class="form-group">
 						<label for="">Password:</label>
 						<input type="password" name="password" class="form-control" id="" placeholder="Input field">
@@ -68,7 +61,7 @@
 						<label >Phân quyền:</label>
 						@foreach($roles as $rel)
 					<div class="form-check" >
-    					<input type="checkbox" name="roles[]" value="{{$rel->id}}" class="form-check-input">
+    					<input type="checkbox" name="roles[]" value="{{$rel->id}}"  class="form-check-input">
     					<label class="form-check-label">{{$rel->name}}</label>
   					</div>
 						@endforeach

@@ -49,7 +49,7 @@
 					
                     <td >
                       		<div class="btn-group btn-group-sm">
-                      			<a style="margin-right: 5px" href="{{route('user.show',$rel->id)}}" class="btn btn-info" title="Chi tiết"><i class="fas fa-eye"></i></a>
+                      			
                         		<a style="margin-right: 5px" href="{{route('user.edit',$rel->id)}}" class="btn btn-secondary" title="Sửa"><i class="far fa-edit"></i></a>
                             <a style="margin-right: 5px" title="Xóa" href="{{route('user.destroy', $rel->id)}}" class="btn btn-danger" onclick="event.preventDefault();
                                                        window.confirm('Bạn có chắc là bạn muốn xoá user: ' + '{{ $rel->id }}' + ' không?') ? document.getElementById('delete-user-{{ $rel->id }}').submit() : false;"><i class="fas fa-trash"></i></a>

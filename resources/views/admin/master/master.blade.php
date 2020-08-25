@@ -42,7 +42,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="{{ url('/admin/index') }}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -64,33 +64,33 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
      <!-- login and dk -->
-      @guest
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-          </li>
-            @if (Route::has('register'))
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-          </li>
-            @endif
-            @else
-          <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ Auth::user()->fullname }} <span class="caret"></span>
-            </a>
+      <li>
+         <div  >
+          <img src="{{asset("admin/dist/img/user2-160x160.jpg")}}" style="width: 40px; height: 40px" class="img-circle elevation-2" alt="User Image">
+        </div>
+      </li>
+      <li class="nav-item dropdown">
 
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-            </a>
+        
+        <div class="info">
+          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        {{ Auth::user()->fullname }} <span class="caret"></span>
+        </a>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ route('auth.logoutadmin') }}"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            Đăng Xuất
+           </a>
+
+          <form id="logout-form" action="{{ route('auth.logoutadmin') }}" method="POST" style="display: none;">
             @csrf
           </form>
         </div>
+
+        </div>
       </li>
-       @endguest
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -196,16 +196,7 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{asset("admin/dist/img/user2-160x160.jpg")}}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Admin Ngoc Thanh</a>
-        </div>
-      </div>
-
+    
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -215,47 +206,60 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-               Danh mục
+               Danh mục quản lí
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item active">
-                <a href="{{ url('/admin/category') }}" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Category</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('/admin/product') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('/admin/user') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>User</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('/admin/role') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Role</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('/admin/order') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Order</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('/admin/userAuth') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>User Authorization</p>
-                </a>
-              </li>
+                <?php  $role_user = Auth::user()->role_users->pluck('role_id')->toArray();?>
+                  @if(in_array(1, $role_user))
+                    <li class="nav-item ">
+                      <a href="{{ url('/admin/role') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Quản lí phân quyền</p>
+                      </a>
+                    </li>
+                  @endif
+                  @if(in_array(2, $role_user))
+                    <li class="nav-item">
+                      <a href="{{ url('/admin/category') }}" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Quản lí hãng sản xuất</p>
+                      </a>
+                    </li>
+                  @endif
+                  @if(in_array(3, $role_user))
+                    <li class="nav-item">
+                      <a href="{{ url('/admin/product') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Quản lí sản phẩm</p>
+                      </a>
+                    </li>
+                  @endif
+                  @if(in_array(4, $role_user))
+                    <li class="nav-item">
+                      <a href="{{ url('/admin/order') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Quản lí đơn hàng</p>
+                      </a>
+                    </li>
+                  @endif
+                  @if(in_array(5, $role_user))
+                    <li class="nav-item">
+                      <a href="{{ url('/admin/user') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Quản lý khách hàng</p>
+                      </a>
+                    </li>
+                  @endif
+                  @if(in_array(6, $role_user))
+                    <li class="nav-item">
+                      <a href="{{ url('/admin/userAuth') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Quản lí người phân quyền</p>
+                      </a>
+                    </li>
+                  @endif
             </ul>
           </li>
                            
