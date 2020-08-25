@@ -28,7 +28,7 @@ function fetch(Request $request)
   $data = DB::table('products')
   ->where('name', 'LIKE', "%{$query}%")
   ->get();
-  $output = '<ul class="dropdown-menu" style="display:block; position:absolute; width:295px; left:115px">';
+  $output = '<ul class="dropdown-menu" style="display:block; position:absolute; width:295px;">';
   foreach($data as $row)
   {
    $output .= '

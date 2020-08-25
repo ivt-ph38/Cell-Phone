@@ -4,14 +4,7 @@
 	<form  action="{{route('user.update', $user->id)}}" method="POST" role="form">
 		@method('PUT')
 				@csrf
-				<div class="form-group">
-					<label for="">Tên đăng nhập:</label>
-					<input type="text" name="username" value="{{$user->username}}" class="form-control" id="" placeholder="Input field">
-					@if( $errors->has('username'))
-            			<p style ="color: red;">{{$errors->first('username')}}</p>
-        			@endif
-					
-				</div>
+				
 				<div class="form-group">
 					<label for="">Email:</label>
 					<input type="text" name="email" value="{{$user->email}}" class="form-control" id="" placeholder="Input field">
@@ -52,17 +45,7 @@
         			@endif
 					
 				</div>
-				 <div class="form-group">
-					<label for="">Role</label>
-					<select name="roles[]" value=""  class="form-control" multiple="multiple"  >
-						
-						@foreach($role_id as $key => $value)
-
-						<option value="{{$value->id}}" >{{$value->name}}</option>
-						@endforeach
-						
-					</select>
-				</div>
+				 
 				<button type="submit" class="btn btn-primary">Cập nhật</button>
 			</form>
          @endsection     

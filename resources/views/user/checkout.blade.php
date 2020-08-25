@@ -24,23 +24,45 @@
 
 				<!-- Shiping Details -->
 				<div class="shiping-details">
-					
+					<form action="{{ route('user.cartStore') }}" role="form" method="POST">
+						@csrf
 					<div class="input-checkbox">
-						<input type="checkbox" id="shiping-address">
+						<input type="checkbox" id="shiping-address" name="change"  >
 						<label for="shiping-address">
 							<span></span>
 							Thay đổi địa chỉ nhận hàng?
 						</label>
+						@if ($errors->has('fullname')|$errors->has('phone')|$errors->has('address'))
+									<p style="color:red">Thông tin không hợp lệ</p>
+								@endif
 						<div class="caption">
 							<div class="form-group">
-								<input class="input" type="text" name="name" placeholder="Tên người nhận hàng">
+								<label > Tên người nhận hàng <span style="color:red">(*)</span> 
+								@if ($errors->has('fullname'))
+									<span style="color:red"> Nhập tên của bạn</span>
+								@endif
+								</label>
+								<input class="input" type="text" name="fullname" placeholder="Tên người nhận hàng" value="{{old('fullname')}}" >
+								
 							</div>
 							<div class="form-group">
-								<input class="input" type="tel" name="tel" placeholder="Điện thoại">
+								<label > Điện thoại <span style="color:red">(*)</span>
+									@if ($errors->has('phone'))
+									<span style="color:red">Nhập số điện thoại</span>
+								@endif
+								</label>
+								<input class="input" type="tel" name="phone" placeholder="Điện thoại" value="{{old('phone')}}">
+								
 							</div>
 							
 							<div class="form-group">
-								<input class="input" type="text" name="address" placeholder="Địa chỉ">
+								<label > Địa chỉ <span style="color:red">(*)</span>
+									@if ($errors->has('address'))
+									<span style="color:red">Yêu cầu nhập địa chỉ</span>
+								@endif
+								</label>
+								<input class="input" type="text" name="address" placeholder="Địa chỉ" value="{{old('address')}}">
+								
 							</div>	
 						</div>
 					</div>
@@ -49,7 +71,7 @@
 
 				<!-- Order notes -->
 				<div class="order-notes">
-					<textarea class="input" placeholder="Chú thích thêm"></textarea>
+					<textarea class="input" placeholder="Chú thích thêm" name="note"></textarea>
 				</div>
 				<!-- /Order notes -->
 			</div>
@@ -88,7 +110,9 @@
 					<p>Quý khách kiểm tra kĩ đơn hàng trước khi thanh toán!!</p>
 				</div>
 				
-				<a href="{{ route('user.cartStore') }}" class="primary-btn order-submit">Đặt Hàng</a>
+				<button style="margin-left: 35%; background-color:#D10024; color:white" class=" btn primary-btn order-submit">Đặt Hàng</button>
+				</form>
+
 			</div>
 			<!-- /Order Details -->
 		</div>

@@ -87,7 +87,7 @@
 					<p>Quý khách kiểm tra kĩ đơn hàng trước khi thanh toán!!</p>
 				</div>
 				
-					<button style="margin-left: 35%;" class="primary-btn order-submit">Đặt Hàng</button>
+					<button style="margin-left: 35%; background-color:#D10024; color:white" class=" btn primary-btn order-submit">Đặt Hàng</button>
 
 				
 				

@@ -26,7 +26,7 @@ class ReviewRequest extends FormRequest
         return [
         'value'=>'required',
         'name'=>'required|string',
-        'email'=>'required|email|unique:guests,email',
+        'email'=>'required|email',
         'content'=>'required|string'
         ];
     }
@@ -36,7 +36,6 @@ class ReviewRequest extends FormRequest
             'name.required'=> 'Bắt buộc nhập tên của bạn',
             'email.required'=> 'Bắt buộc nhập email',
             'email.email'=> 'email không hợp lệ',
-            'email.unique'=> 'email đã tồn tại',
             'content.required' => 'Yêu cầu nhập đánh giá của ban'
             
            

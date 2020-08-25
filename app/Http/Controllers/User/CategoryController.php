@@ -62,37 +62,7 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function filterPrice($id,$level){
-        switch ($level) {
-            case '1':
-                $min = 0;
-                $max = 2000000;
-                break;
-            case '2':
-                $min = 2000000;
-                $max = 4000000;
-                break;
-             case '3':
-                $min = 4000000;
-                $max = 7000000;
-                break;
-             case '4':
-                $min = 7000000;
-                $max = 13000000;
-                break;
-             case '5':
-                $min = 13000000;
-                $max = 100000000;
-                break;
-            default:
-                # code...
-                break;
-        }
-       $product =  DB::table('products')->where('category_id',$id)->whereBetween('price', array($min, $max))->orderBy('price','asc')->paginate(2);
-       $categoryName = Category::find($id)->toArray();
-       dd( $product);
-       
-   }
+    
     public function show($id,$level,$arrange)
    
     { 

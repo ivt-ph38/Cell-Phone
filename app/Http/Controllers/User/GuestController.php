@@ -64,8 +64,10 @@ class GuestController extends Controller
          $order = Order_detail::create($dataOrderDetail);
           
         }
+
         session()->forget('cart');
-        return view('guest.success');
+        
+        return redirect()->route('feedback',$order_id);  
     }
 
     /**

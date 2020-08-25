@@ -71,8 +71,8 @@
 						</div>
 						<div class="product-body">
 							<p class="product-category">{{$value['category_name']}}</p>
-							<h3 class="product-name"><a href="#">{{$value['product_name']}}</a></h3>
-							<h4 class="product-price">{{$value['price']}} <del class="product-old-price">$990.00</del></h4>
+							<h3 class="product-name"><a href="{{route('user.product',$value['id'])}}">{{$value['product_name']}}</a></h3>
+							<h4 class="product-price">{{$value['price']}}</h4>
 						</div>
 					</div>
 					@endforeach														
@@ -123,22 +123,14 @@
 						<div class="product">
 							<div class="product-img">
 								<img src="{{asset($value->image)}}" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
-									<span class="new">NEW</span>
-								</div>
+								
 							</div>
 							<div class="product-body">
-								<p class="product-category">{{'categoryName'}}</p>
+								
 								<h3 class="product-name"><a href="#">{{$value->name}}</a></h3>
-								<h4 class="product-price">{{$value->price}} <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
+								<h4 class="product-price">{{number_format($value->price)}}&nbsp;VND</h4>	
+								<p class="product-category">hfdsjgdkl</p>
+								
 							</div>
 							<div class="add-to-cart">
 								<a href="{{route('user.product',$value->id)}}"><button class="add-to-cart-btn"><i class="fa fa-eye"></i> Chi Tiết Sản Phẩm</button></a>

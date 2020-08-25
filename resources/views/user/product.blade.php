@@ -185,13 +185,15 @@
 								<div class="col-md-3">
 									<div id="rating">
 										<div class="rating-avg">
-											<span>4.5</span>
+											<span>{{$avg}}.0</span>
 											<div class="rating-stars">
+												@for ($i = 1; $i <= $avg; $i++)
 												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
+												@endfor
+												
+												@for ($i = 1; $i <= 5-$avg; $i++)
 												<i class="fa fa-star-o"></i>
+												@endfor
 											</div>
 										</div>
 										<ul class="rating">
@@ -204,10 +206,11 @@
 													<i class="fa fa-star"></i>
 												</div>
 												<div class="rating-progress">
-													<div style="width: 80%;"></div>
+													<div style="width: {{($slvalue['5']/$slvalue['total'])*100}}%;"></div>
 												</div>
-												<span class="sum">3</span>
+												<span class="sum">{{$slvalue['5']}}</span>
 											</li>
+											
 											<li>
 												<div class="rating-stars">
 													<i class="fa fa-star"></i>
@@ -217,9 +220,9 @@
 													<i class="fa fa-star-o"></i>
 												</div>
 												<div class="rating-progress">
-													<div style="width: 60%;"></div>
+													<div style="width: {{($slvalue['4']/$slvalue['total'])*100}}%;"></div>
 												</div>
-												<span class="sum">2</span>
+												<span class="sum">{{$slvalue['4']}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
@@ -230,9 +233,9 @@
 													<i class="fa fa-star-o"></i>
 												</div>
 												<div class="rating-progress">
-													<div></div>
+													<div style="width: {{($slvalue['3']/$slvalue['total'])*100}}%;"></div>
 												</div>
-												<span class="sum">0</span>
+												<span class="sum">{{$slvalue['3']}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
@@ -243,9 +246,9 @@
 													<i class="fa fa-star-o"></i>
 												</div>
 												<div class="rating-progress">
-													<div></div>
+													<div style="width: {{($slvalue['2']/$slvalue['total'])*100}}%;"></div>
 												</div>
-												<span class="sum">0</span>
+												<span class="sum">{{$slvalue['2']}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
@@ -256,9 +259,9 @@
 													<i class="fa fa-star-o"></i>
 												</div>
 												<div class="rating-progress">
-													<div></div>
+													<div style="width: {{($slvalue['1']/$slvalue['total'])*100}}%;"></div>
 												</div>
-												<span class="sum">0</span>
+												<span class="sum">{{$slvalue['1']}}</span>
 											</li>
 										</ul>
 									</div>
@@ -279,6 +282,9 @@
 														@for ($i = 1; $i <= $review['valueStar']; $i++)
 														<i class="fa fa-star"></i>
 														@endfor
+														@for ($i = 1; $i <= 5- $review['valueStar']; $i++)
+														<i class="fa fa-star-o"></i>
+														@endfor
 														
 														
 													</div>
@@ -290,13 +296,7 @@
 											@endforeach
 											
 										</ul>
-										<ul class="reviews-pagination">
-											<li class="active">1</li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-										</ul>
+										
 									</div>
 								</div>
 								<!-- /Reviews -->
@@ -311,19 +311,19 @@
 											<span>Tên <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
 											<input class="input" name="name" type="text" placeholder="Tên của bạn" value="{{old('name')}}">
 											@if($errors->has('name'))
-												<p style="color:red">{{$errors->first('name')}}</p>
-												@endif
+											<p style="color:red">{{$errors->first('name')}}</p>
+											@endif
 											<span>Email <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
 											<input class="input" name="email" type="email" placeholder="Email của bạn" value="{{old('email')}}">
 											@if($errors->has('email'))
-												<p style="color:red">{{$errors->first('email')}}</p>
-												@endif
+											<p style="color:red">{{$errors->first('email')}}</p>
+											@endif
 											@endguest
 											
 											<textarea class="input" name="content" placeholder="Viết đánh giá về sản phẩm" value="{{old('content')}}"></textarea>
 											@if($errors->has('content'))
-												<p style="color:red">{{$errors->first('content')}}</p>
-												@endif
+											<p style="color:red">{{$errors->first('content')}}</p>
+											@endif
 											<input type="hidden" name="product_id" value="{{$itemProduct['id']}}">
 											<div class="input-rating">
 												<span>Đánh giá <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
@@ -338,7 +338,8 @@
 												<p style="color:red">{{$errors->first('value')}}</p>
 												@endif
 											</div>
-											<button  class="primary-btn">Đánh Giá</button>
+											<button style="margin-left: 35%; background-color:#D10024; color:white" class=" btn primary-btn order-submit">Đánh Giá</button>
+											
 
 										</form>
 										
@@ -370,127 +371,45 @@
 
 			<div class="col-md-12">
 				<div class="section-title text-center">
-					<h3 class="title">Related Products</h3>
+					<h3 class="title">Sản Phẩm Liên Quan</h3>
 				</div>
 			</div>
-
+			@foreach ($relateProduct as $value)
 			<!-- product -->
 			<div class="col-md-3 col-xs-6">
 				<div class="product">
 					<div class="product-img">
-						<img src="{{asset("user/img/product01.png")}}" alt="">
+						<img src="{{asset($value['image'])}}" alt="">
 						<div class="product-label">
-							<span class="sale">-30%</span>
+
+							<span class="new">Mới</span>
 						</div>
 					</div>
 					<div class="product-body">
-						<p class="product-category">Category</p>
-						<h3 class="product-name"><a href="#">product name goes here</a></h3>
-						<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+						
+						<h3 class="product-name"><a href="#">{{$value['name']}}</a></h3>
+						<h4 class="product-price">{{number_format($value['price'])}}<del class="product-old-price">$990.00</del></h4>
+
+
 						<div class="product-rating">
+							<i class="fa fa-star"></i>	
+							<i class="fa fa-star"></i>	
+							<i class="fa fa-star"></i>	
+							<i class="fa fa-star"></i>	
 						</div>
-						<div class="product-btns">
-							<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-							<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-							<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-						</div>
+
 					</div>
 					<div class="add-to-cart">
-						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+						<a href="{{route('user.product',$value['id'])}}"><button  class="add-to-cart-btn" ><i class="fa fa-eye" ></i>Chi Tiết Sản Phẩm </button></a>
+
 					</div>
 				</div>
 			</div>
 			<!-- /product -->
+			@endforeach
+			
 
-			<!-- product -->
-			<div class="col-md-3 col-xs-6">
-				<div class="product">
-					<div class="product-img">
-						<img src="{{asset("user/img/product02.png")}}" alt="">
-						<div class="product-label">
-							<span class="new">NEW</span>
-						</div>
-					</div>
-					<div class="product-body">
-						<p class="product-category">Category</p>
-						<h3 class="product-name"><a href="#">product name goes here</a></h3>
-						<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-						<div class="product-rating">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-						</div>
-						<div class="product-btns">
-							<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-							<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-							<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-						</div>
-					</div>
-					<div class="add-to-cart">
-						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-					</div>
-				</div>
-			</div>
-			<!-- /product -->
-
-			<div class="clearfix visible-sm visible-xs"></div>
-
-			<!-- product -->
-			<div class="col-md-3 col-xs-6">
-				<div class="product">
-					<div class="product-img">
-						<img src="{{asset("user/img/product03.png")}}" alt="">
-					</div>
-					<div class="product-body">
-						<p class="product-category">Category</p>
-						<h3 class="product-name"><a href="#">product name goes here</a></h3>
-						<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-						<div class="product-rating">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star-o"></i>
-						</div>
-						<div class="product-btns">
-							<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-							<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-							<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-						</div>
-					</div>
-					<div class="add-to-cart">
-						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-					</div>
-				</div>
-			</div>
-			<!-- /product -->
-
-			<!-- product -->
-			<div class="col-md-3 col-xs-6">
-				<div class="product">
-					<div class="product-img">
-						<img src="{{asset("user/img/product04.png")}}" alt="">
-					</div>
-					<div class="product-body">
-						<p class="product-category">Category</p>
-						<h3 class="product-name"><a href="#">product name goes here</a></h3>
-						<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-						<div class="product-rating">
-						</div>
-						<div class="product-btns">
-							<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-							<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-							<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-						</div>
-					</div>
-					<div class="add-to-cart">
-						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-					</div>
-				</div>
-			</div>
-			<!-- /product -->
+			
 
 		</div>
 		<!-- /row -->

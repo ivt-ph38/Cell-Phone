@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 use App\Cart;
+use App\Category;
 use App\Product;
 use App\Order;
 use App\Guest;
@@ -30,12 +31,12 @@ class ProductController extends Controller
      */
     
 
-   public function getAddToCart(Request $request, $id) {
-    $product = Product::find($id);
-    $oldCart = Session::has('cart') ? Session::get('cart') : null;
-    $cart = new Cart($oldCart);
-    $cart->add($product, $product->id);   
-    Session::put('cart',$cart); 
+    public function getAddToCart(Request $request, $id) {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);   
+        Session::put('cart',$cart); 
 
         return redirect()->route('user.cart'); //chuyen đến route cart
     }
@@ -54,6 +55,7 @@ class ProductController extends Controller
         $cart = new Cart($storedCart);
         $cart->delete($id);
         Session::put('cart',$cart);
+       
         return redirect()->route('user.cart');
 
     }
@@ -115,20 +117,52 @@ class ProductController extends Controller
          //list review of product
          $listReviewOfProduct = DB::table('reviews')->where('product_id',$id)->get();
          // dd($listReviewOfProduct->toArray());
+         //chay for dr lay name nguoi review
          foreach ($listReviewOfProduct as $key => $value) {
             if($value->guest_id==null) {
-                 $convertReviewOfProduct[$key]['name'] = User::find($value->user_id)->fullname;  
-            }else{
-                 $convertReviewOfProduct[$key]['name'] = Guest::find($value->guest_id)->name;
-            }
-             $convertReviewOfProduct[$key]['valueStar'] = $value->value;
-             $convertReviewOfProduct[$key]['content'] = $value->content;
-             $convertReviewOfProduct[$key]['created_at'] = $value->created_at;
-             
-         }
-      
-         return view('user.product',compact('itemProduct','qtyAvailable','convertReviewOfProduct'));
-     }
+               $convertReviewOfProduct[$key]['name'] = User::find($value->user_id)->fullname;  
+           }else{
+               $convertReviewOfProduct[$key]['name'] = Guest::find($value->guest_id)->name;
+           }
+           $convertReviewOfProduct[$key]['valueStar'] = $value->value;
+           $convertReviewOfProduct[$key]['content'] = $value->content;
+           $convertReviewOfProduct[$key]['created_at'] = $value->created_at;
+
+       }
+       $relateProduct=Category::find(Product::find($id)->category_id)->products->toArray();
+
+       $avg=DB::table('reviews')->select('product_id',DB::raw('AVG(value) as avg'))->groupBy('product_id')->where('product_id','=',$id)->get();
+       $listValue=DB::table('reviews')->select('product_id','value')->where('product_id','=',$id)->get();
+       $avg = round($avg[0]->avg,0);
+        // dd($avg);
+       $slvalue = ['1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'total'=>0];
+       foreach ($listValue as $key => $value) {
+
+           switch ($value->value) {
+               case '1':
+               $slvalue['1'] ++;
+               break;
+               case '2':
+               $slvalue['2'] ++;
+               break;
+               case '3':
+               $slvalue['3'] ++;
+               break;
+               case '4':
+               $slvalue['4'] ++;
+               break;
+               case '5':
+               $slvalue['5'] ++;
+               break;
+               default:
+                     # code...
+               break;
+           }
+           $slvalue['total'] = $key+1;
+       }
+       // dd($slvalue);
+       return view('user.product',compact('itemProduct','qtyAvailable','convertReviewOfProduct','relateProduct','avg','slvalue'));
+   }
 
     /**
      * Show the form for editing the specified resource.

@@ -14,14 +14,7 @@
               <form   action="{{route('user.store')}}" method="POST" role="form">
 				@csrf
 				<div class="block_1" style="width: 400px; float:left;  margin-right: 30px">
-					<div class="form-group">
-						<label for="">Tên đăng nhập:</label>
-						<input type="text" name="username" value="{{old('username')?old('username'):''}}" class="form-control" id="" placeholder="Input field">
-						@if( $errors->has('username'))
-	            			<p style ="color: red;">{{$errors->first('username')}}</p>
-	        			@endif
-						
-					</div>
+					
 					<div class="form-group">
 						<label for="">Email:</label>
 						<input type="text"  name="email" value="{{old('email')?old('email'):''}}" class="form-control" id="" placeholder="Input field">
@@ -64,15 +57,7 @@
 	        			@endif
 						
 					</div>
-					 <div class="form-group">
-						<label for="">Role</label>
-						<select name="roles[]"  class="form-control" multiple="multiple"  >
-							
-							@foreach($roles as $rel)
-							<option value="{{$rel->id}}">{{$rel->name}}</option>
-							@endforeach
-						</select>
-					</div>
+					 
 					<button type="submit" class="btn btn-primary">Thêm mới</button>
 					
 				</div>

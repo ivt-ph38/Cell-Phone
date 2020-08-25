@@ -38,8 +38,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('admin.user.create',compact('roles'));
+       
+        return view('admin.user.create');
     }
 
     /**
@@ -54,9 +54,7 @@ class UserController extends Controller
         $data = $request->except('_token');
         $data['password'] = bcrypt($request->password);
         $user = User::create($data);
-        // --- insert to  role_user table ---//
-        //-- phan quyen cho user-- //
-        $user->roles()->attach($request->roles);
+       
         
         return redirect()->route('user.index');
     }
@@ -82,13 +80,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        $roles = DB::table('role_user')->where('user_id',$id)->pluck('role_id');
-        foreach ($roles as $key => $value) {
-            $role_id[] = Role::find($roles[$key]);
-        }
-      
-
-        return view('admin.user.edit', compact('user','role_id'));
+        return view('admin.user.edit', compact('user'));
     }
 
     /**

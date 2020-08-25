@@ -81,15 +81,10 @@
 						<div class="product-body">
 							<p class="product-category">{{$value['category_name']}}</p>
 							<h3 class="product-name"><a href="#">{{$value['product_name']}}</a></h3>
-							<h4 class="product-price">{{number_format($value['price'])}}<del class="product-old-price">$990.00</del></h4>
+							<h4 class="product-price">{{number_format($value['price'])}}</h4>
 
 
-							<div class="product-rating">
-								<i class="fa fa-star"></i>	
-								<i class="fa fa-star"></i>	
-								<i class="fa fa-star"></i>	
-								<i class="fa fa-star"></i>	
-							</div>
+							
 
 						</div>
 						<div class="add-to-cart">
@@ -145,22 +140,13 @@
 								<div class="product">
 									<div class="product-img">
 										<img src="{{asset($value['image'])}}" alt="">
-										<div class="product-label">
-											<span class="sale">-30%</span>
-											<span class="new">NEW</span>
-										</div>
+										
 									</div>
 									<div class="product-body">
 										<p class="product-category">{{$value['category_name']}}</p>
 										<h3 class="product-name"><a href="#">{{$value['product_name']}}</a></h3>
-										<h4 class="product-price">{{number_format($value['price'])}} <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
+										<h4 class="product-price">{{number_format($value['price'])}} </h4>
+										
 										
 									</div>
 									<div class="add-to-cart">

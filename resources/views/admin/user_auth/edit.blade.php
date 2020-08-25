@@ -16,14 +16,7 @@
             	@method('PUT')
 				@csrf
 				<div class="block_1" style="width: 400px; float:left;  margin-right: 30px">
-					<div class="form-group">
-					<label for="">Tên đăng nhập:</label>
-					<input type="text" name="username" value="{{$user->username}}" class="form-control" id="" placeholder="Input field">
-					@if( $errors->has('username'))
-            			<p style ="color: red;">{{$errors->first('username')}}</p>
-        			@endif
 					
-				</div>
 				<div class="form-group">
 					<label for="">Email:</label>
 					<input type="text" name="email" value="{{$user->email}}" class="form-control" id="" placeholder="Input field">

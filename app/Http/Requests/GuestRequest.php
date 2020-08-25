@@ -25,7 +25,7 @@ class GuestRequest extends FormRequest
     {
         return [
         'name' => 'required|string',
-        'email'=>'required|email|unique:guests,email',
+        'email'=>'required|email',
         'phone'=> 'required|numeric',
         'address'=> 'required'
         ];
@@ -35,7 +35,6 @@ class GuestRequest extends FormRequest
             'name.required'=> 'Bắt buộc nhập tên của bạn',
             'email.required'=> 'Bắt buộc nhập email',
             'email.email'=> 'email không hợp lệ',
-            'email.unique'=> 'email đã tồn tại',
             'phone.required' => 'Yêu cầu nhập số điện thoại',
             'phone.numeric' => 'Số điện thoại không hợp lệ',
             'address.required' => 'Yêu cầu nhập địa chỉ',
