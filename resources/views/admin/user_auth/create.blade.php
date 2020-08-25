@@ -14,6 +14,7 @@
               <form  action="{{route('userAuth.store')}}" method="POST" role="form">
 				@csrf
 				<div class="block_1" style="width: 400px; float:left;  margin-right: 30px">
+
 					<div class="form-group">
 						<label for="">Họ và Tên:</label>
 						<input type="text" name="fullname" value="{{old('fullname')?old('fullname'):''}}" class="form-control" id="" placeholder="Input field">
@@ -22,6 +23,7 @@
 	        			@endif
 						
 					</div>
+
 					<div class="form-group">
 						<label for="">Email:</label>
 						<input type="text"  name="email" value="{{old('email')?old('email'):''}}" class="form-control" id="" placeholder="Input field">

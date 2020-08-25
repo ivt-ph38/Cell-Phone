@@ -17,7 +17,7 @@ Route::post('/autocomplete/fetch', 'User\SearchController@fetch')->name('autocom
 
 // trang chu 
 Route::get('/', "User\CategoryController@index")->name("user.home"); 
- 
+
 // Cac trang user
 Route::group(['prefix'=>'user','as'=>'user.'],function () {
 	// Trang cac san pham trong category 
@@ -44,7 +44,7 @@ Route::group(['prefix'=>'user','as'=>'user.'],function () {
 	Route::get('/cart/checkout', "User\OrderController@userCheckout")->name("Checkout");
 	
 	//luu don hang vao database
-	Route::get('/cart/store', "User\OrderController@store")->name("cartStore");
+	Route::post('/cart/store', "User\OrderController@store")->name("cartStore");
 	//huy don hang
 	Route::get('/order/update/{id}/{status}', "User\OrderController@update")->name("orderUpdate");
 	
@@ -56,12 +56,13 @@ Route::group(['prefix'=>'user','as'=>'user.'],function () {
 	Route::get('/logout', "Auth\LoginController@logout")->name("logout");
 	Route::get('/account', "User\UserController@show")->name("Account");
 
-    Route::get('/register/view/{role}',  function ($role) {  return view('user.singUp',compact('role'));})->name("ViewSingUp");
-    Route::post('/register/{role}', "User\UserController@register")->name("register");
+	Route::get('/register/view/{role}',  function ($role) {  return view('user.singUp',compact('role'));})->name("ViewSingUp");
+	Route::post('/register/{role}', "User\UserController@register")->name("register");
 	// Trang thanh toan
 	Route::get('/checkout', function () {return view('user.checkout');})->name("checkout");
 });
 /////////////route admin
+
 
 // Auth::routes();
  //Route::get('/home', 'HomeController@index')->name('home');
@@ -82,45 +83,61 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth'],funct
 	Route::group([
 			'middleware' => 'check_role:Quản lí hãng sản phẩm'
 				],function () {
+
+Route::get('/feedback/{orderId}',"User\OrderController@addFeedback")->name("feedback");
+
+
+
+
 					// ----------Category-----------// 
-					Route::resource('category', 'CategoryController');
-					Route::get('searchCategory', 'CategoryController@search')->name('search_category');
+				Route::resource('category', 'CategoryController');
+				Route::get('searchCategory', 'CategoryController@search')->name('search_category');
 			});
+
 	Route::group([
 			'middleware' => 'check_role:Quản lí sản phẩm'
 				],function () {
+
 					// ----------Product-----------// 
-					Route::resource('product', 'ProductController');
-					Route::get('searchProduct', 'ProductController@search')->name('search_product');
+				Route::resource('product', 'ProductController');
+				Route::get('searchProduct', 'ProductController@search')->name('search_product');
 			});
+
 	Route::group([
 			'middleware' => 'check_role:Quản lí đơn hàng'
 				],function () {
+
 					// ----------Order-----------// 
-					Route::resource('order', 'OrderController');
-					Route::get('searchOrder', 'OrderController@search')->name('search_order');
+				Route::resource('order', 'OrderController');
+				Route::get('searchOrder', 'OrderController@search')->name('search_order');
 					// ----------Send order to mail-----------// 
 					Route::get('mail/{id}', 'OrderController@sendMail')->name('sendmail');
 			});
+
 	Route::group([
 			'middleware' => 'check_role:Quản lí khách hàng'
 				],function () {
+
 					//---- module Users ----//
-					Route::resource('user', 'UserController');
-					Route::get('searchUser', 'UserController@search')->name('search_user');
+				Route::resource('user', 'UserController');
+				Route::get('searchUser', 'UserController@search')->name('search_user');
 			});
 			
+
     Route::group([
 			'middleware' => 'check_role:Quản lí phân quyền'
 				],function () {
+
 					//---- module Role  ----//
-					Route::resource('role', 'RoleController');
+				Route::resource('role', 'RoleController');
 			});
+
 	Route::group([
 			'middleware' => 'check_role:Quản lí người phân quyền'
 				],function () {
+
 					//---- module User Authorization  ----//
-					Route::resource('userAuth', 'UserAuthorizationController');
+				Route::resource('userAuth', 'UserAuthorizationController');
 			});
 
 		
@@ -139,6 +156,6 @@ Route::post('guest/cart/store', "User\GuestController@store")->name("guest.Store
 //test
 
 Route::get('/test',"User\ProductController@filterPrice");
-Route::get('/test1',"User\ProductController@index");
+Route::get('/test1',"User\OrderController@addFeedback");
 
 Route::get('/thanhcong', function () {return view('guest.success');});

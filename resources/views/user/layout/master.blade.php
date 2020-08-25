@@ -61,7 +61,7 @@
 							<div class="header-logo">
 
 								<a href="{{route('user.home')}}" class="logo">
-									<img src="{{asset("user/img/logo.png")}}" alt="">
+									<img style="width:70px;" src="{{asset("user/img/logo.png")}}" alt="">
 
 								</a>
 							</div>
@@ -74,15 +74,9 @@
 								<form action="{{route('user.search')}}" method="POST">
 									@method('POST')
 									@csrf
-									<select class="input-select">
-										<option value="0">Tất cả</option>		
-										@foreach ($category as $key=>$value)
-										<option value="{{$key+1}}">{{$value['name']}}</option>		   
-										@endforeach
-										
-									</select>
+									
 									<input type="text" name="product_search" id="product_search" class="input" placeholder="Tìm điện thoại ở đây!!">				
-									<button type="submit" class="search-btn">Chi tiết</button>
+									
 									<div id="productList">
 									</div>
 									{{ csrf_field() }}
@@ -108,7 +102,13 @@
 								<div>
 									<a href="{{ route('user.Account') }}">
 										<i class="fa fa-user-o"></i>
-										<span>Tài Khoản</span>
+										@auth
+											{{Auth::user()->fullname}}
+										@endauth
+										@guest
+											<span>Đăng Nhập</span>
+										@endguest
+										
 										
 									</a>
 								</div>
@@ -143,7 +143,7 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="{{route('user.home')}}">Trang chủ</a></li>
+						<li ><a href="{{route('user.home')}}">Trang chủ</a></li>
 						@foreach ($category as $key=>$value)
 
 

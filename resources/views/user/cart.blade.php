@@ -5,6 +5,10 @@
 <div class="container" >
 	
 	<div class="row" style="margin-top: 20px; margin-bottom: 100px">
+		@if (Session::get('cart')->items==null)		
+		<h4 class="text-center" style="margin-top: 20px;">Hiện giỏ hàng Rỗng tiếp tục mua hàng</h4>
+		<div class="text-center" style="margin-top: 30px"><a href="{{route('user.home')}}" class="btn" style="background-color:#D10024;color:#fff"><i class="fa fa-shopping-cart"></i> &nbsp; Tiếp Tục Mua Hàng</a></div>	
+		@else
 		<div class="col-sm-7">
 			<h3 class="text-center" style="margin-top: 20px;">Giỏ Hàng</h3>
 			<table id="cart" class="table table-hover table-condensed">
@@ -59,10 +63,12 @@
 							</td>
 						</tr>
 						@endforeach
-	
+
 					</tbody>
 					
 				</table>
+				
+
 			</div>
 
 			<div class="col-sm-4 col-sm-offset-1">	
@@ -79,6 +85,7 @@
 
 
 				</div>
+				@endif
 			</div>
 
 			<div class="container" >

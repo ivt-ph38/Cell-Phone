@@ -5,9 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Order;
 use App\Order_detail;
 use App\User;
+use App\Guest;
+use App\Product;
 use Session;
 use Illuminate\Http\Request;
 use Auth;
+use Mail;
 class OrderController extends Controller
 {
     /**
@@ -21,9 +24,9 @@ class OrderController extends Controller
     }
     
     public function userCheckout(){
-            $cart = Session::get('cart');
-            $user = Auth::user();
-            return view('user.checkout',compact('cart', 'user'));
+        $cart = Session::get('cart');
+        $user = Auth::user();
+        return view('user.checkout',compact('cart', 'user'));
     }
 
     /**
@@ -45,13 +48,23 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     { 
+        // dd($request->toArray()['change']);
+        if(isset($request->change)) {
+            $validatedData = $request->validate([
+                'fullname' => 'required',
+                'phone' => 'required',
+                'address' => 'required'
+            ]);
+            $dataUpdate = $request->only(['fullname', 'phone', 'address']);
+            Auth::user()->update($dataUpdate);
 
-       $dataOrder = [
+        }
+        $dataOrder = [
             'user_id' => Auth::user()->id,
             'status_id' =>'1',
             'deliverer_id' => '1',
             'total_price' => Session::get('cart')->totalPrice,
-            'note' =>'test1'
+            'note' =>$request->note
         ];
         $order = Order::create($dataOrder);
         $order_id=$order->id;
@@ -62,12 +75,12 @@ class OrderController extends Controller
             'sale_quantity'=>$value['qty'],
             'price'=>$value['price']
         ];
-         $order = Order_detail::create($dataOrderDetail);
-          
-        }
-        session()->forget('cart');
-        return redirect()->route('user.Account');   
+        $order = Order_detail::create($dataOrderDetail);
+
     }
+    session()->forget('cart');
+    return redirect()->route('feedback',$order_id);   
+}
 
     /**
      * Display the specified resource.
@@ -75,11 +88,42 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function addFeedback($orderId)
     {
-        
-        
-    }
+        if ((Order::find($orderId)->user_id)==null) {
+            $guest_id = Order::find($orderId)->guest_id;
+          $name = Guest::find($guest_id)->name;
+          $phone = Guest::find($guest_id)->phone;
+          $address = Guest::find($guest_id)->address;
+      }
+      else { 
+
+          $user_id = Order::find($orderId)->user_id;
+          $name = User::find($user_id)->fullname;
+          $phone = User::find($user_id)->phone;
+          $address = User::find($user_id)->address;
+
+
+      }
+
+      $order_id = $orderId;
+      $total = number_format( Order::find($orderId)->total_price);
+      $listProductOfOrder = Order::find($orderId)->order_details;
+      foreach ($listProductOfOrder as $key => $value) {
+       $product[]=['name'=>Product::find($value->product_id)->name, 'qty'=>$value->sale_quantity, 'price'=>number_format($value->price)];
+   }
+   Mail::send('mailfb', array('name'=>$name,'phone'=>$phone, 'address'=>$address,'order_id'=>$order_id ,'product'=>$product,'total'=>$total), function($message){
+    $message->to('zumzuminto@gmail.com', 'Khách hàng')->subject('Thông tin đơn hàng!');
+});
+   Session::flash('flash_message', 'Send message successfully!');
+
+   return view('guest.success');
+}
+public function show(Request $request)
+{
+
+
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -104,16 +148,16 @@ class OrderController extends Controller
        $order = Order::find($id);
        if ($status== 1) {
           $data=['status_id'=> 4];
-       }
-       elseif ($status==4){
+      }
+      elseif ($status==4){
          $data=['status_id'=> 1];
-       }
-       
-       
-       $order->update($data);
+     }
 
-       return redirect()->route('user.Account');
-    }
+
+     $order->update($data);
+
+     return redirect()->route('user.Account');
+ }
 
     /**
      * Remove the specified resource from storage.

@@ -55,7 +55,9 @@ class UserController extends Controller
         $data = $request->except('_token');
         $data['password'] = bcrypt($request->password);
         $user = User::create($data);
+
         return redirect()->route('user.index')->with(['message'=>'Đã tạo thành công !!']);
+
     }
 
     /**
@@ -78,6 +80,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+
         return view('admin.user.edit', compact('user'));
     }
 

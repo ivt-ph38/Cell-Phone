@@ -15,15 +15,16 @@
             <form  action="{{route('userAuth.update', $user->id)}}" method="POST" role="form">
             	@method('PUT')
 				@csrf
-				
+
+				<div class="block_1" style="width: 400px; float:left;  margin-right: 30px">
 				<div class="form-group">
 					<label for="">Họ và Tên:</label>
 					<input type="text" name="fullname" value="{{$user->fullname}}" class="form-control" id="" placeholder="Input field">
 					@if( $errors->has('fullname'))
             			<p style ="color: red;">{{$errors->first('fullname')}}</p>
         			@endif
+
 					
-				</div>
 				<div class="form-group">
 					<label for="">Email:</label>
 					<input type="text" name="email" value="{{$user->email}}" class="form-control" id="" placeholder="Input field">
