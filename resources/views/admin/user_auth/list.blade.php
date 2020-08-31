@@ -1,13 +1,13 @@
 @extends('admin.master.master')
 	@section ('content')
-    @include('errors.message')
+  @include('errors.message')
   @include('errors.error')
     <div class="row">
       <div class="col-sm-12">
         <form action=""  method="GET" style="margin-bottom:30px " class="form-inline" role="form">
           @csrf
           <div class="form-group" style="margin-right:10px ">
-             <input type="search" name="name" id="input" class="form-control"  placeholder="Tên khách hàng...">
+             <input type="search" name="name" id="input" class="form-control"  >
           </div>
 
           <button type="submit" class="btn btn-default" style="margin-right:30px "><i class="fas fa-search"></i></button>
@@ -32,6 +32,7 @@
                     <th>STT</th>
           					<th>Tên</th>
           					<th>Email</th>
+                    <th>Điện thoại</th>
                     <th>Hành động</th>
 					  
                   </tr>
@@ -42,6 +43,7 @@
                 	<td>{{++$key}}</td>
         					<td>{{$rel->fullname}}</td>
         					<td>{{$rel->email}}</td>
+                  <td>{{$rel->phone}}</td>
         				
                     <td >
                       		<div class="btn-group btn-group-sm">

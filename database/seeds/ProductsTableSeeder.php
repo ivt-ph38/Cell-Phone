@@ -356,7 +356,8 @@ class ProductsTableSeeder extends Seeder
             'end_promotion' =>'2020-07-30',
             'created_at' =>now()           
         ],
-        'category_id' => 8,
+        [
+            'category_id' => 8,
             'name'=>'Vivo Y30',
             'title' => 'Vivo Y30',
             'description' => 'Vivo Y30',
