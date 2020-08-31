@@ -32,29 +32,29 @@
 					<h3 class="aside-title text-center">Lọc Theo giá</h3>
 					<div class="text-center">
 						@if ($level==1)
-						<a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'1']) }}">Dưới 2 triệu</a>  <hr>
+						<a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'1']) }}">Dưới 5 triệu</a>  <hr>
 						@else
-						<a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'1']) }}">Dưới 2 triệu</a>  <hr> 
+						<a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'1']) }}">Dưới 5 triệu</a>  <hr> 
 						@endif
 						 @if ($level==2)
-						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'2']) }}">Từ 2 - 4 triệu</a> <hr>
+						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'2']) }}">Từ 5 - 10 triệu</a> <hr>
 						 @else	{{-- expr --}}
-						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'2']) }}">Từ 2 - 4 triệu</a> <hr>
+						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'2']) }}">Từ 5 - 10 triệu</a> <hr>
 						 @endif
 						 @if ($level==3)
-						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'3']) }}">Từ 4 - 7 triệu</a> <hr>
+						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'3']) }}">Từ 10 - 15 triệu</a> <hr>
 						 @else	{{-- expr --}}
-						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'3']) }}">Từ 4 - 7 triệu</a> <hr>
+						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'3']) }}">Từ 10 - 15 triệu</a> <hr>
 						 @endif
 						 @if ($level==4)
-						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'4']) }}"> Từ 7 - 13 triệu</a> <hr>
+						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'4']) }}"> Từ 15 - 20 triệu</a> <hr>
 						 @else	{{-- expr --}}
-						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'4']) }}"> Từ 7 - 13 triệu</a> <hr>
+						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'4']) }}"> Từ 15 - 20 triệu</a> <hr>
 						 @endif
 						 @if ($level==5)
-						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'5']) }}"> Trên 13 triệu</a> <hr>
+						 <a style="color:red" href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'5']) }}"> Trên 20 triệu</a> <hr>
 						 @else	{{-- expr --}}
-						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'5']) }}"> Trên 13 triệu</a> <hr>
+						 <a href="{{ route('user.productCategory',['id'=>$id,'arrange'=>$arrange,'level'=>'5']) }}"> Trên 20 triệu</a> <hr>
 						 @endif
 						 
 					</div>

@@ -48,6 +48,9 @@ class GuestController extends Controller
         $dataOrder = [
             'guest_id' => $guest->id,
             'status_id' =>'1',
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
             'deliverer_id' => '1',
             'total_price' => Session::get('cart')->totalPrice,
             'note' =>$request->note

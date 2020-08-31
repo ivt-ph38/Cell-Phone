@@ -7,20 +7,20 @@ use App\Http\Controllers\User\Controller;
 use DB;
 class SearchController extends Controller
 {
- function getProductId(Request $request)
- {
+//  function getProductId(Request $request)
+//  {
 
-  if(isset($request->product_search)){
-    $data = DB::table('products')
-    ->select('id')
-    ->where('name','LIKE',"%{$request->product_search}%")
-    ->get();
-    return redirect(route('user.product',$data[0]->id));
-  }
-  else {return redirect(route('user.home'));}
-}
+//   if(isset($request->product_search)){
+//     $data = DB::table('products')
+//     ->select('id')
+//     ->where('name','LIKE',"%{$request->product_search}%")
+//     ->get();
+//     return redirect(route('user.product',$data[0]->id));
+//   }
+//   else {return redirect(route('user.home'));}
+// }
 
-function fetch(Request $request)
+function search(Request $request)
 {
  if($request->get('query'))
  {

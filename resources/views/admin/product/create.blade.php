@@ -64,6 +64,7 @@
 					<div class="custom-file">
 					<input type="file" name="image" class="custom-file-input" >
 					<label class="custom-file-label" >Chọn file</label>
+
 					</div>
 				</div>
 				
@@ -111,7 +112,9 @@
 					<input type="text" name="warranty" value="{{old('warranty')?old('warranty'):''}}" class="form-control" id="" placeholder="Input field">
 				</div>
 				
+
 				<button type="submit" class="btn btn-primary">Thêm mới</button>
+
            </div>
             
 				

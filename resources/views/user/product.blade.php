@@ -182,6 +182,15 @@
 						<div id="tab2" class="tab-pane fade in">
 							<div class="row">
 								<!-- Rating -->
+								@if ($convertReviewOfProduct==null)
+								<div class="col-md-4 text-center" >
+									<h4  style="color: #610B0B">Hiện chưa có đánh giá nào cho sản phẩm này hãy để lại đánh giá của bạn!!</h4>
+								</div>
+								<div class="col-md-4">
+									<i style="font-size: 100px; color:#0B3B24" class="fa fa-hand-o-right" aria-hidden="true"></i>
+								</div>
+								@else
+
 								<div class="col-md-3">
 									<div id="rating">
 										<div class="rating-avg">
@@ -269,96 +278,100 @@
 								<!-- /Rating -->
 
 								<!-- Reviews -->
-								<div class="col-md-6">
-									<div id="reviews">
-										<ul class="reviews">
-											@foreach ($convertReviewOfProduct as $review)
-											
-											<li>
-												<div class="review-heading">
-													<h5 class="name">{{$review['name']}}</h5>
-													<p class="date">{{$review['created_at']}}</p>
-													<div class="review-rating">
-														@for ($i = 1; $i <= $review['valueStar']; $i++)
-														<i class="fa fa-star"></i>
-														@endfor
-														@for ($i = 1; $i <= 5- $review['valueStar']; $i++)
-														<i class="fa fa-star-o"></i>
-														@endfor
-														
-														
-													</div>
-												</div>
-												<div class="review-body">
-													<p>{{$review['content']}}</p>
-												</div>
-											</li>
-											@endforeach
-											
-										</ul>
-										
-									</div>
-								</div>
-								<!-- /Reviews -->
+								<div class="col-md-6" style="height: 320px;overflow-x: hidden;
+								overflow-y: auto;">
+								<div id="reviews">
+									<ul class="reviews">
+										@foreach ($convertReviewOfProduct as $review)
 
-								<!-- Review Form -->
-								<div class="col-md-3">
-									<div id="review-form">
-										<form class="review-form" action="{{ route('user.addReview') }}" method="POST">
-											@csrf
-											
-											@guest
-											<span>Tên <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
-											<input class="input" name="name" type="text" placeholder="Tên của bạn" value="{{old('name')}}">
-											@if($errors->has('name'))
-											<p style="color:red">{{$errors->first('name')}}</p>
-											@endif
-											<span>Email <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
-											<input class="input" name="email" type="email" placeholder="Email của bạn" value="{{old('email')}}">
-											@if($errors->has('email'))
-											<p style="color:red">{{$errors->first('email')}}</p>
-											@endif
-											@endguest
-											
-											<textarea class="input" name="content" placeholder="Viết đánh giá về sản phẩm" value="{{old('content')}}"></textarea>
-											@if($errors->has('content'))
-											<p style="color:red">{{$errors->first('content')}}</p>
-											@endif
-											<input type="hidden" name="product_id" value="{{$itemProduct['id']}}">
-											<div class="input-rating">
-												<span>Đánh giá <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
-												<div class="stars">
-													<input id="star5" name="value" value="5" type="radio"><label for="star5"></label>
-													<input id="star4" name="value" value="4" type="radio"><label for="star4"></label>
-													<input id="star3" name="value" value="3" type="radio"><label for="star3"></label>
-													<input id="star2" name="value" value="2" type="radio"><label for="star2"></label>
-													<input id="star1" name="value" value="1" type="radio"><label for="star1"></label>
+										<li>
+											<div class="review-heading">
+												<h5 class="name">{{$review['name']}}</h5>
+												<p class="date">{{$review['created_at']}}</p>
+												<div class="review-rating">
+													@for ($i = 1; $i <= $review['valueStar']; $i++)
+													<i class="fa fa-star"></i>
+													@endfor
+													@for ($i = 1; $i <= 5- $review['valueStar']; $i++)
+													<i class="fa fa-star-o"></i>
+													@endfor
+
+
 												</div>
-												@if($errors->has('value'))
-												<p style="color:red">{{$errors->first('value')}}</p>
-												@endif
 											</div>
-											<button style="margin-left: 35%; background-color:#D10024; color:white" class=" btn primary-btn order-submit">Đánh Giá</button>
-											
+											<div class="review-body">
+												<p>{{$review['content']}}</p>
+											</div>
+										</li>
+										@endforeach
 
-										</form>
-										
-										
-									</div>
+									</ul>
+
 								</div>
-								<!-- /Review Form -->
 							</div>
+							<!-- /Reviews -->
+
+							@endif
+
+
+							<!-- Review Form -->
+							<div class="col-md-3">
+								<div id="review-form">
+									<form class="review-form" action="{{ route('user.addReview') }}" method="POST">
+										@csrf
+
+										@guest
+										<span>Tên <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
+										<input class="input" name="name" type="text" placeholder="Tên của bạn" value="{{old('name')}}">
+										@if($errors->has('name'))
+										<p style="color:red">{{$errors->first('name')}}</p>
+										@endif
+										<span>Email <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
+										<input class="input" name="email" type="email" placeholder="Email của bạn" value="{{old('email')}}">
+										@if($errors->has('email'))
+										<p style="color:red">{{$errors->first('email')}}</p>
+										@endif
+										@endguest
+
+										<textarea class="input" name="content" placeholder="Viết đánh giá về sản phẩm" value="{{old('content')}}"></textarea>
+										@if($errors->has('content'))
+										<p style="color:red">{{$errors->first('content')}}</p>
+										@endif
+										<input type="hidden" name="product_id" value="{{$itemProduct['id']}}">
+										<div class="input-rating">
+											<span>Đánh giá <span style="color:red">(<i class="fa fa-asterisk" aria-hidden="true"></i>)</span>: </span>
+											<div class="stars">
+												<input id="star5" name="value" value="5" type="radio"><label for="star5"></label>
+												<input id="star4" name="value" value="4" type="radio"><label for="star4"></label>
+												<input id="star3" name="value" value="3" type="radio"><label for="star3"></label>
+												<input id="star2" name="value" value="2" type="radio"><label for="star2"></label>
+												<input id="star1" name="value" value="1" type="radio"><label for="star1"></label>
+											</div>
+											@if($errors->has('value'))
+											<p style="color:red">{{$errors->first('value')}}</p>
+											@endif
+										</div>
+										<button style="margin-left: 35%; background-color:#D10024; color:white" class=" btn primary-btn order-submit">Đánh Giá</button>
+
+
+									</form>
+
+
+								</div>
+							</div>
+							<!-- /Review Form -->
 						</div>
-						<!-- /tab3  -->
 					</div>
-					<!-- /product tab content  -->
+					<!-- /tab3  -->
 				</div>
+				<!-- /product tab content  -->
 			</div>
-			<!-- /product tab -->
 		</div>
-		<!-- /row -->
+		<!-- /product tab -->
 	</div>
-	<!-- /container -->
+	<!-- /row -->
+</div>
+<!-- /container -->
 </div>
 <!-- /SECTION -->
 

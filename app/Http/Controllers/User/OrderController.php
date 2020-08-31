@@ -9,6 +9,7 @@ use App\Guest;
 use App\Product;
 use Session;
 use Illuminate\Http\Request;
+use App\Http\Requests\OrderRequest;
 use Auth;
 use Mail;
 class OrderController extends Controller
@@ -46,21 +47,14 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     { 
-        // dd($request->toArray()['change']);
-        if(isset($request->change)) {
-            $validatedData = $request->validate([
-                'fullname' => 'required',
-                'phone' => 'required',
-                'address' => 'required'
-            ]);
-            $dataUpdate = $request->only(['fullname', 'phone', 'address']);
-            Auth::user()->update($dataUpdate);
-
-        }
+    
         $dataOrder = [
             'user_id' => Auth::user()->id,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
             'status_id' =>'1',
             'deliverer_id' => '1',
             'total_price' => Session::get('cart')->totalPrice,

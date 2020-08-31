@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('title');
             $table->string('description');
-            $table->string('price');
+            $table->bigInteger('price');
             $table->string('quantity');
             $table->string('size');
             $table->string('weight');
@@ -35,9 +35,6 @@ class CreateProductsTable extends Migration
             $table->string('rear_camera');
             $table->string('battery');
             $table->string('warranty');
-            $table->string('promotion_price');
-            $table->date('start_promotion')->nullable();
-            $table->date('end_promotion')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
             $table->softDeletes();

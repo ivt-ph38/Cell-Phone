@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Product;
 use App\Order;
+use App\Image;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,15 +43,22 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $data = $request->except('_token');
-        if($request->hasFile('image')){
-            //code upload file
-            $newName = md5(microtime(true)).$request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('admin/images/products/'),$newName);
-            
+        $file = $request->file('file');
+
+        if(!empty($file)) {
+            foreach ($file as $key => $value) {
+                 $newName = md5(microtime(true)).$value->getClientOriginalName();
+            $value->move(public_path('admin/images/products/'),$newName);
+            $dataNameImage[$key]=$newName;
+            }
         }
-        $data['image'] = '/admin/images/products/'.$newName;
-        Product::create($data);
+        $data = $request->except('_token');
+        $data['image'] = '/admin/images/products/'.$dataNameImage[0];
+       $product =  Product::create($data);
+       foreach ($dataNameImage as $key => $value) {
+         $dataTableImage[] = ['product_id'=>$product->id, 'name'=> '/admin/images/products/'.$value];
+       }
+       Image::insert($dataTableImage);   
         return redirect()->route('product.index')->with(['message'=>'Đã tạo thành công !!']);
     }
 
