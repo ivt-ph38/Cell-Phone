@@ -16,7 +16,7 @@
 				<div class="block_1" style="width: 400px; float:left;  margin-right: 30px">
 
 					<div class="form-group">
-						<label for="">Họ và Tên:</label>
+						<label for=""><sup style="color:red">*</sup>Họ và Tên:</label>
 						<input type="text" name="fullname" value="{{old('fullname')?old('fullname'):''}}" class="form-control" id="" placeholder="Input field">
 						@if( $errors->has('fullname'))
 	            			<p style ="color: red;">{{$errors->first('fullname')}}</p>
@@ -25,7 +25,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="">Email:</label>
+						<label for=""><sup style="color:red">*</sup>Email:</label>
 						<input type="text"  name="email" value="{{old('email')?old('email'):''}}" class="form-control" id="" placeholder="Input field">
 						@if( $errors->has('email'))
 	            			<p style ="color: red;">{{$errors->first('email')}}</p>
@@ -34,7 +34,7 @@
 					</div>
 				
 					<div class="form-group">
-						<label for="">Password:</label>
+						<label for=""><sup style="color:red">*</sup>Password:</label>
 						<input type="password" name="password" class="form-control" id="" placeholder="Input field">
 						@if( $errors->has('password'))
 	            			<p style ="color: red;">{{$errors->first('password')}}</p>
@@ -44,7 +44,7 @@
 				</div>
 				<div class="block_2" style="width: 400px;float:left;">
 					<div class="form-group">
-						<label for="">Địa chỉ:</label>
+						<label for=""><sup style="color:red">*</sup>Địa chỉ:</label>
 						<input type="text" name="address" value="{{old('address')?old('address'):''}}" class="form-control" id="" placeholder="Input field">
 						@if( $errors->has('address'))
 	            			<p style ="color: red;">{{$errors->first('address')}}</p>
@@ -52,7 +52,7 @@
 						
 					</div>
 					<div class="form-group">
-						<label for="">Số điện thoại:</label>
+						<label for=""><sup style="color:red">*</sup>Số điện thoại:</label>
 						<input type="text" name="phone" value="{{old('phone')?old('phone'):''}}" class="form-control" id="" placeholder="Input field">
 						@if( $errors->has('phone'))
 	            			<p style ="color: red;">{{$errors->first('phone')}}</p>

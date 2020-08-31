@@ -938,9 +938,10 @@ class ProductsTableSeeder extends Seeder
             'warranty'=> '12 tháng',
            
             'created_at' =>now()           
-      ],
-      [
 
+        ],
+       
+      [
             'category_id' => 4,
             'name'=>'Vsmart Active 7',
             'title' => 'Màn hình 6.1"

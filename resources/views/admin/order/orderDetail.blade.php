@@ -4,7 +4,7 @@
 	@include('errors.message')
 	<div class="card card-info main"  >
     <div class="card-header">
-      <h3 class="card-title">Chi tiết đơn hàng</h3>
+      <h3 class="card-title">CHI TIẾT ĐƠN HÀNG</h3>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
         </div>

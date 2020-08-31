@@ -8,6 +8,7 @@ use App\Image;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -40,7 +41,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $file = $request->file('file');
 
@@ -94,7 +95,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         $product = Product::find($id);
         $data = $request->except('_token', '_method');

@@ -57,7 +57,7 @@ class UserAuthorizationController extends Controller
         //-- phan quyen cho user-- //
         $user->roles()->attach($request->roles);
         
-        return redirect()->route('userAuth.index');
+        return redirect()->route('userAuth.index')->with(['message'=>'Đã tạo thành công !!']);
     }
 
     /**
@@ -106,7 +106,7 @@ class UserAuthorizationController extends Controller
             //-- phan quyen cho user-- //
         $user->roles()->sync($request->roles);
         
-        return redirect()->route('userAuth.index');
+        return redirect()->route('userAuth.index')->with(['message'=>'Đã sửa thành công!!']);
     }
 
     /**
