@@ -12,12 +12,12 @@
 				<!-- Billing Details -->
 				<div class="billing-details">
 					<div class="section-title">
-						<h3 class="title">Địa chỉ nhận hàng</h3>
+						<h3 class="title">Thông tin đơn hàng</h3>
 					</div>
-					<div class="">
+					{{-- <div class="">
 						<p class=""><strong>Tên:  &nbsp; </strong>{{$user->fullname}}<span> | </span><span><strong>SĐT:  &nbsp; </strong>  {{$user->phone}}</span></p>
 						<p class=""> <strong>Địa chỉ:  &nbsp; </strong>{{$user->address}}</p>
-					</div>
+					</div> --}}
 				
 				</div>
 				<!-- /Billing Details -->
@@ -26,42 +26,40 @@
 				<div class="shiping-details">
 					<form action="{{ route('user.cartStore') }}" role="form" method="POST">
 						@csrf
-					<div class="input-checkbox">
-						<input type="checkbox" id="shiping-address" name="change"  >
-						<label for="shiping-address">
+					<div >
+						{{-- <input type="checkbox" id="shiping-address" name="change"  > --}}
+						{{-- <label for="shiping-address">
 							<span></span>
 							Thay đổi địa chỉ nhận hàng?
-						</label>
-						@if ($errors->has('fullname')|$errors->has('phone')|$errors->has('address'))
-									<p style="color:red">Thông tin không hợp lệ</p>
-								@endif
+						</label> --}}
+						
 						<div class="caption">
 							<div class="form-group">
 								<label > Tên người nhận hàng <span style="color:red">(*)</span> 
-								@if ($errors->has('fullname'))
-									<span style="color:red"> Nhập tên của bạn</span>
+								@if ($errors->has('name'))
+									<span style="color:red"> {{ $errors->first('name') }}</span>
 								@endif
 								</label>
-								<input class="input" type="text" name="fullname" placeholder="Tên người nhận hàng" value="{{old('fullname')}}" >
+								<input class="input" type="text" name="name"  value="{{old('name')==null ? $user->fullname : old('name') }}" >
 								
 							</div>
 							<div class="form-group">
 								<label > Điện thoại <span style="color:red">(*)</span>
 									@if ($errors->has('phone'))
-									<span style="color:red">Nhập số điện thoại</span>
+									<span style="color:red">{{ $errors->first('phone') }}</span>
 								@endif
 								</label>
-								<input class="input" type="tel" name="phone" placeholder="Điện thoại" value="{{old('phone')}}">
+								<input class="input" type="tel" name="phone" value="{{old('phone')==null ? $user->phone : old('phone') }}">
 								
 							</div>
 							
 							<div class="form-group">
 								<label > Địa chỉ <span style="color:red">(*)</span>
 									@if ($errors->has('address'))
-									<span style="color:red">Yêu cầu nhập địa chỉ</span>
+									<span style="color:red">{{ $errors->first('address') }}</span>
 								@endif
 								</label>
-								<input class="input" type="text" name="address" placeholder="Địa chỉ" value="{{old('address')}}">
+								<input class="input" type="text" name="address" value="{{old('address')==null ? $user->address : old('address') }}">
 								
 							</div>	
 						</div>

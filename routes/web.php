@@ -11,7 +11,7 @@
 |
 */
 //chuc nang search
-Route::post('/autocomplete/fetch', 'User\SearchController@fetch')->name('autocomplete.fetch');
+Route::post('/autocomplete/fetch', 'User\SearchController@search')->name('autocomplete.fetch');
 //chuc nang search
 
 
@@ -58,6 +58,16 @@ Route::group(['prefix'=>'user','as'=>'user.'],function () {
 
 	Route::get('/register/view/{role}',  function ($role) {  return view('user.singUp',compact('role'));})->name("ViewSingUp");
 	Route::post('/register/{role}', "User\UserController@register")->name("register");
+	Route::get('/edit', "User\UserController@edit")->name("editProfile");
+	Route::post('/update', "User\UserController@update")->name("updateProfile");
+	////
+	
+	Route::get('/form/resetPassword', function () {return view('user.sendEmailResetPassword');})->name("formReset");
+	Route::post('/sendmail',"User\UserController@ResetPassword")->name("sendMail");
+	
+	Route::get('/password/reset/{token}',function($token){
+	return view('user.ResetPassword',compact('token'));})->name('ResetPassword')->middleware('signed');
+	Route::post('/password/update',"User\UserController@updatePassword")->name("updatePassword");
 	// Trang thanh toan
 	Route::get('/checkout', function () {return view('user.checkout');})->name("checkout");
 });
@@ -160,4 +170,4 @@ Route::post('guest/cart/store', "User\GuestController@store")->name("guest.Store
 Route::get('/test',"User\ProductController@filterPrice");
 Route::get('/test1',"User\OrderController@addFeedback");
 
-Route::get('/thanhcong', function () {return view('guest.success');});
+// Route::get('/testlogin', function () {return view('user.cart');});

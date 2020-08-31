@@ -18,6 +18,9 @@ $factory->define(Order::class, function (Faker $faker) {
     return [
         'user_id' => $faker->randomElement($listUserID),
         'guest_id' => $faker->randomElement($listGuestID),
+        'name' =>  $faker->name,
+        'address' => $faker->address,
+        'phone' => $faker->e164PhoneNumber,
         'status_id' => $faker->randomElement($listStatusID),
         'deliverer_id' =>$faker->randomElement($listDelivererID),
         'total_price' => rand(10, 1000000), // password

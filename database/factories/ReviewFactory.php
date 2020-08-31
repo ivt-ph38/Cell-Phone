@@ -15,7 +15,7 @@ $factory->define(Review::class, function (Faker $faker) {
         'user_id' => $faker->randomElement($listUserID),
         'guest_id' => $faker->randomElement($listGuestID),
         'product_id' => $faker->randomElement($listProductID),
-        'value' => rand(0, 5), 
+        'value' => rand(1, 5), 
         'content' => $faker->text
     ];
 });

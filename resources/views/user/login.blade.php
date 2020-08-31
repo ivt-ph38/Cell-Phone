@@ -36,9 +36,9 @@
 				</div>
 
 				<div class="text-right p-t-8 p-b-31">
-					<a href="#">
-						Quên mật khẩu?
-					</a>
+
+					<a href="{{ route('user.formReset') }}">Quên mật khẩu</a>
+					
 				</div>
 
 				<div class="container-login100-form-btn">
@@ -66,6 +66,4 @@
 	</div>
 </div>
 
-
-<div id="dropDownSelect1"></div>
 @endsection

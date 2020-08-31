@@ -4,11 +4,22 @@
     <div style="margin-bottom: 70px">
         <div class="row">
             <div class="col-md-6">
-                <h4 class="text-center" >Xin chào: <strong style="color:red">{{$user['fullname']}}</strong></h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="text-center" >Xin chào: <strong style="color:red">{{$user['fullname']}}</strong></h4>
+                        <h5  >Email:&emsp; &emsp;&nbsp;&nbsp;  <strong style="color:#0B2F3A">{{$user['email']}}</strong></h5>
+                        <h5  >Điện thoại:&nbsp; <strong style="color:#0B2F3A">{{$user['phone']}}</strong></h5>
+                        <h5  >Đại chỉ:&nbsp;&emsp;&emsp; <strong style="color:#0B2F3A">{{$user['address']}}</strong></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{{ route('user.editProfile') }}"><button class="btn" style="background-color: #0B2F3A; color: white">Chỉnh Sửa</button></a>
+                    </div> 
+                </div>   
             </div>
             <div class="col-md-6 text-center">
                 <a href="{{ route('user.logout') }}"><button class="btn btn-default" style="background-color:#070719; color:#FFF; font-weight: bold"><i class="fa fa-sign-out" aria-hidden="true"></i>&ensp;Đăng xuất</button></a>
             </div>
+       
         </div>
   
     </div>
@@ -79,6 +90,13 @@
                                     @endif
                                 </tbody>
                             </table>
+                            <div >
+                                <h5 style="color: red">Thông tin nhận hàng</h5>
+                                <h5>Tên người nhận: &emsp;&emsp;&emsp;&emsp;&emsp;&ensp; {{$order['name']}}</h5>
+                                <h5>Số điện thoại người nhận:&emsp;{{$order['phone']}}</h5>
+                                <h5>Địa chỉ nhận hàng: &emsp;&emsp;&emsp;&emsp; {{$order['address']}}</h5>
+                                <h5>Ghi chú thêm: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{$order['note']}}</h5>
+                            </div>
                         </div>
                     </td>
                     <td style="padding:0"></td>

@@ -62,8 +62,8 @@
 				<label for="">Image</label>
 				<div class="form-group">
 					<div class="custom-file">
-					<input type="file" name="image" class="custom-file-input" >
-					<label class="custom-file-label" >Choose file</label>
+					<input type="file" name="file[]"  multiple>
+					{{-- <label class="custom-file-label" >Choose file</label> --}}
 					</div>
 				</div>
 				<div class="form-group">
@@ -109,18 +109,7 @@
 					<label for="">Warranty</label>
 					<input type="text" name="warranty" value="{{old('warranty')?old('warranty'):''}}" class="form-control" id="" placeholder="Input field">
 				</div>
-				<div class="form-group">
-					<label for="">Promotion_price</label>
-					<input type="text" name="promotion_price" class="form-control" id="" placeholder="Input field">
-				</div>
-				<div class="form-group">
-					<label for="">Start_promotion</label>
-					<input type="date" name="start_promotion" class="form-control" id="" placeholder="Input field">
-				</div>
-				<div class="form-group">
-					<label for="">End_promotion</label>
-					<input type="date" name="end_promotion" class="form-control" id="" placeholder="Input field">
-				</div>
+				
 				<button type="submit" class="btn btn-primary">ADD Product</button>
            </div>
             

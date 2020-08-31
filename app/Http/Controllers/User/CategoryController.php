@@ -69,22 +69,22 @@ class CategoryController extends Controller
         switch ($level) {
             case '1':
                 $min = 0;
-                $max = 2000000;
+                $max = 5000000;
                 break;
             case '2':
-                $min = 2000000;
-                $max = 4000000;
+                $min = 5000000;
+                $max = 10000000;
                 break;
              case '3':
-                $min = 4000000;
-                $max = 7000000;
+                $min = 10000000;
+                $max = 15000000;
                 break;
              case '4':
-                $min = 7000000;
-                $max = 13000000;
+                $min = 15000000;
+                $max = 20000000;
                 break;
              case '5':
-                $min = 13000000;
+                $min = 20000000;
                 $max = 100000000;
                 break;
             default:
@@ -92,7 +92,7 @@ class CategoryController extends Controller
                 $max = 100000000;
                 break;
         }
-         $listProduct =  DB::table('products')->where('category_id',$id)->whereBetween('price', array($min, $max))->orderBy('price',$arrange)->paginate(2);
+         $listProduct =  DB::table('products')->where('category_id',$id)->whereBetween('price', array($min, $max))->orderBy('price',$arrange)->paginate(3);
          $categoryName = Category::find($id)->toArray();
         // $listProduct = Category::find($id)->products()->orderBy('price',$arrange)->paginate(2);
          // dd($listProduct->items()[0]->name);
