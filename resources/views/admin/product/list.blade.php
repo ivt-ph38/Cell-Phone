@@ -53,7 +53,7 @@
                 <tbody>
 				@foreach($products as $key => $rel)
                  	<tr>
-                   	<td>{{$key+1}}</td>
+                   	<td>{{$products->firstItem() + $key}}</td>
                    	<td><img src="{{asset($rel->image)}}" width="70px" height="50px">
 						        </td>
         						<td>{{$rel->name}}</td>

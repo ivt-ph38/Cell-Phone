@@ -23,7 +23,7 @@
                 <tbody>
 				@foreach($listRole as$key => $rel)
                 <tr>
-                  <td>{{++$key}}</td>
+                  <td>{{$listRole->firstItem() + $key}}</td>
         					<td>{{$rel->name}}</td>
         					<td>{{count($rel->users)}}</td>
 					

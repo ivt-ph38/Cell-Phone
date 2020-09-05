@@ -62,9 +62,8 @@
 				<label for="">Hình ảnh</label>
 				<div class="form-group">
 					<div class="custom-file">
-					<input type="file" name="image" class="custom-file-input" >
-					<label class="custom-file-label" >Chọn file</label>
-
+					<input type="file" name="file[]"  multiple>
+					
 					</div>
 				</div>
 				

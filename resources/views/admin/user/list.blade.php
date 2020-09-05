@@ -29,7 +29,7 @@
               <table class="table">
                 <thead style="background: #DEE1E6;">
                   <tr>
-                    <th>ID</th>
+                    <th>STT</th>
           					<th>Khách hàng</th>
           					<th>Email</th>
           					<th>Địa chỉ</th>
@@ -39,9 +39,9 @@
                   </tr>
                 </thead>
                 <tbody>
-				        @foreach($listUser as $rel)
+				        @foreach($listUser as $key => $rel)
                 <tr>
-                	<td>{{$rel->id}}</td>
+                	<td>{{$listUser->firstItem() + $key}}</td>
         					<td>{{$rel->fullname}}</td>
         					<td>{{$rel->email}}</td>
         					<td>{{$rel->address}}</td>

@@ -99,6 +99,14 @@ class UserAuthorizationController extends Controller
      
          //---- insert to users table ---//
         $user = User::find($id);
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' .$id,
+            ],
+            [
+            'email.required' => 'Vui lòng nhập email! ',
+            'email.email' => 'email không hợp lệ',
+            'email.unique' => 'email đã tồn tại',
+        ]);
         $data = $request->except('_token', '_method');
         $data['password'] = bcrypt($request->password);
         $user->update($data);

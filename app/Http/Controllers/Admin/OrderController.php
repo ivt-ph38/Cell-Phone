@@ -23,7 +23,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orderInfo = Order::orderBy('id','ASC')->paginate(5);
+       
+        $orderInfo = Order::orderBy('created_at','DESC')->paginate(5);
        //dd($orderInfo);
         $status = Status::all();
         return view('admin.order.list', compact('orderInfo','status'));
@@ -60,9 +61,11 @@ class OrderController extends Controller
     {
         
         $orderID = Order::find($id);
-        $user= $orderID->toArray();
-        $userID= $user['user_id'];
-        $user = User::find($userID)->toArray();
+        // $r = $orderID['name'];
+        // dd($r);
+        // $user= $orderID->toArray();
+        // $userID= $user['user_id'];
+        // $user = User::find($userID)->toArray();
         $order = DB::table('orders')
                 ->join('order_details', 'orders.id', '=','order_details.order_id')
                 ->leftjoin('products','order_details.product_id','=','products.id')
@@ -71,7 +74,7 @@ class OrderController extends Controller
                 ->get();
         $status = Status::all();
 
-        return view('admin.order.orderDetail', compact('order','user','orderID','status'));
+        return view('admin.order.orderDetail', compact('order','orderID','status'));
     }
 
     /**
@@ -115,12 +118,19 @@ class OrderController extends Controller
     }
     public function sendMail($id){
         $orderID = Order::find($id);
-        $user= $orderID->toArray();
+        $mail_order= $orderID->toArray();
+        //dd($mail_order);
+        // $userID= $user['user_id'];
+        // $user = User::find($userID)->toArray();
         //dd($user);
-        $userID= $user['user_id'];
-        $user = User::find($userID)->toArray();
-        //dd($user);
-        Mail::to($user['email'])->send(new OrderMail($user));
+        $order = DB::table('orders')
+                ->join('order_details', 'orders.id', '=','order_details.order_id')
+                ->leftjoin('products','order_details.product_id','=','products.id')
+                ->select('orders.*','order_details.price','order_details.sale_quantity',  'products.name as product_name')
+                ->where('orders.id','=',$id)
+                ->get();
+        $status = Status::all();
+        Mail::to($mail_order['email'])->send(new OrderMail($mail_order,$order,$status,$orderID));
         return redirect()->route('order.index')->with(['message'=>'Đã gửi 1 thông báo đến khách hàng!!']);
 
     }
@@ -148,6 +158,7 @@ class OrderController extends Controller
         }
         //----- tìm tên nhân viên giao hàng ------// 
         if($request->deliverer_name){
+            
             $deliverer_name = Deliverer::where('name','like','%'.$request->deliverer_name.'%')
                         ->get()->toArray();
             foreach ($deliverer_name as $key => $value) {
@@ -160,23 +171,26 @@ class OrderController extends Controller
                      $order_id[] = Order::find($value1['id']);
                 }
             }
-                 // dd($order_id);
+                
                 return view('admin.order.search', compact('order_id','status'));
         }
-        //----- tìm theo tình trạng đơn hàng ------// 
+       
+        //----- tìm theo ngày ------// 
+        if($request->date){
+            //dd($request->abc);
+            $order_id = Order::whereDate('created_at','=',$request->date)
+                        ->get();
+            return view('admin.order.search', compact('order_id','status'));
+            //dd($order_id);
+                        
+        }
+         //----- tìm theo tình trạng đơn hàng ------// 
         if($request->status_order){
-            
+           
+             dd($request->status_order);
             $order_id = Order::where('status_id',$request->status_order)->get();
                    //dd($order_id);      
         return view('admin.order.search', compact('order_id','status'));
-        }
-        //----- tìm theo ngày ------// 
-        if($request->date){
-            
-            $order_id = Order::whereDate('created_at',$request->date)->get();
-            //dd($order_id);
-                        
-        //return view('admin.order.search', compact('order_id','status'));
         }
     }
 }

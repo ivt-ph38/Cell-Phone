@@ -21,23 +21,24 @@
                     <tbody>
                       <tr>
                         <td>Người đặt hàng</td>
-                        <td>{{ $user['fullname'] }}</td>
+                        <td>{{ $orderID->name }}</td>
                       </tr>
                       <tr>
                         <td>Ngày đặt hàng</td>
-                        <td>{{$orderID['created_at']}}</td>
+                        <td>{{date("d-m-Y", strtotime("$orderID->created_at"))}}</td>
+                        
                       </tr>
                       <tr>
                         <td>Số điện thoại</td>
-                        <td>{{ $user['phone'] }}</td>
+                        <td>{{ $orderID->phone }}</td>
                       </tr>
                       <tr>
                         <td>Địa chỉ</td>
-                        <td>{{ $user['address'] }}</td>
+                        <td>{{ $orderID->address }}</td>
                       </tr>
                       <tr>
                         <td>Email</td>
-                        <td>{{ $user['email'] }}</td>
+                        <td>{{ $orderID->email }}</td>
                       </tr>
                       <tr>
                         <td>Ghi chú</td>
@@ -77,7 +78,7 @@
                          
                             <tr>
                                 <td colspan="3"><b>Tổng tiền</b></td>
-                                <td colspan="1"><b class="text-red"> {{number_format($orderID['total_price'])}}VNĐ</b></td>
+                                <td colspan="1"><b class="text-red"> {{number_format($orderID->total_price)}}VNĐ</b></td>
                             </tr>
                           
 

@@ -50,7 +50,7 @@
                   
                 @foreach($listCategory as $key => $value)
                  <tr>
-                   <td>{{++$key}}</td>
+                   <td>{{$listCategory->firstItem() + $key}}</td>
                   
                    <td>{{$value->name}}</td>
                    <td>{{count($value->products)}}</td>
