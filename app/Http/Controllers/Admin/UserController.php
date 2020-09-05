@@ -94,8 +94,20 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $user = User::find($id);
+       
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' .$id,
+        ],
+        [
+
+            'email.required' => 'Vui lòng nhập email! ',
+            'email.email' => 'email không hợp lệ',
+            'email.unique' => 'email đã tồn tại',
+        ]);
+        
         $data = $request->except('_token', '_method');
         $data['password'] = bcrypt($request->password);
+       
         $user->update($data);
         return redirect()->route('user.index')->with(['message'=>'Đã sửa thành công!!']);
     }

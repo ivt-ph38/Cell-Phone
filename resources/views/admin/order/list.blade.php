@@ -22,8 +22,7 @@
             </select>
           </div>
           <div class="form-group" style="margin-right:10px ">
-            
-             <input type="date" name="date" id="input" class="form-control">
+            <input type="date" name="date" id="input" class="form-control"  placeholder="ngày tháng năm...">
           </div>
           <button type="submit" class="btn btn-default" style="margin-right:30px "><i class="fas fa-search"></i></button>
 
@@ -43,41 +42,43 @@
               <table class="table table-hover">
                 <thead style="background: #DEE1E6;">
                   <tr>
-                    <th>ID</th>
+                    <th>STT</th>
                     <th>Khách hàng</th>
-                    <th>Địa chỉ nhận hàng</th>
+                    <th >Địa chỉ nhận hàng</th>
                     <th>Người giao hàng</th>
                     <th>Ngày đặt hàng</th>
-                   
                     <th>Số tiền</th>
                     <th>Tình trạng đặt hàng</th>
-                    <th>Action</th>
+
+                    <th>Hành động</th>
                   </tr>
                 </thead>
                 <tbody>
 				        @foreach($orderInfo as $key => $rel)
+
                  <tr>
-                   <td>{{$key+1}}</td>
-					         <td>{{$rel->user->fullname}}</td>
-                   <td>{{$rel->user->address}}</td>
+                   <td>{{$orderInfo->firstItem() + $key }}</td>
+					         <td>{{$rel->name}}</td>
+                   <td>{{$rel->address}}</td>
                    <td>{{$rel->deliverer->name}}</td>
                    
                    <td>{{date("d-m-Y", strtotime("$rel->created_at"))}}</td>
                    <td>{{number_format($rel->total_price)}}</td>
-					         <td style="color:#0c0">{{$rel->status->status}}</td>
+                   @if ($rel->status_id ==1)
+                    <td><label style="font-size: 14px;text-align: center;width: 100px;background: #c9f; border-radius: 5px;">{{$rel->status->status}}</label></td>
+                  @elseif($rel->status_id ==2)
+                    <td><label style="font-size: 14px;text-align: center;width: 120px;background: #0fcf; border-radius: 5px">{{$rel->status->status}}</label></td>
+                  @elseif($rel->status_id ==3)
+                    <td><label style="font-size: 14px;text-align: center;width: 100px;background: #ff0f; border-radius: 5px; ">{{$rel->status->status}}</label></td>
+                  @elseif($rel->status_id ==4)
+                    <td><label style="font-size: 14px;color: white ;text-align: center;width: 100px;background: red; border-radius: 5px; ">{{$rel->status->status}}</label></td>
+                  @endif
+
                     <td >
                       <div class="btn-group btn-group-sm">
                         <a href="{{route('order.show', $rel->id)}}" class="btn btn-info" title="Chi tiết đơn hàng" style="margin-right: 5px"><i class="fas fa-eye"></i></a>
 
                         <a href="{{route('sendmail',$rel->id)}}" class="btn btn-secondary" title="Gửi thông báo giao hàng" onclick = 'return confirm("Bạn có chắc chắn muốn gửi thông báo đơn hàng đến khách hàng không?" )' style="margin-right: 5px"><i class="fas fa-paper-plane"></i></a>
-
-                        <a style="margin-right: 5px" href="{{route('order.destroy', $rel->id)}}" class="btn btn-danger" onclick="event.preventDefault();
-                                                       window.confirm('Bạn có chắc là bạn muốn xoá đơn hàng: ' + '{{ $rel->id }}' + ' không?') ? document.getElementById('delete-order-{{ $rel->id }}').submit() : false;" ><i class="fas fa-print"></i></a>
-                        <form  action="{{route('order.destroy', $rel->id)}}" method="POST" id="delete-order-{{ $rel->id }}" style="display: none;">
-                      @method('DELETE')
-                      @csrf
-                  </form>
-                        
                       </div>
                     </td>
                   </tr>

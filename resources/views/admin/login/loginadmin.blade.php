@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V3</title>
+	<title>Login - Admin</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -35,20 +35,20 @@
 				<form action="{{route('auth.loginadmin')}}" method="POST" >
 					@csrf
 					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
+						<img style="width:70px;" src="http://sellphone.com:8080/user/img/logo.png" alt="">
 					</span>
 
-					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
+					<span  class="login100-form-title p-b-34 p-t-27">
+						ADMIN
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="email" placeholder="email">
+						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 						
 					</div>
 					@if( $errors->has('email'))
-	            			<p style ="color: red;">{{$errors->first('email')}}</p>
+	            			<p style ="color: #B40404;">{{$errors->first('email')}}</p>
 	        		@endif
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
@@ -57,27 +57,15 @@
 						
 					</div>
 					@if( $errors->has('password'))
-	            			<p style ="color: red;">{{$errors->first('password')}}</p>
+	            			<p style ="color: #B40404;">{{$errors->first('password')}}</p>
 	        		@endif
 
-					<div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						<label class="label-checkbox100" for="ckb1">
-							Remember me
-						</label>
-					</div>
-
 					<div class="container-login100-form-btn">
-						<button type="submit" class="login100-form-btn">
-							Login
+						<button style="font-family: sans-Serif" type="submit" class="login100-form-btn">
+							Đăng nhập
 						</button>
 					</div>
 
-					<div class="text-center p-t-90">
-						<a class="txt1" href="#">
-							Forgot Password?
-						</a>
-					</div>
 				</form>
 			</div>
 		</div>

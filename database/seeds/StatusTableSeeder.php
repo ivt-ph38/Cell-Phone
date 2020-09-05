@@ -15,7 +15,7 @@ class StatusTableSeeder extends Seeder
         		[ 'status' => 'Đang đóng gói'],
         		[ 'status' => 'Đang vận chuyển'],
                 [ 'status' => 'Đã giao'],
-        		[ 'status' => 'Đã Hủy']
+        		[ 'status' => 'Đã hủy']
                 
         ];
         Status::insert($data);

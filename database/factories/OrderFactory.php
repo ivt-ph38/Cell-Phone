@@ -19,6 +19,7 @@ $factory->define(Order::class, function (Faker $faker) {
         'user_id' => $faker->randomElement($listUserID),
         'guest_id' => $faker->randomElement($listGuestID),
         'name' =>  $faker->name,
+        'email' => $faker->unique()->safeEmail,
         'address' => $faker->address,
         'phone' => $faker->e164PhoneNumber,
         'status_id' => $faker->randomElement($listStatusID),

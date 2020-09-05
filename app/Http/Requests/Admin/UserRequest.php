@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use User;
 
 class UserRequest extends FormRequest
 {
@@ -23,10 +24,11 @@ class UserRequest extends FormRequest
      */
    public function rules()
     {
+        
         return [
            
             'fullname' => 'required|min:3|max:50',
-            'email' => 'required|email|unique:users,email',
+            // 'email' => 'required|email|unique:users,email,' .$this->id,
             'address' => 'required',
             'phone' => 'required|min:10',
             'password' => 'required|min:4|max:20'
