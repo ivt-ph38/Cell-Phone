@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email', 'password','fullname','address','phone'
     ];
 
+    
+    
     /**
      * The attributes that should be hidden for arrays.
      *

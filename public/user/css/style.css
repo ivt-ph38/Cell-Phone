@@ -495,7 +495,7 @@ textarea.input {
 #header {
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: #15161D;
+  background-color: #DBA901;
 }
 
 .header-logo {
@@ -530,7 +530,7 @@ textarea.input {
 
 .header-search form .search-btn {
   height: 40px;
-  width: 100px;
+  width: 70px;
   background: #D10024;
   color: #FFF;
   font-weight: 700;
@@ -2082,12 +2082,12 @@ textarea.input {
 ===========================================================*/
 
 #footer {
-  background: #15161D;
-  color: #B9BABC;
+  background: #DBA901;
+  color: #fff;
 }
 
 #bottom-footer {
-  background: #1E1F29;
+  background: #DBA901;
 }
 
 .footer {
@@ -2106,7 +2106,7 @@ textarea.input {
 }
 
 .footer-links li a {
-  color: #B9BABC;
+  color: #fff;
 }
 
 .footer-links li i {

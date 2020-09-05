@@ -10,21 +10,12 @@
 			<!-- Product main img -->
 			<div class="col-md-5 col-md-push-2">
 				<div id="product-main-img">
-					<div class="product-preview">
-						<img src="{{asset("user/img/product01.png")}}" alt="">
+					@foreach ($image as $value)
+						<div class="product-preview">
+						<img src="{{asset($value->name)}}" alt="" style="height: 400px; ">
 					</div>
-
-					<div class="product-preview">
-						<img src="{{asset("user/img/product03.png")}}" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="{{asset("user/img/product06.png")}}" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="{{asset("user/img/product08.png")}}" alt="">
-					</div>
+					@endforeach
+					
 				</div>
 			</div>
 			<!-- /Product main img -->
@@ -32,21 +23,12 @@
 			<!-- Product thumb imgs -->
 			<div class="col-md-2  col-md-pull-5">
 				<div id="product-imgs">
-					<div class="product-preview">
-						<img src="{{asset("user/img/product01.png")}}" alt="">
+					@foreach ($image as $value)
+						<div class="product-preview">
+						<img src="{{asset($value->name)}}" alt="" style="height:160px;width:100%">
 					</div>
-
-					<div class="product-preview">
-						<img src="{{asset("user/img/product03.png")}}" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="{{asset("user/img/product06.png")}}" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="{{asset("user/img/product08.png")}}" alt="">
-					</div>
+					@endforeach
+					
 				</div>
 			</div>
 			<!-- /Product thumb imgs -->
@@ -317,7 +299,13 @@
 							<!-- Review Form -->
 							<div class="col-md-3">
 								<div id="review-form">
-									<form class="review-form" action="{{ route('user.addReview') }}" method="POST">
+									@guest
+										<form class="review-form" action="{{ route('guest.addReview') }}" method="POST">
+									@endguest
+									@auth
+										<form class="review-form" action="{{ route('user.addReview') }}" method="POST">
+									@endauth
+									
 										@csrf
 
 										@guest
@@ -395,22 +383,13 @@
 						<img src="{{asset($value['image'])}}" alt="">
 						<div class="product-label">
 
-							<span class="new">Mới</span>
+							
 						</div>
 					</div>
 					<div class="product-body">
 						
 						<h3 class="product-name"><a href="#">{{$value['name']}}</a></h3>
-						<h4 class="product-price">{{number_format($value['price'])}}<del class="product-old-price">$990.00</del></h4>
-
-
-						<div class="product-rating">
-							<i class="fa fa-star"></i>	
-							<i class="fa fa-star"></i>	
-							<i class="fa fa-star"></i>	
-							<i class="fa fa-star"></i>	
-						</div>
-
+						<h4 class="product-price">{{number_format($value['price'])}}</h4>
 					</div>
 					<div class="add-to-cart">
 						<a href="{{route('user.product',$value['id'])}}"><button  class="add-to-cart-btn" ><i class="fa fa-eye" ></i>Chi Tiết Sản Phẩm </button></a>

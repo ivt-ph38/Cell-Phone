@@ -45,9 +45,8 @@ class UserController extends Controller
 		return view('user.editProfile');
 	}
 	public function update(UserRequest $request) {
-
 		$data = $request->except('_token');
-		$data['password'] = bcrypt( $data['password']);  
+		// $data['password'] = bcrypt( $data['password']);  
 		Auth::user()->update($data);
 		return view('user.editSuccess');
 	}
@@ -75,12 +74,12 @@ class UserController extends Controller
 
 			if (Password_reset::Where('user_id','=',$user->id)->first()) {
 				$data = ['user_id'=>$user->id,'token'=>$request->_token,'created_at'=>now()];
-			Password_reset::Where('user_id','=',$user->id)->first()->update($data);;
-			
+				Password_reset::Where('user_id','=',$user->id)->first()->update($data);;
+
 			}
 			else{
 				$data = ['user_id'=>$user->id,'token'=>$request->_token,'created_at'=>now()];
-			Password_reset::insert($data);
+				Password_reset::insert($data);
 			}
 			
 

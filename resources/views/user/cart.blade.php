@@ -23,14 +23,14 @@
 				</thead>
 				<tbody>
 
-					@foreach ($products as $value)
+					@foreach ($products as $key=>$value)
 					<tr>
 						<td data-th="Product">
 							<div class="row">
 								<div class="col-sm-2 hidden-xs"><img src="{{$value['item']->image}}" alt="..." class="img-responsive"/></div>
 								<div class="col-sm-10">
 									<h4 class="nomargin">{{$value['item']->name}}</h4>
-									<p>Mô tả sản phẩm</p>
+									
 								</div>
 							</div>
 						</td> 
@@ -44,7 +44,7 @@
 									@if ($value['stocking']=='true')
 									<a href="{{route('user.cartUpdate',['id'=>$value['item']->id,'action'=>'asc'])}}" ><span class="qty-up"  >+</span></a>
 									@else
-									<a  data-toggle="modal" data-target="#Qtyup"><span class="qty-disup " >+</span></a>
+									<a  data-toggle="modal" data-target="#Qtyup{{$key}}"><span class="qty-disup " >+</span></a>
 									@endif
 
 									@if ($value['minimum']=='true')
@@ -62,6 +62,69 @@
 								<a href="{{route('user.deleteProduct',$value['item']->id)}}"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></a>
 							</td>
 						</tr>
+
+						<div class="container" >
+
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header" style="background-color: #81F7F3">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Xin chào quý khách hiện bạn chưa đăng nhập!!!</h4>
+										</div>
+										<div class="modal-body">
+											<p>Để quản lí đơn hàng bạn cần  </p> <a href="{{ route('user.ViewLogin',['role'=>'cart']) }}"><button class="btn" style="background-color:#B40431;color: white; margin-left: 250px;">Đăng nhập tại đây</button></a>
+											<p>hoặc </p> <a href="{{ route('guest.Checkout') }}"><button class="btn" style="background-color:#8A0808;color: white;margin-left: 250px;">Tiếp tục thanh toán</button></a> 
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="modal fade" id="Qtyup{{$key}}" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header" style="background-color: #D10024; ">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h3 class="text-center" style="color: #fff"><i class="fa fa-times" aria-hidden="true"></i> Hết Hàng!!</h3>
+										</div>
+										<div class="modal-body">
+											<h4 class="modal-title text-center">{{$value['item']->name}} Hiện Hết Hàng. Xin thông cảm!! </h4>
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="modal fade" id="Qtydown" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header" style="background-color: #D10024; ">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h3 class="text-center" style="color: #fff">Thông báo!!</h3>
+										</div>
+										<div class="modal-body">
+											<h4 class="modal-title text-center"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Tối thiểu mua 1 sản phẩm.</h4>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
 						@endforeach
 
 					</tbody>
@@ -88,68 +151,7 @@
 				@endif
 			</div>
 
-			<div class="container" >
-
-				<div class="modal fade" id="myModal" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header" style="background-color: #81F7F3">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Xin chào quý khách hiện bạn chưa đăng nhập!!!</h4>
-							</div>
-							<div class="modal-body">
-								<p>Để quản lí đơn hàng bạn cần  </p> <a href="{{ route('user.ViewLogin',['role'=>'cart']) }}"><button class="btn" style="background-color:#B40431;color: white; margin-left: 250px;">Đăng nhập tại đây</button></a>
-								<p>hoặc </p> <a href="{{ route('guest.Checkout') }}"><button class="btn" style="background-color:#8A0808;color: white;margin-left: 250px;">Tiếp tục thanh toán</button></a> 
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="modal fade" id="Qtyup" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header" style="background-color: #D10024; ">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h3 class="text-center" style="color: #fff">Thông báo!!</h3>
-							</div>
-							<div class="modal-body">
-								<h4 class="modal-title text-center"><i class="fa fa-times" aria-hidden="true"></i> Hết Hàng!!</h4>
-								
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="modal fade" id="Qtydown" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header" style="background-color: #D10024; ">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h3 class="text-center" style="color: #fff">Thông báo!!</h3>
-							</div>
-							<div class="modal-body">
-								<h4 class="modal-title text-center"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Tối thiểu mua 1 sản phẩm.</h4>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
+			
 
 		</div>
 

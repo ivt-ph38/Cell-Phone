@@ -50,6 +50,7 @@ class GuestController extends Controller
             'status_id' =>'1',
             'name' => $request->name,
             'phone' => $request->phone,
+            'email' => $request->email,
             'address' => $request->address,
             'deliverer_id' => '1',
             'total_price' => Session::get('cart')->totalPrice,
