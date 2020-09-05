@@ -9,7 +9,7 @@
         <form action="{{route('search_category')}}"  method="GET" style="margin-bottom:30px " class="form-inline" role="form">
           @csrf
           <div class="form-group" style="margin-right:10px ">
-             <input type="search" name="name" id="input" class="form-control"  placeholder="Tên sản phẩm...">
+             <input type="search" name="name" id="input" class="form-control"  placeholder="Tên hãng sản xuất...">
           </div>
           <div class="form-group" style="margin-right:10px ">
             <select name="brand" id="input" class="form-control" >

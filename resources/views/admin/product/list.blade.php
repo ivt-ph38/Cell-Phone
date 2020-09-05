@@ -1,6 +1,6 @@
 @extends('admin.master.master')
 		@section ('content')
-    @include('errors.message')
+  @include('errors.message')
   @include('errors.error')
     <div class="row">
       <div class="col-sm-12">
@@ -60,7 +60,7 @@
                     <td>{{$rel->category->name}}</td>
         						<td>{{$rel->quantity}}</td>
         						<td>{{number_format($rel->price)}}</td>
-        						<td>{{$rel->created_at}}</td>
+        						<td>{{date("d-m-Y", strtotime("$rel->created_at"))}}</td>
         					
                     	<td >
                       		<div class="btn-group btn-group-sm">

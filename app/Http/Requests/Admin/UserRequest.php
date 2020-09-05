@@ -42,6 +42,7 @@ class UserRequest extends FormRequest
             'fullname.max' => ':attribute nhiều nhất 50 kí tự.',
             'email.required' => 'Vui lòng nhập :attribute! ',
             'email.email' => ':attribute không hợp lệ',
+            'email.unique' => ':attribute đã tồn tại',
             'address.required' => 'Vui lòng nhập :attribute! ',
             'phone.required' => 'Vui lòng nhập :attribute! ',
             'phone.min' => ':attribute ít nhất 10 số.',

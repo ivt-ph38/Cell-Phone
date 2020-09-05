@@ -12,10 +12,10 @@ class StatusTableSeeder extends Seeder
     public function run()
     {
         $data = [
-        		['id'=>1, 'status' => 'Đang đóng gói'],
-        		['id'=>2, 'status' => 'Đang vận chuyển'],
-                ['id'=>3, 'status' => 'Đã giao'],
-        		['id'=>4, 'status' => 'Đã Hủy']
+        		[ 'status' => 'Đang đóng gói'],
+        		[ 'status' => 'Đang vận chuyển'],
+                [ 'status' => 'Đã giao'],
+        		[ 'status' => 'Đã Hủy']
                 
         ];
         Status::insert($data);

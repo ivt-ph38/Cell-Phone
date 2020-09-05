@@ -1195,7 +1195,35 @@ class ProductsTableSeeder extends Seeder
             'rear_camera'=> '3 camera 12 MP',
             'battery'=> '3969 mAh',
             'warranty'=> '12 tháng',
+            'created_at' =>now()           
 
+        ],
+       
+      [
+            'category_id' => 4,
+            'name'=>'Vsmart Active 7',
+            'title' => 'Màn hình 6.1"
+            Camera sau Chính 12 MP & Phụ 12 MP
+            Pin 3110 mAh',
+            'description' => 'Màn hình 6.1"
+            Camera sau Chính 12 MP & Phụ 12 MP
+            Pin 3110 mAh',
+            'price' =>14490000,
+            'quantity' => 18,
+            'size' => '158.0 x 77.8 x 8.1 mm',
+            'weight' => '226 g',
+            'color' => 'vàng',
+            'image' => '/img/user/abc.png',
+            'display'=>'6.5 inchs, Super Retina XDR, 1242 x 2688 Pixels',
+            'os' => 'iOS 13',
+            'storage' => '64GB',
+            'ram' => '4GB',
+            'cpu' =>'Apple A13 Bionic 6 nhân',
+            'gpu'=> 'Apple GPU 4 nhân',
+            'primary_camera' => '12.0 MP',
+            'rear_camera'=> '3 camera 12 MP',
+            'battery'=> '3969 mAh',
+            'warranty'=> '12 tháng',
             'created_at' =>now()           
       ],
       [

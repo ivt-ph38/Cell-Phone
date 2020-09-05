@@ -20,7 +20,7 @@
   
 		<div class="card card-info main">
     <div class="card-header">
-      <h3 class="card-title">Danh sách khách hàng</h3>
+      <h3 class="card-title">DANH SÁCH KHÁCH HÀNG</h3>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
         </div>

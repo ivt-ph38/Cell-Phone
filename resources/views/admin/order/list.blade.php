@@ -27,14 +27,14 @@
           </div>
           <button type="submit" class="btn btn-default" style="margin-right:30px "><i class="fas fa-search"></i></button>
 
-           <button type="button" class="btn btn-info" ><a style="color:white;" href="{{route('order.create')}}">Tạo Mới</a></button>
+           
         </form>
        
       </div>
     </div>
 	<div class="card card-info main" >
     <div class="card-header">
-      <h3 class="card-title">Danh sách đơn hàng</h3>
+      <h3 class="card-title">DANH SÁCH ĐƠN HÀNG</h3>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
         </div>
