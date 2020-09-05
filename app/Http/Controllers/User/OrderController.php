@@ -54,6 +54,7 @@ class OrderController extends Controller
             'user_id' => Auth::user()->id,
             'name' => $request->name,
             'phone' => $request->phone,
+            'email' => Auth::user()->email,
             'address' => $request->address,
             'status_id' =>'1',
             'deliverer_id' => '1',
@@ -84,7 +85,7 @@ class OrderController extends Controller
      */
     public function addFeedback($orderId)
     {
-        if ((Order::find($orderId)->user_id)==null) {
+        if ((Order::find($orderId)->user_id)==null) { 
             $guest_id = Order::find($orderId)->guest_id;
           $name = Guest::find($guest_id)->name;
           $phone = Guest::find($guest_id)->phone;
@@ -96,17 +97,15 @@ class OrderController extends Controller
           $name = User::find($user_id)->fullname;
           $phone = User::find($user_id)->phone;
           $address = User::find($user_id)->address;
-
-
       }
-
+      $note = Order::find($orderId)->note;
       $order_id = $orderId;
       $total = number_format( Order::find($orderId)->total_price);
       $listProductOfOrder = Order::find($orderId)->order_details;
       foreach ($listProductOfOrder as $key => $value) {
        $product[]=['name'=>Product::find($value->product_id)->name, 'qty'=>$value->sale_quantity, 'price'=>number_format($value->price)];
    }
-   Mail::send('mailfb', array('name'=>$name,'phone'=>$phone, 'address'=>$address,'order_id'=>$order_id ,'product'=>$product,'total'=>$total), function($message){
+   Mail::send('mailfb', array('name'=>$name,'phone'=>$phone, 'address'=>$address,'order_id'=>$order_id ,'product'=>$product,'total'=>$total,'note'=>$note), function($message){
     $message->to('zumzuminto@gmail.com', 'Khách hàng')->subject('Thông tin đơn hàng!');
 });
    Session::flash('flash_message', 'Send message successfully!');

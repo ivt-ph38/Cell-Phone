@@ -38,7 +38,7 @@
 						<input class="input" type="text" name="address" value="{{old('address')==null ? Auth::user()->address : old('address') }}">
 
 					</div>
-					<div class="form-group">
+					{{-- <div class="form-group">
 						<label > Mật khẩu  
 							@if ($errors->has('password'))
 							<span style="color:red"> {{ $errors->first('password') }}</span>
@@ -46,7 +46,7 @@
 						</label>
 						<input class="input" type="password" name="password"  >
 
-					</div>
+					</div> --}}
 					<button style="margin-left: 35%; background-color:#0A2229; color:white" class=" btn primary-btn order-submit">Cập Nhật</button>
 					<a href="{{ route('user.Account') }}" style="margin-left: 39%; margin-top: 10px; background-color:#D10024; color:white" class=" btn primary-btn">Hủy</a>	
 					

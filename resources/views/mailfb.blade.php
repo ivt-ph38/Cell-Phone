@@ -3,7 +3,8 @@
 <strong>Tên:</strong> {{$name}} <br>
 <strong>Số điện thoại:</strong> {{$phone}} <br>
 <strong>Địa chỉ:</strong> {{$address}} <br>
-<strong>ID Đơn Hàng :</strong>{{$order_id}} <br>
+<strong>ID Đơn Hàng : </strong> {{$order_id}} <br>
+<strong>Chú thích thêm : </strong> {{$note}} <br>
 <table style="border-collapse: collapse;border: 1px solid gray;">
 	<thead >
 		<tr style="background-color: #D10024; color:white">

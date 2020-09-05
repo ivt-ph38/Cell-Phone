@@ -6,7 +6,8 @@ use App\Review;
 use App\Guest;
 use Illuminate\Http\Request;
 use Auth;
-use  App\Http\Requests\ReviewRequest;
+use  App\Http\Requests\ReviewGuestRequest;
+use  App\Http\Requests\ReviewUserRequest;
 class ReviewController extends Controller
 {
     /**
@@ -35,9 +36,22 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ReviewRequest $request)
+    public function guestStore(ReviewGuestRequest $request)
     {
-        if(Auth::check()){
+     
+        $dataGuest=['name'=>$request->name,
+                    'email' =>$request->email ];
+                    $guest = Guest::create($dataGuest);
+        $dataReview = ['guest_id'=>$guest->id,
+                    'product_id' =>$request->product_id,
+                    'value'=>$request->value,
+                    'content'=>$request->content ];
+        Review::create($dataReview);
+        return redirect()->back(); 
+}
+     public function userStore(ReviewUserRequest $request)
+    {
+       
             $data=['user_id'=>Auth::user()->id,
             'product_id' =>$request->product_id,
             'value'=>$request->value,
@@ -45,20 +59,6 @@ class ReviewController extends Controller
         ];
         Review::create($data);
         return redirect()->back();   
-    }
-    else{
-        $dataGuest=['name'=>$request->name,
-        'email' =>$request->email
-    ];
-    $guest = Guest::create($dataGuest);
-    $dataReview = ['guest_id'=>$guest->id,
-    'product_id' =>$request->product_id,
-    'value'=>$request->value,
-    'content'=>$request->content ];
-      Review::create($dataReview);
-    return redirect()->back(); 
-}
-
 }
 
     /**

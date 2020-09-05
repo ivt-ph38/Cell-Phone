@@ -26,7 +26,7 @@ Route::group(['prefix'=>'user','as'=>'user.'],function () {
 	// Trang chi tiet san pham
 	Route::get('/product/{id}', "User\ProductController@show")->name("product");
 	//review
-	Route::post('/review/store', "User\ReviewController@store")->name("addReview");
+	Route::post('/review/store', "User\ReviewController@userStore")->name("addReview");
 	//Search 
 	Route::post('/search', "User\SearchController@getProductId")->name("search");
 
@@ -164,7 +164,7 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth'],funct
 
 Route::get('guest/cart/checkout', "User\GuestController@guestCheckout")->name("guest.Checkout");
 Route::post('guest/cart/store', "User\GuestController@store")->name("guest.Store");
-
+Route::post('guest/review/store', "User\ReviewController@guestStore")->name("guest.addReview");
 //test
 
 Route::get('/test',"User\ProductController@filterPrice");

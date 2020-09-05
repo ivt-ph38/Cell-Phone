@@ -8,6 +8,7 @@ use App\Order;
 use App\Guest;
 use App\User;
 use App\Review;
+use App\Image;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Session;
@@ -172,7 +173,12 @@ class ProductController extends Controller
        }
        
        $relateProduct=Category::find(Product::find($id)->category_id)->products->toArray();
-       return view('user.product',compact('itemProduct','qtyAvailable','convertReviewOfProduct','relateProduct','avg','slvalue'));
+       //////////////////Lây ảnh hien thị
+       $image = Image::Where('product_id',$id)->get();
+       
+       //////////////
+
+       return view('user.product',compact('itemProduct','qtyAvailable','convertReviewOfProduct','relateProduct','avg','slvalue','image'));
      }
 
     /**

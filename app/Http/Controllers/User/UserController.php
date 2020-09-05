@@ -47,7 +47,7 @@ class UserController extends Controller
 	public function update(UserRequest $request) {
 
 		$data = $request->except('_token');
-		$data['password'] = bcrypt( $data['password']);  
+		// $data['password'] = bcrypt( $data['password']);  
 		Auth::user()->update($data);
 		return view('user.editSuccess');
 	}

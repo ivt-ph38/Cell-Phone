@@ -129,7 +129,7 @@
 								
 								<h3 class="product-name"><a href="#">{{$value->name}}</a></h3>
 								<h4 class="product-price">{{number_format($value->price)}}&nbsp;VND</h4>	
-								<p class="product-category">hfdsjgdkl</p>
+								
 								
 							</div>
 							<div class="add-to-cart">

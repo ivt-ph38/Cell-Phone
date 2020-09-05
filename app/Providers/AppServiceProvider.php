@@ -38,8 +38,11 @@ class AppServiceProvider extends ServiceProvider
         ->orderBy('total_quantity', 'DESC')
                 ->take(5) //lấy 5 sản phẩm                
                 ->get()->toArray();
-
-        //////Lây list san phẩm bán nhìu nhất ($hotProduct là mang cac oj)
+            if(empty($hotProduct)){
+                 $listHotProduct=array();
+            }
+            else {
+                  //////Lây list san phẩm bán nhìu nhất ($hotProduct là mang cac oj)
                 foreach ($hotProduct as $key => $value) {
         $product = Product::find($value->product_id)->toArray(); //$product là mảng sp 
         $listHotProduct[]=[
@@ -50,6 +53,8 @@ class AppServiceProvider extends ServiceProvider
             'image'=>$product['image']
         ];
     }   
+            }
+      
     View::share('listHotProduct', $listHotProduct);
     //////////////////////////
 }   

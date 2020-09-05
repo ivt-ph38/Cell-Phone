@@ -71,11 +71,11 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form action="{{route('user.search')}}" method="POST">
-									@method('POST')
+								<form action="{{route('user.home')}}" method="GET">
+									@method('GET')
 									@csrf
-									
-									<input type="text" name="product_search" id="product_search" class="input" placeholder="Tìm điện thoại ở đây!!">				
+									<input type="text" name="product_search" id="product_search" class="input" placeholder="Tìm điện thoại ở đây!!" style="border-radius: 5px 0px 0px 5px;">
+									<button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>				
 									
 									<div id="productList">
 									</div>

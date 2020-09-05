@@ -26,8 +26,7 @@ class UserRequest extends FormRequest
         return [
         'fullname' => 'required|string',
         'phone'=> 'required|numeric',
-        'address'=> 'required',
-        'password'=>'required|min:6',
+        'address'=> 'required', 
         ];
     }
      public function messages () {
@@ -35,8 +34,6 @@ class UserRequest extends FormRequest
             'fullname.required'=> 'Không được để trống tên',
             'phone.required' => 'Yêu cầu nhập số điện thoại',
             'phone.numeric' => 'Số điện thoại không hợp lệ',
-            'password.required' => 'Yêu cầu nhập mật khẩu',
-            'password.min' => 'Mật khẩu ít nhất 6 kí tự',
             'address.required' => 'Yêu cầu nhập địa chỉ',
           
         ];

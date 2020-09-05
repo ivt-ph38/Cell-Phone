@@ -72,7 +72,7 @@
 					
 						<div class="product">
 						<div class="product-img">
-							<img src="{{asset($value['image'])}}" alt="">
+							<img src="{{asset($value['image'])}}" alt="" style="height: 300px">
 							<div class="product-label">
 								
 								<span class="new">Mới</span>
@@ -139,7 +139,7 @@
 
 								<div class="product">
 									<div class="product-img">
-										<img src="{{asset($value['image'])}}" alt="">
+										<img src="{{asset($value['image'])}}" alt="" style="height: 300px">
 										
 									</div>
 									<div class="product-body">
