@@ -18,7 +18,15 @@
 						<input class="input" type="text" name="fullname"  value="{{old('fullname')==null ? Auth::user()->fullname : old('fullname') }}" >
 
 					</div>
-					
+					<div class="form-group">
+						<label > Email  
+							@if ($errors->has('email'))
+							<span style="color:red"> {{ $errors->first('email') }}</span>
+							@endif
+						</label>
+						<input class="input" type="text" name="email"  value="{{old('email')==null ? Auth::user()->email : old('email') }}" >
+
+					</div>
 					<div class="form-group">
 						<label > Điện thoại 
 							@if ($errors->has('phone'))

@@ -23,10 +23,15 @@
         </div>
   
     </div>
+    
+    @if ($account==null)
+    <div class="text-center"><h3 style="color: red">Hiện bạn chưa có đơn hàng nào!</h3></div>
+    
+    @else
     <div class="" style="margin-bottom: 50px">
         <h4>Quản lí đơn hàng của bạn</h4>
     </div>
-    <div class="table-responsive">
+     <div class="table-responsive">
 
         <table class="table table-condensed">
             <thead>
@@ -106,6 +111,8 @@
             </tbody>
         </table>
     </div>
+    @endif
+   
 </div>
 
 @endsection
